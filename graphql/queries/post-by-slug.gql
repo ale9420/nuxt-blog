@@ -1,6 +1,5 @@
-# Write your query or mutation here
-query post {
-  posts {
+query post($slug: String) {
+  posts(filters: { slug: { eq: $slug } }) {
     data {
       id
       attributes {

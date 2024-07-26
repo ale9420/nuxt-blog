@@ -1,8 +1,8 @@
 <template>
 	<div>
 		<h1>{{ data?.title }}</h1>
-		<img :src="data?.feature_image || ''" :alt="data?.title" />
-		<div v-html="data?.html"></div>
+		<img :src="data?.feature_image || ''" :alt="data?.title" >
+		<div v-html="data?.html"/>
 
 		<pre>{{ data }}</pre>
 		<pre>{{ status }}</pre>

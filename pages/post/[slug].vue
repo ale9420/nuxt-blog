@@ -4,10 +4,10 @@
 			:src="post?.feature_image || ''"
 			:alt="post?.title"
 			class="h-1/3 w-full"
-		/>
+		>
 		<div class="p-5">
 			<h1 class="text-7xl">{{ post?.title }}</h1>
-			<div class="mt-5" v-html="post?.html"></div>
+			<div class="mt-5" v-html="post?.html"/>
 		</div>
 	</article>
 </template>

@@ -3,7 +3,7 @@ import GhostContentAPI, { type PostsOrPages } from '@tryghost/content-api';
 
 export const usePostStore = defineStore('post', () => {
 	const config = useRuntimeConfig();
-	let posts = ref<PostsOrPages | null>();
+	const posts = ref<PostsOrPages | null>();
 
 	const GHOST_API = new GhostContentAPI({
 		url: config.public.ghostContentUrl,

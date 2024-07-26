@@ -8,7 +8,7 @@
 					:src="post.feature_image || ''"
 					:alt="post?.feature_image_alt || post.title"
 					class="h-60 w-full"
-				/>
+				>
 				<span
 					v-if="post.primary_tag"
 					class="absolute right-0 top-4 bg-gradient-to-r from-red-500 to-red-700 text-slate-100 rounded-l-lg p-1"
@@ -35,7 +35,7 @@
 						class="rounded-full h-10 w-10"
 						:src="post.primary_author?.profile_image || ''"
 						alt=""
-					/>
+					>
 					<div class="ml-2">
 						<p>{{ post.primary_author?.name }}</p>
 						<span>{{ postDate }}</span>
