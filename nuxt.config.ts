@@ -5,6 +5,7 @@ export default defineNuxtConfig({
 	imports: { dirs: ['store'] },
 	modules: [
 		['@pinia/nuxt', { autoImports: ['defineStore', 'acceptHMRUpdate'] }],
+		'@nuxtjs/strapi',
 	],
 	css: ['~/public/main.css'],
 	postcss: {
@@ -12,6 +13,9 @@ export default defineNuxtConfig({
 			tailwindcss: {},
 			autoprefixer: {},
 		},
+	},
+	strapi: {
+		url: process.env.STRAPI_URL,
 	},
 	runtimeConfig: {
 		public: {

@@ -14,17 +14,33 @@
 
 <script lang="ts" setup>
 const route = useRoute();
-const { getPostBySlug } = usePostStore();
-const { data: post } = await getPostBySlug(route.params.slug as string);
 
-const seoTitle = post.value?.meta_title || post.value?.title || '';
-const seoDescription = post.value?.meta_description || post.value?.excerpt;
+const graphql = useStrapiGraphQL();
 
-useSeoMeta({
-	title: () => seoTitle,
-	ogTitle: () => seoTitle,
-	description: () => seoDescription,
-	ogDescription: () => seoDescription,
-	ogImage: () => post.value?.og_image,
-});
+const postQuery: any = await graphql(`
+	query post {
+		posts {
+			data {
+				id
+				attributes {
+					content
+					published
+				}
+			}
+		}
+	}
+`);
+// const { getPostBySlug } = usePostStore();
+// const { data: post } = await getPostBySlug(route.params.slug as string);
+
+// const seoTitle = post.value?.meta_title || post.value?.title || '';
+// const seoDescription = post.value?.meta_description || post.value?.excerpt;
+
+// useSeoMeta({
+// 	title: () => seoTitle,
+// 	ogTitle: () => seoTitle,
+// 	description: () => seoDescription,
+// 	ogDescription: () => seoDescription,
+// 	ogImage: () => post.value?.og_image,
+// });
 </script>

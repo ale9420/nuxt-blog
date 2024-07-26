@@ -1,0 +1,12 @@
+# Write your query or mutation here
+query post {
+	posts {
+		data {
+			id
+			attributes {
+				content
+				published
+			}
+		}
+	}
+}

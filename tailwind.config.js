@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+/** @type {import('tailwindcss').Config} */
+
 export default {
 	content: [
 		'./components/**/*.{js,vue,ts}',
@@ -11,5 +13,5 @@ export default {
 	theme: {
 		extend: {},
 	},
-	plugins: [],
+	plugins: [require('@tailwindcss/typography')],
 };

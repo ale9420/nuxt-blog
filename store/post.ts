@@ -20,7 +20,7 @@ export const usePostStore = defineStore('post', () => {
 
 	async function getPostBySlug(slug: string) {
 		const { data } = await useAsyncData('posts', () =>
-			GHOST_API.posts.read({ slug })
+			GHOST_API.posts.read({ slug }, { formats: ['html'] })
 		);
 
 		return { data };
