@@ -6,6 +6,13 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   imports: { dirs: ['store'] },
   css: ['~/public/main.css'],
+  app: {
+    head: {
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      ],
+    },
+  },
   postcss: {
     plugins: {
       tailwindcss: {},

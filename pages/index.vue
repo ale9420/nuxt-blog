@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="grid grid-cols-3 gap-3">
-      <post-card
+    <div class="sm:flex sm:flex-col gap-3 lg:grid lg:grid-cols-3">
+      <PostCard
         v-for="post of result?.data?.posts?.data"
         :key="+post.id"
         :post="post.attributes"

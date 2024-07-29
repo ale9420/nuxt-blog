@@ -1,17 +1,19 @@
 <template>
   <article class="bg-slate-100">
-    <h1 class="text-7xl">{{ post?.title }}</h1>
     <NuxtImg
       :src="post?.featured_image?.data?.attributes?.url"
       :alt="post?.featured_image?.data?.attributes?.alternativeText"
       provider="strapi"
-      class="featured-image w-full"
+      class="sm:h-64 lg:h-[40rem] w-full"
     />
-    <StrapiBlocks
-      class="mt-2 line-clamp-3"
-      :content="post?.content || []"
-      :blocks="userBlocks"
-    />
+    <h1 class="sm:text-3xl lg:text-7xl">{{ post?.title }}</h1>
+    <div class="prose">
+      <StrapiBlocks
+        class="mt-2 line-clamp-3"
+        :content="post?.content || []"
+        :blocks="userBlocks"
+      />
+    </div>
   </article>
 </template>
 

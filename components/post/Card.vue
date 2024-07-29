@@ -8,25 +8,21 @@
           :src="post.featured_image.data.attributes.url"
           :alt="post.featured_image.data.attributes.alternativeText"
           provider="strapi"
-          class="h-60 w-full"
+          class="sm:h-36 lg:h-60 w-full"
         />
-
         <span
           v-if="post.primary_category"
           class="absolute right-0 top-4 bg-gradient-to-r from-red-500 to-red-700 text-slate-100 rounded-l-lg p-1"
           >{{ post.primary_category.data.attributes.name }}</span
         >
       </div>
-      <div class="p-5">
+      <div class="sm:p-2 lg:p-5">
         <h3 class="text-2xl font-bold">{{ post.title }}</h3>
-        <div class="min-h-24">
-          <StrapiBlocks
-            class="mt-2 line-clamp-3"
-            :content="post.excerpt"
-            :blocks="userBlocks"
-          />
+        <div class="sm:prose-sm prose mt-2">
+          <StrapiBlocks :content="post.excerpt" :blocks="userBlocks" />
         </div>
-        <div class="flex items-end mt-5 min-h-10">
+
+        <div class="flex items-end sm:mt-2 lg:mt-5 min-h-10">
           <span
             v-for="tag in post.categories.data"
             :key="tag.id"
@@ -42,7 +38,7 @@
             class="rounded-full h-10 w-10"
           />
           <div class="ml-2">
-            <p>{{ post?.author?.data?.attributes?.name || 'adasd' }}</p>
+            <p>{{ post?.author?.data?.attributes?.name }}</p>
             <span>{{ postDate }}</span>
           </div>
         </div>
