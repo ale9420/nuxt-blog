@@ -1,20 +1,32 @@
 <template>
-	<div>
-		<h1>{{ data?.title }}</h1>
-		<img :src="data?.feature_image || ''" :alt="data?.title" >
-		<div v-html="data?.html"/>
-
-		<pre>{{ data }}</pre>
-		<pre>{{ status }}</pre>
-	</div>
+  <div>
+    <h1>{{ page?.title }}</h1>
+    <StrapiBlocks
+      class="mt-2"
+      :content="page?.content || []"
+      :blocks="userBlocks"
+    />
+  </div>
 </template>
 
 <script lang="ts" setup>
-const route = useRoute();
-const { GHOST_API } = useContentApi();
-console.log(route.params.slug);
+import { StrapiBlocks } from 'vue-strapi-blocks-renderer'
+import { userBlocks } from '@/helpers/strapi-blocks'
+import type { PageEntityResponseCollection } from '@/types'
+import pageBySlug from '@/graphql/queries/page-by-slug.gql'
 
-const { data, status } = await useAsyncData('page', () =>
-	GHOST_API.pages.read({ slug: route.params.slug as string })
-);
+const route = useRoute()
+const graphql = useStrapiGraphQL()
+const result = await graphql<PageEntityResponseCollection>(pageBySlug, {
+  slug: route.params.slug,
+})
+
+const page = computed(() => result?.data?.pages?.data[0]?.attributes)
+
+useSeoMeta({
+  title: () => page.value.meta.meta_title,
+  ogTitle: () => page.value.meta.meta_title,
+  description: () => page.value.meta.meta_description,
+  ogDescription: () => page.value.meta.meta_description,
+})
 </script>

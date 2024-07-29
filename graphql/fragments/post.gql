@@ -1,0 +1,45 @@
+fragment PostFragment on Post {
+  excerpt
+  content
+  title
+  meta_title
+  meta_description
+  slug
+  createdAt
+  publishedAt
+  author {
+    data {
+      attributes {
+        name
+        profile_image {
+          data {
+            attributes {
+              url
+            }
+          }
+        }
+      }
+    }
+  }
+  featured_image {
+    data {
+      attributes {
+        url
+      }
+    }
+  }
+  primary_category {
+    data {
+      attributes {
+        name
+      }
+    }
+  }
+  categories {
+    data {
+      attributes {
+        name
+      }
+    }
+  }
+}

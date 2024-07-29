@@ -1,10 +1,11 @@
+#import "../fragments/post.gql"
+
 query post($slug: String) {
   posts(filters: { slug: { eq: $slug } }) {
     data {
       id
       attributes {
-        content
-        published
+        ...PostFragment
       }
     }
   }

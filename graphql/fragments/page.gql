@@ -1,0 +1,9 @@
+fragment PageFragment on Page {
+  title
+  content
+  meta {
+    meta_title
+    meta_description
+    slug
+  }
+}

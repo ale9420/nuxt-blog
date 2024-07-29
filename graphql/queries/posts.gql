@@ -1,11 +1,11 @@
-# Write your query or mutation here
-query post {
+#import "../fragments/post.gql"
+
+query posts {
   posts {
     data {
       id
       attributes {
-        content
-        published
+        ...PostFragment
       }
     }
   }

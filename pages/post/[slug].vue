@@ -1,46 +1,47 @@
 <template>
-	<article class="bg-slate-100">
-		<img
-			:src="post?.feature_image || ''"
-			:alt="post?.title"
-			class="h-1/3 w-full"
-		>
-		<div class="p-5">
-			<h1 class="text-7xl">{{ post?.title }}</h1>
-			<div class="mt-5" v-html="post?.html"/>
-		</div>
-	</article>
+  <article class="bg-slate-100">
+    <h1 class="text-7xl">{{ post?.title }}</h1>
+    <NuxtImg
+      :src="post?.featured_image?.data?.attributes?.url"
+      :alt="post?.featured_image?.data?.attributes?.alternativeText"
+      provider="strapi"
+      class="featured-image w-full"
+    />
+    <StrapiBlocks
+      class="mt-2 line-clamp-3"
+      :content="post?.content || []"
+      :blocks="userBlocks"
+    />
+  </article>
 </template>
 
 <script lang="ts" setup>
-const route = useRoute();
+import { StrapiBlocks } from 'vue-strapi-blocks-renderer'
+import { userBlocks } from '@/helpers/strapi-blocks'
+import postBySlug from '@/graphql/queries/post-by-slug.gql'
+import type { PostEntityResponseCollection } from '~/types'
 
-const graphql = useStrapiGraphQL();
+const graphql = useStrapiGraphQL()
+const route = useRoute()
 
-const postQuery: any = await graphql(`
-	query post {
-		posts {
-			data {
-				id
-				attributes {
-					content
-					published
-				}
-			}
-		}
-	}
-`);
-// const { getPostBySlug } = usePostStore();
-// const { data: post } = await getPostBySlug(route.params.slug as string);
+const postQuery = await graphql<PostEntityResponseCollection>(postBySlug, {
+  slug: route.params.slug,
+})
 
-// const seoTitle = post.value?.meta_title || post.value?.title || '';
-// const seoDescription = post.value?.meta_description || post.value?.excerpt;
+const post = computed(() => postQuery?.data?.posts?.data[0]?.attributes)
+const seoTitle = post.value?.meta_title || post.value?.title || ''
+const seoDescription = post.value?.meta_description
 
-// useSeoMeta({
-// 	title: () => seoTitle,
-// 	ogTitle: () => seoTitle,
-// 	description: () => seoDescription,
-// 	ogDescription: () => seoDescription,
-// 	ogImage: () => post.value?.og_image,
-// });
+useSeoMeta({
+  title: () => seoTitle,
+  ogTitle: () => seoTitle,
+  description: () => seoDescription,
+  ogDescription: () => seoDescription,
+})
 </script>
+
+<style>
+.featured-image {
+  height: 628px;
+}
+</style>

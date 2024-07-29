@@ -1,0 +1,12 @@
+#import "../fragments/page.gql"
+
+query pages {
+  pages {
+    data {
+      id
+      attributes {
+        ...PageFragment
+      }
+    }
+  }
+}
