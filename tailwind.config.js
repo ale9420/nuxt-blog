@@ -1,5 +1,4 @@
 /** @type {import('tailwindcss').Config} */
-/** @type {import('tailwindcss').Config} */
 
 export default {
   content: [
@@ -19,7 +18,15 @@ export default {
         xl: '1280px',
         '2xl': '1536px',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            h1: {
+              fontWeight: '500',
+            },
+          },
+        },
+      },
     },
   },
-  plugins: [require('@tailwindcss/typography')],
 }

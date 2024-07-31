@@ -1,5 +1,5 @@
 <template>
-  <article class="bg-slate-100">
+  <article class="flex flex-col bg-slate-50 w-full">
     <NuxtImg
       :src="post?.featured_image?.data?.attributes?.url"
       :alt="post?.featured_image?.data?.attributes?.alternativeText"
@@ -7,9 +7,9 @@
       class="sm:h-64 lg:h-[40rem] w-full"
     />
     <h1 class="sm:text-3xl lg:text-7xl">{{ post?.title }}</h1>
-    <div class="prose">
+    <div class="prose prose-zinc w-full">
       <StrapiBlocks
-        class="mt-2 line-clamp-3"
+        class="mt-2"
         :content="post?.content || []"
         :blocks="userBlocks"
       />

@@ -18,7 +18,7 @@
       </div>
       <div class="sm:p-2 lg:p-5">
         <h3 class="text-2xl font-bold">{{ post.title }}</h3>
-        <div class="sm:prose-sm prose mt-2">
+        <div class="prose sm:prose-sm mt-2">
           <StrapiBlocks :content="post.excerpt" :blocks="userBlocks" />
         </div>
 

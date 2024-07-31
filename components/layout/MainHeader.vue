@@ -1,6 +1,6 @@
 <template>
   <header
-    class="fixed flex items-center justify-between sm:p-2 lg:p-5 bg-gradient-to-r from-red-600 to-red-400 w-full z-10"
+    class="sticky top-0 flex items-center justify-between sm:p-2 lg:p-5 bg-gradient-to-r from-red-600 to-red-400 w-full z-10"
   >
     <h3 class="text-slate-50 text-xl">BOG.DEV</h3>
     <div class="flex">

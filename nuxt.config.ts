@@ -1,8 +1,15 @@
 import gql from '@rollup/plugin-graphql'
+import tailwindTypography from '@tailwindcss/typography'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@pinia/nuxt', '@nuxtjs/strapi', '@nuxt/eslint', '@nuxt/image'],
+  modules: [
+    '@pinia/nuxt',
+    '@nuxtjs/strapi',
+    '@nuxt/eslint',
+    '@nuxt/image',
+    '@nuxtjs/tailwindcss',
+  ],
   devtools: { enabled: true },
   imports: { dirs: ['store'] },
   css: ['~/public/main.css'],
@@ -17,6 +24,11 @@ export default defineNuxtConfig({
     plugins: {
       tailwindcss: {},
       autoprefixer: {},
+    },
+  },
+  tailwindcss: {
+    config: {
+      plugins: [tailwindTypography],
     },
   },
   strapi: {
