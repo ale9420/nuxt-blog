@@ -11,6 +11,7 @@
     "lintfix": "eslint . --fix && prettier --write --list-different ."
   },
   "dependencies": {
+    "@heroicons/vue": "^2.1.5",
     "@nuxt/image": "^1.7.0",
     "@nuxtjs/strapi": "^1.12.0",
     "@nuxtjs/tailwindcss": "^6.12.1",
