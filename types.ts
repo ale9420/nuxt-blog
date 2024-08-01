@@ -19,7 +19,7 @@ type CategoryEntity = {
   attributes: Category
 }
 
-type PageEntity = {
+export type PageEntity = {
   id: string
   attributes: Page
 }
