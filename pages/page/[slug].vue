@@ -4,18 +4,12 @@
     <div
       class="prose sm:prose-sm lg:prose-lg xl:prose-xl 2xl:prose-2xl prose-p:leading-normal prose-zinc prose-img:w-full w-full"
     >
-      <StrapiBlocks
-        class="mt-2"
-        :content="page?.content || []"
-        :blocks="userBlocks"
-      />
+      <StrapiBlocksText :nodes="page?.content" />
     </div>
   </article>
 </template>
 
 <script lang="ts" setup>
-import { StrapiBlocks } from 'vue-strapi-blocks-renderer'
-import { userBlocks } from '@/helpers/strapi-blocks'
 import type { PageEntityResponseCollection } from '@/types'
 import pageBySlug from '@/graphql/queries/page-by-slug.gql'
 

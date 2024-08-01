@@ -39,7 +39,6 @@ const result = await graphql<PageEntityResponseCollection>(pagesQuery)
 const pages = result.data.pages.data
 
 const closeSideBar = () => {
-  console.log('asd1111')
   openSidebar.value = false
 }
 </script>

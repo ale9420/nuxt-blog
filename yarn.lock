@@ -5175,6 +5175,14 @@ nuxi@^3.12.0:
   optionalDependencies:
     fsevents "~2.3.3"
 
+nuxt-strapi-blocks-renderer@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/nuxt-strapi-blocks-renderer/-/nuxt-strapi-blocks-renderer-1.0.8.tgz#f71525cf4a35c4c9f8ab01ad31077480a5c6cfd4"
+  integrity sha512-CseYhP8cTuVrWP2KXlwxFGwfo+DQGrkKuKXhkjaRQEbOSiqtKIbNa5El4V0HHBjs2JwAQEgc4bByluL40Y4r8g==
+  dependencies:
+    "@nuxt/kit" "^3.12.3"
+    defu "^6.1.4"
+
 nuxt@^3.12.3:
   version "3.12.3"
   resolved "https://registry.npmjs.org/nuxt/-/nuxt-3.12.3.tgz"
@@ -6973,6 +6981,11 @@ type-is@^1.6.16:
     media-typer "0.3.0"
     mime-types "~2.1.24"
 
+typescript@^5.5.4:
+  version "5.5.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.5.4.tgz#d9852d6c82bad2d2eda4fd74a5762a8f5909e9ba"
+  integrity sha512-Mtq29sKDAEYP7aljRgtPOpTvOfbwRWlS6dPRzwjdE+C0R4brX/GUyhHSecbHMFLNBLcJIPt9nl9yG5TZ1weH+Q==
+
 ufo@^1.1.2, ufo@^1.3.2, ufo@^1.4.0, ufo@^1.5.3, ufo@^1.5.4:
   version "1.5.4"
   resolved "https://registry.npmjs.org/ufo/-/ufo-1.5.4.tgz"
@@ -7358,11 +7371,6 @@ vue-router@^4.4.0:
   integrity sha512-HB+t2p611aIZraV2aPSRNXf0Z/oLZFrlygJm+sZbdJaW6lcFqEDQwnzUBXn+DApw+/QzDU/I9TeWx9izEjTmsA==
   dependencies:
     "@vue/devtools-api" "^6.5.1"
-
-vue-strapi-blocks-renderer@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/vue-strapi-blocks-renderer/-/vue-strapi-blocks-renderer-0.2.2.tgz#5b67a86177c3095a49a01fa127f28add371720e6"
-  integrity sha512-QkUF5KJ59lL05X2uXDLJV7jSchyHQjtK9dQvUDirYcxKsHBLIqO0vq+7OVvqiEPIY0q5k11CyQVmQrC8ENocXw==
 
 vue@^3.4.31, vue@latest:
   version "3.4.31"

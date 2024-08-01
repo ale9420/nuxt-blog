@@ -9,7 +9,15 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
+    'nuxt-strapi-blocks-renderer',
   ],
+  typescript: {
+    tsConfig: {
+      compilerOptions: {
+        resolveJsonModule: true,
+      },
+    },
+  },
   devtools: { enabled: true },
   imports: { dirs: ['store'] },
   css: ['~/public/main.css'],
@@ -19,6 +27,10 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       ],
     },
+  },
+  components: {
+    dirs: [{ path: '~/components' }],
+    global: true,
   },
   postcss: {
     plugins: {

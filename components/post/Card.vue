@@ -18,7 +18,7 @@
       <div
         class="prose prose-zinc prose-p:leading-normal sm:prose-sm lg:prose-lg xl:prose-xl 2xl:prose-2xl mt-2 min-h-20 overflow-hidden"
       >
-        <StrapiBlocks :content="post.excerpt" :blocks="userBlocks" />
+        <StrapiBlocksText :nodes="post?.excerpt" />
       </div>
       <div
         class="overflow-x-auto sm:mt-0 lg:mt-5 py-2"
@@ -60,8 +60,6 @@
 
 <script lang="ts" setup>
 import { DateTime } from 'luxon'
-import { StrapiBlocks } from 'vue-strapi-blocks-renderer'
-import { userBlocks } from '@/helpers/strapi-blocks'
 import type { Post } from '~/types'
 
 type PostProps = {

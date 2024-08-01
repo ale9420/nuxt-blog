@@ -1,4 +1,5 @@
 import type { BlocksContent } from 'vue-strapi-blocks-renderer'
+import type { BlockNode } from '#strapi-blocks-renderer/types'
 
 export type Author = {
   name: string
@@ -50,12 +51,12 @@ export type Category = {
 }
 
 export type Post = {
-  excerpt: BlocksContent
+  excerpt: BlockNode[]
   title: string
   meta_title?: string
   meta_description?: string
   slug: string
-  content: BlocksContent
+  content: BlockNode[]
   publishedAt: string
   createdAt: string
   updatedAt: string
@@ -68,7 +69,7 @@ export type Post = {
 export type Page = {
   title: string
   slug: string
-  content: BlocksContent
+  content: BlockNode[]
   meta: Meta
 }
 
@@ -94,9 +95,9 @@ type ImageFormats = {
 
 export type ImageBlock = {
   name: string
-  alternativeText: string
-  url: string
   caption: string
+  url: string
+  alternativeText: string
   width: number
   height: number
   formats: ImageFormats

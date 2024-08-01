@@ -4,7 +4,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   nuxtApp.vueApp.directive('click-outside', {
     beforeMount(el: any, binding: any) {
       el.clickOutsideEvent = function (event: any) {
-        console.log('asdasd')
         // Check if the clicked element is neither the element
         // to which the directive is applied nor its child
         if (!(el === event.target || el.contains(event.target))) {
@@ -19,7 +18,6 @@ export default defineNuxtPlugin((nuxtApp) => {
       document.removeEventListener('click', el.clickOutsideEvent)
     },
     getSSRProps(binding, vnode) {
-      console.log(binding, vnode)
       // you can provide SSR-specific props here
       return {}
     },
