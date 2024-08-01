@@ -1,11 +1,13 @@
 <template>
   <div>
     <h1>{{ page?.title }}</h1>
-    <StrapiBlocks
-      class="mt-2"
-      :content="page?.content || []"
-      :blocks="userBlocks"
-    />
+    <div class="prose">
+      <StrapiBlocks
+        class="mt-2"
+        :content="page?.content || []"
+        :blocks="userBlocks"
+      />
+    </div>
   </div>
 </template>
 

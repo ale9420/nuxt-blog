@@ -1,18 +1,22 @@
 <template>
-  <article class="flex flex-col bg-slate-50 w-full">
+  <article class="w-full">
     <NuxtImg
       :src="post?.featured_image?.data?.attributes?.url"
       :alt="post?.featured_image?.data?.attributes?.alternativeText"
       provider="strapi"
-      class="sm:h-64 lg:h-[40rem] w-full"
+      class="sm:h-64 md:h-96 lg:h-[40rem] w-full"
     />
-    <h1 class="sm:text-3xl lg:text-7xl">{{ post?.title }}</h1>
-    <div class="prose prose-zinc w-full">
-      <StrapiBlocks
-        class="mt-2"
-        :content="post?.content || []"
-        :blocks="userBlocks"
-      />
+    <div class="flex flex-col items-center bg-slate-50 w-full sm:p-3">
+      <h1 class="sm:text-3xl lg:text-7xl">{{ post?.title }}</h1>
+      <div
+        class="prose sm:prose-sm lg:prose-lg xl:prose-xl 2xl:prose-2xl prose-zinc prose-img:w-full w-full"
+      >
+        <StrapiBlocks
+          class="mt-2"
+          :content="post?.content || []"
+          :blocks="userBlocks"
+        />
+      </div>
     </div>
   </article>
 </template>

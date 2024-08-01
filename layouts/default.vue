@@ -1,8 +1,8 @@
 <template>
-  <div class="flex flex-col min-h-screen">
+  <div class="bg-slate-200 flex flex-col min-h-screen">
     <LayoutMainHeader />
     <div
-      class="overflow-auto flex grow container mx-auto z-0 sm:pt-5 lg:pt-8 sm:py-3 lg:p-5 lg:inset-x-0"
+      class="container overflow-auto flex grow mx-auto z-0 sm:pt-5 sm:py-5 lg:pt-8 lg:p-5"
     >
       <slot />
     </div>

@@ -72,6 +72,37 @@ export type Page = {
   meta: Meta
 }
 
+type ImageFormat = {
+  name: string
+  url: string
+  ext: string
+  hash: string
+  mime: string
+  path?: string | null
+  width: number
+  height: number
+  size: number
+  sizeInBites: number
+}
+
+type ImageFormats = {
+  small: ImageFormat
+  thumbnail: ImageFormat
+  medium: ImageFormat
+  large: ImageFormat
+}
+
+export type ImageBlock = {
+  name: string
+  alternativeText: string
+  url: string
+  caption: string
+  width: number
+  height: number
+  formats: ImageFormats
+  provider: string
+}
+
 type UploadFile = {
   name: String
   alternativeText: string

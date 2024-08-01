@@ -1,5 +1,32 @@
 import { h } from 'vue'
 import { type BlocksComponents } from 'vue-strapi-blocks-renderer'
+import { screens } from '@/constants/screens'
+
+import type { ImageBlock } from '@/types'
+
+function getResourceUrl(url: string) {
+  return url.startsWith('https://') ? url : `http://localhost:1437${url}`
+}
+
+function resolveImage(props: ImageBlock) {
+  console.log(props)
+  let url = ''
+  switch (true) {
+    case window?.innerWidth >= +screens.sm:
+      url = props.formats.small.url
+      break
+    case window?.innerWidth >= +screens.md:
+      url = props.formats.medium.url
+      break
+    default:
+      url = getResourceUrl(props.formats.small.url)
+      break
+  }
+
+  console.log(url)
+
+  return url
+}
 
 export const userBlocks: BlocksComponents = {
   paragraph: (props) => h('p', { class: 'prose-p' }, props.children),
@@ -22,14 +49,10 @@ export const userBlocks: BlocksComponents = {
         : []
     ),
   image: (props) =>
-    h(
-      'img',
-      {
-        class: 'prose-img',
-        src: props.image.url,
-        alt: props.image.alternativeText,
-      },
-      props.children
-    ),
+    h('img', {
+      class: '',
+      src: resolveImage(props.image as unknown as ImageBlock),
+      alt: props.image.alternativeText || '',
+    }),
   'list-item': (props) => h('li', props.children),
 }
