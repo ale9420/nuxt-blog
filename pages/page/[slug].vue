@@ -1,14 +1,16 @@
 <template>
-  <div>
-    <h1>{{ page?.title }}</h1>
-    <div class="prose">
+  <article class="w-full bg-slate-50 sm:p-3">
+    <h1 class="sm:text-3xl lg:text-7xl">{{ page?.title }}</h1>
+    <div
+      class="prose sm:prose-sm lg:prose-lg xl:prose-xl 2xl:prose-2xl prose-p:leading-normal prose-zinc prose-img:w-full w-full"
+    >
       <StrapiBlocks
         class="mt-2"
         :content="page?.content || []"
         :blocks="userBlocks"
       />
     </div>
-  </div>
+  </article>
 </template>
 
 <script lang="ts" setup>

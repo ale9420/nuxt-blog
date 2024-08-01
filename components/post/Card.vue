@@ -1,7 +1,5 @@
 <template>
-  <section
-    class="bg-neutral-100 shadow-md rounded-md overflow-hidden hover:shadow-lg max-w-md"
-  >
+  <section class="bg-neutral-100 shadow-md rounded-md hover:shadow-lg">
     <div class="relative">
       <NuxtImg
         :src="post.featured_image.data.attributes.url"
@@ -18,21 +16,24 @@
     <div class="sm:p-2 lg:p-5">
       <h3 class="sm:text-lg md:text-2xl font-bold">{{ post.title }}</h3>
       <div
-        class="prose sm:prose-sm lg:prose-lg xl:prose-xl 2xl:prose-2xl prose-zinc mt-2 min-h-20"
+        class="prose prose-zinc prose-p:leading-normal sm:prose-sm lg:prose-lg xl:prose-xl 2xl:prose-2xl mt-2 min-h-20 overflow-hidden"
       >
         <StrapiBlocks :content="post.excerpt" :blocks="userBlocks" />
       </div>
-      <div class="overflow-x-auto whitespace-nowrap sm:w-1/2 sm:mt-0 lg:mt-5">
-        <div class="inline-flex">
-          <span
-            v-for="tag in post.categories.data"
-            :key="tag.id"
-            class="sm:text-xs bg-yellow-400 rounded-md mr-1 py-1 sm:px-1 md:px-2"
-            >{{ tag.attributes.name }}</span
-          >
-        </div>
+      <div
+        class="overflow-x-auto sm:mt-0 lg:mt-5 py-2"
+        :class="categoriesWidth.class"
+        ref="categoriesContainer"
+      >
+        <span
+          v-if="categoriesWidth.size > 0"
+          v-for="tag in post.categories.data"
+          :key="tag.id"
+          class="sm:text-xs bg-yellow-400 rounded-md mr-1 py-1 sm:px-1 md:px-2"
+          >{{ tag.attributes.name }}</span
+        >
       </div>
-      <div class="flex items-center justify-between mt-2">
+      <div class="flex items-end justify-between mt-2">
         <div class="flex items-center">
           <NuxtImg
             :src="post.author.data.attributes.profile_image.data.attributes.url"
@@ -47,7 +48,7 @@
         </div>
 
         <NuxtLink
-          class="border border-sky-500 text-sky-500 p-1 sm:text-xs rounded-lg"
+          class="uppercase font-bold text-sky-500 p-1 sm:text-xs rounded-lg hover:text-sky-600 hover:underline"
           :to="{ name: 'post-slug', params: { slug: post.slug } }"
         >
           Ver detalle
@@ -68,9 +69,18 @@ type PostProps = {
 }
 
 const props = defineProps<PostProps>()
+const categoriesContainer = ref<Element>()
+const categoriesWidth = ref({ size: 0, class: '' })
 const postDate = computed(() =>
   DateTime.fromISO(props.post.publishedAt as string).toLocaleString(
     DateTime.DATE_FULL
   )
 )
+
+onMounted(() => {
+  const containerSize = categoriesContainer?.value?.clientWidth || 0
+  categoriesWidth.value.class = `w-[${Math.round(containerSize / 16)}rem]`
+  categoriesWidth.value.size = containerSize
+  console.log(categoriesWidth.value)
+})
 </script>
