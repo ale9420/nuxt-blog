@@ -1,4 +1,3 @@
-import type { BlocksContent } from 'vue-strapi-blocks-renderer'
 import type { BlockNode } from '#strapi-blocks-renderer/types'
 
 export type Author = {
@@ -93,7 +92,7 @@ type ImageFormats = {
   large: ImageFormat
 }
 
-export type ImageBlock = {
+export type UploadFile = {
   name: string
   caption: string
   url: string
@@ -102,14 +101,6 @@ export type ImageBlock = {
   height: number
   formats: ImageFormats
   provider: string
-}
-
-type UploadFile = {
-  name: String
-  alternativeText: string
-  caption: String
-  url: string
-  ext: String
 }
 
 type Pagination = {

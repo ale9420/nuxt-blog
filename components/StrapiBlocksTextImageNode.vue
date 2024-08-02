@@ -12,10 +12,10 @@
 
 <script lang="ts" setup>
 import { screens } from '@/constants/screens'
-import type { ImageBlock } from '@/types'
+import type { UploadFile } from '@/types'
 
 const props = defineProps<{
-  image: ImageBlock
+  image: UploadFile
 }>()
 
 const url = ref(props.image.url)

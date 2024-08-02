@@ -1,9 +1,7 @@
 <template>
   <article class="w-full">
-    <NuxtImg
-      :src="post?.featured_image?.data?.attributes?.url"
-      :alt="post?.featured_image?.data?.attributes?.alternativeText"
-      provider="strapi"
+    <StrapiBlocksTextImageNode
+      :image="post?.featured_image?.data?.attributes"
       class="sm:h-64 md:h-96 lg:h-[40rem] w-full"
     />
     <div class="flex flex-col items-center bg-slate-50 w-full sm:p-3">
@@ -39,9 +37,3 @@ useSeoMeta({
   ogDescription: () => seoDescription,
 })
 </script>
-
-<style>
-.featured-image {
-  height: 628px;
-}
-</style>

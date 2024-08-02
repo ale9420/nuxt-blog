@@ -1,5 +1,5 @@
 <template>
-  <article class="w-full bg-slate-50 sm:p-3">
+  <article class="flex flex-col items-center w-full bg-slate-50 sm:p-3">
     <h1 class="sm:text-3xl lg:text-7xl">{{ page?.title }}</h1>
     <div
       class="prose sm:prose-sm lg:prose-lg xl:prose-xl 2xl:prose-2xl prose-p:leading-normal prose-zinc prose-img:w-full w-full"

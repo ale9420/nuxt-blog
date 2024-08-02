@@ -1,10 +1,8 @@
 <template>
   <section class="bg-neutral-100 shadow-md rounded-md hover:shadow-lg">
     <div class="relative">
-      <NuxtImg
-        :src="post.featured_image.data.attributes.url"
-        :alt="post.featured_image.data.attributes.alternativeText"
-        provider="strapi"
+      <StrapiBlocksTextImageNode
+        :image="post?.featured_image?.data?.attributes"
         class="sm:h-40 lg:h-60 w-full"
       />
       <span
@@ -36,7 +34,10 @@
       <div class="flex items-end justify-between mt-2">
         <div class="flex items-center">
           <NuxtImg
-            :src="post.author.data.attributes.profile_image.data.attributes.url"
+            :src="
+              post.author.data.attributes.profile_image?.data?.attributes
+                ?.formats.thumbnail.url
+            "
             :alt="post.author.data.attributes.name"
             provider="strapi"
             class="rounded-full sm:h-6 sm:w-6 md:h-10 md:w-10"
@@ -77,8 +78,7 @@ const postDate = computed(() =>
 
 onMounted(() => {
   const containerSize = categoriesContainer?.value?.clientWidth || 0
-  categoriesWidth.value.class = `w-[${Math.round(containerSize / 16)}rem]`
+  categoriesWidth.value.class = `w-[${Math.round(containerSize / 16) - 1}rem]`
   categoriesWidth.value.size = containerSize
-  console.log(categoriesWidth.value)
 })
 </script>

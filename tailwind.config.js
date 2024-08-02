@@ -10,6 +10,7 @@ export default {
     './app.vue',
     './error.vue',
   ],
+  safelist: [...Array.from({ length: 100 }, (_, i) => `w-[${i + 1}rem]`)],
   theme: {
     extend: {
       screens,

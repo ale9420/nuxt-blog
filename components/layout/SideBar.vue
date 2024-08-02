@@ -12,7 +12,7 @@
     </div>
     <hr class="w-full" />
     <LayoutMenuNavigation
-      class="flex flex-col mt-3"
+      class="text-slate-50 flex flex-col mt-3"
       @click="$emit('close')"
       :pages="pages"
     />
