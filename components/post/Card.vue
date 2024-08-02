@@ -52,7 +52,7 @@
           class="uppercase font-bold text-sky-500 p-1 sm:text-xs rounded-lg hover:text-sky-600 hover:underline"
           :to="{ name: 'post-slug', params: { slug: post.slug } }"
         >
-          Ver detalle
+          {{ $t('global.details') }}
         </NuxtLink>
       </div>
     </div>

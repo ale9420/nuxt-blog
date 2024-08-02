@@ -1,6 +1,6 @@
 <template>
   <header
-    class="sticky relative top-0 flex items-center justify-between sm:p-3 lg:p-5 w-full z-10 text-slate-700 backdrop-blur-sm bg-slate-200/50"
+    class="sticky relative top-0 flex items-center justify-between sm:p-3 lg:p-5 w-full z-10 text-slate-700 backdrop-blur-sm bg-slate-200/50 shadow-lg shadow-slate-300/50"
   >
     <div class="lg:hidden" v-click-outside="closeSideBar">
       <Bars3Icon @click="openSidebar = true" class="lg:hidden size-6" />

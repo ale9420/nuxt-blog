@@ -9,8 +9,12 @@ export default defineNuxtConfig({
     '@nuxt/eslint',
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/i18n',
     'nuxt-strapi-blocks-renderer',
   ],
+  i18n: {
+    vueI18n: './i18n.config.ts',
+  },
   typescript: {
     tsConfig: {
       compilerOptions: {

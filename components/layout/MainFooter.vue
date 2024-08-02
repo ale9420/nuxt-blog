@@ -14,11 +14,9 @@
     </div>
     <hr class="w-full my-5" />
     <div class="container text-justify">
-      <h3 class="text-xl">Blog</h3>
+      <h3 class="text-xl">{{ $t('footer.blog') }}</h3>
       <p class="text-sm mt-2">
-        El objetivo de este blog es de hablar de mis experiencias en el mundo
-        del desarrollo web, noticias, tutoriales y poder compartir el
-        conocimiento con quien lo desee.
+        {{ $t('footer.blogText') }}
       </p>
     </div>
   </footer>
