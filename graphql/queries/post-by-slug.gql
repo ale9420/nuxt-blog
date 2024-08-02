@@ -1,7 +1,7 @@
 #import "../fragments/post.gql"
 
-query post($slug: String) {
-  posts(filters: { slug: { eq: $slug } }) {
+query post($slug: String, $locale: I18NLocaleCode) {
+  posts(filters: { slug: { eq: $slug } }, locale: $locale) {
     data {
       id
       attributes {

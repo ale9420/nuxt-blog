@@ -21,9 +21,11 @@ import type { PostEntityResponseCollection } from '~/types'
 
 const graphql = useStrapiGraphQL()
 const route = useRoute()
+const { language } = useLanguageStore()
 
 const postQuery = await graphql<PostEntityResponseCollection>(postBySlug, {
   slug: route.params.slug,
+  locale: language?.code,
 })
 
 const post = computed(() => postQuery?.data?.posts?.data[0]?.attributes)

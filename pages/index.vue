@@ -4,7 +4,7 @@
       class="sm:flex sm:flex-col gap-3 md:grid md:grid-cols-2 lg:grid-cols-3"
     >
       <PostCard
-        v-for="post of result?.data?.posts?.data"
+        v-for="post of posts?.data?.posts?.data"
         :key="+post.id"
         :post="post.attributes"
       />
@@ -13,11 +13,11 @@
 </template>
 
 <script lang="ts" setup>
-import Posts from '@/graphql/queries/posts.gql'
-import type { PostEntityResponseCollection } from '~/types'
+const { posts, fetchPosts } = usePostStore()
 
-const graphql = useStrapiGraphQL()
-const result = await graphql<PostEntityResponseCollection>(Posts)
+onServerPrefetch(async () => {
+  await fetchPosts()
+})
 
 useSeoMeta({
   title: 'BOG.DEV Blog',

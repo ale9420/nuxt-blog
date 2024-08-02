@@ -1,7 +1,7 @@
 #import "../fragments/post.gql"
 
-query posts {
-  posts {
+query posts($locale: I18NLocaleCode) {
+  posts(locale: $locale) {
     data {
       id
       attributes {

@@ -1,5 +1,15 @@
 import type { BlockNode } from '#strapi-blocks-renderer/types'
 
+export type Language = {
+  value: string
+  label: string
+  code: string
+}
+
+// export enum StrapiLanguage {
+//   es= ''
+// }
+
 export type Author = {
   name: string
   profile_image: UploadFileEntityResponse
@@ -10,7 +20,7 @@ type UploadFileEntityResponse = {
 }
 
 type AuthorEntity = {
-  id: String
+  id: string
   attributes: Author
 }
 
@@ -37,7 +47,7 @@ type CategoryRelationResponseCollection = {
 }
 
 type UploadFileEntity = {
-  id: String
+  id: string
   attributes: UploadFile
 }
 
@@ -104,10 +114,10 @@ export type UploadFile = {
 }
 
 type Pagination = {
-  total: Number
-  page: Number
-  pageSize: Number
-  pageCount: Number
+  total: number
+  page: number
+  pageSize: number
+  pageCount: number
 }
 
 type Meta = {
@@ -117,7 +127,7 @@ type Meta = {
 }
 
 export interface PostEntity {
-  id: String
+  id: string
   attributes: Post
 }
 

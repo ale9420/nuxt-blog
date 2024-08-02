@@ -2,18 +2,22 @@
   <header
     class="sticky relative top-0 flex items-center justify-between sm:p-3 lg:p-5 w-full z-10 text-slate-700 backdrop-blur-sm bg-slate-200/50 shadow-lg shadow-slate-300/50"
   >
-    <div class="lg:hidden" v-click-outside="closeSideBar">
-      <Bars3Icon @click="openSidebar = true" class="lg:hidden size-6" />
-      <LayoutSideBar @close="openSidebar = false" :open="openSidebar" />
+    <div v-click-outside="closeSideBar" class="lg:hidden">
+      <Bars3Icon class="lg:hidden size-6" @click="openSidebar = true" />
+      <LayoutSideBar :open="openSidebar" @close="openSidebar = false" />
     </div>
 
     <h3 class="text-xl">BOG.DEV</h3>
     <div class="sm:hidden lg:flex">
-      <LayoutMenuNavigation
-        class="flex"
-        @click="$emit('close')"
-        :pages="pages"
-      />
+      <div>
+        <FormSelect
+          v-model="languageModel"
+          property="value"
+          label="label"
+          :options="languages"
+        />
+      </div>
+      <LayoutMenuNavigation class="flex" :pages="pages" />
     </div>
   </header>
 </template>
@@ -27,7 +31,14 @@ const openSidebar = ref(false)
 const graphql = useStrapiGraphQL()
 const result = await graphql<PageEntityResponseCollection>(pagesQuery)
 const pages = result.data.pages.data
-
+const { languages, updateLanguage } = useLanguageStore()
+const languageModel = defineModel('language', {
+  type: String,
+  default: 'es',
+  async set(value) {
+    await updateLanguage(value)
+  },
+})
 const closeSideBar = () => {
   openSidebar.value = false
 }
