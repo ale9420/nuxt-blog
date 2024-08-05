@@ -10,6 +10,7 @@ export const useLanguageStore = defineStore('language', () => {
 
   async function updateLanguage(lang: Locale) {
     await setLocale(lang)
+    localStorage.setItem('locale', lang)
     const language = {
       ...languages.value.find((i) => i.value === lang),
     } as Language

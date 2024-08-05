@@ -13,7 +13,7 @@
         v-model="languageModel"
         property="value"
         label="label"
-        class="bg-slate-200/50 hover:underline hover:underline-offset-4 hover:cursor-pointer"
+        class="backdrop-blur-sm bg-slate-200/50 border border-slate-500 rounded-md text-sm p-2"
         name="language"
         :options="languages"
       />

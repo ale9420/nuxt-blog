@@ -14,7 +14,7 @@ export default defineNuxtConfig({
   ],
   i18n: {
     vueI18n: './i18n.config.ts',
-    defaultLocale: 'es',
+    defaultLocale: 'en',
   },
   typescript: {
     tsConfig: {
@@ -54,12 +54,6 @@ export default defineNuxtConfig({
   },
   strapi: {
     url: process.env.STRAPI_URL,
-  },
-  runtimeConfig: {
-    public: {
-      ghostContentUrl: process.env.GHOST_CONTENT_URL,
-      ghostApiKey: process.env.GHOST_API_KEY,
-    },
   },
   image: {
     strapi: {

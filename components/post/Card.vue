@@ -19,12 +19,12 @@
         <StrapiBlocksText :nodes="post?.excerpt" />
       </div>
       <div
+        v-if="categoriesWidth.size > 0"
+        ref="categoriesContainer"
         class="overflow-x-auto sm:mt-0 lg:mt-5 py-2"
         :class="categoriesWidth.class"
-        ref="categoriesContainer"
       >
         <span
-          v-if="categoriesWidth.size > 0"
           v-for="tag in post.categories.data"
           :key="tag.id"
           class="sm:text-xs bg-yellow-400 rounded-md mr-1 py-1 sm:px-1 md:px-2"

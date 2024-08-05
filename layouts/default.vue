@@ -2,11 +2,11 @@
   <div class="bg-slate-200 flex flex-col min-h-screen">
     <LayoutMainHeader />
 
-    <div
+    <section
       class="container overflow-y-auto flex grow mx-auto z-0 sm:py-3 lg:pt-8 lg:p-5"
     >
       <slot />
-    </div>
+    </section>
     <LayoutMainFooter />
   </div>
 </template>

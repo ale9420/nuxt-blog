@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <nav>
     <NuxtLink
       to="/"
       class="hover:underline hover:underline-offset-4 hover:cursor-pointer hover:text-red-600 p-2"
@@ -14,7 +14,7 @@
       @click="$emit('click')"
       >{{ page.attributes.title }}</NuxtLink
     >
-  </div>
+  </nav>
 </template>
 
 <script lang="ts" setup>
