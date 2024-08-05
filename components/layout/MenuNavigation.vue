@@ -1,17 +1,17 @@
 <template>
   <div>
     <NuxtLink
-      @click="$emit('click')"
       to="/"
       class="hover:underline hover:underline-offset-4 hover:cursor-pointer hover:text-red-600 p-2"
+      @click="$emit('click')"
       >{{ $t('global.home') }}</NuxtLink
     >
     <NuxtLink
       v-for="page in pages"
-      @click="$emit('click')"
       :key="page.id"
       :to="{ name: 'page-slug', params: { slug: page.attributes.meta.slug } }"
       class="hover:underline hover:underline-offset-4 hover:cursor-pointer hover:text-red-600 p-2"
+      @click="$emit('click')"
       >{{ page.attributes.title }}</NuxtLink
     >
   </div>
@@ -24,6 +24,7 @@ type PagesProps = {
   pages: PageEntity[]
 }
 
+defineEmits(['click'])
 defineProps<PagesProps>()
 </script>
 

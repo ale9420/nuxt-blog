@@ -9,21 +9,21 @@
 
     <h3 class="text-xl">BOG.DEV</h3>
     <div class="sm:hidden lg:flex">
-      <div>
-        <FormSelect
-          v-model="languageModel"
-          property="value"
-          label="label"
-          :options="languages"
-        />
-      </div>
+      <FormSelect
+        v-model="languageModel"
+        property="value"
+        label="label"
+        class="bg-slate-200/50 hover:underline hover:underline-offset-4 hover:cursor-pointer"
+        name="language"
+        :options="languages"
+      />
       <LayoutMenuNavigation class="flex" :pages="pages" />
     </div>
   </header>
 </template>
 
 <script lang="ts" setup>
-import type { PageEntityResponseCollection } from '~/types'
+import type { Locale, PageEntityResponseCollection } from '~/types'
 import { Bars3Icon } from '@heroicons/vue/16/solid'
 import pagesQuery from '@/graphql/queries/pages.gql'
 
@@ -36,9 +36,10 @@ const languageModel = defineModel('language', {
   type: String,
   default: 'es',
   async set(value) {
-    await updateLanguage(value)
+    await updateLanguage(value as Locale)
   },
 })
+
 const closeSideBar = () => {
   openSidebar.value = false
 }

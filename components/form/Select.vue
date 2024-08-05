@@ -1,5 +1,5 @@
 <template>
-  <select :modelValue="modelValue" @input="onUpdate">
+  <select :name="name" :modelValue="modelValue" @input="onUpdate">
     <option
       v-for="lang in options"
       :key="lang[property]"
@@ -24,11 +24,10 @@ type SelectProps = {
   property: string
   modelValue: string
   label: string
+  name: string
 }
 
-const props = defineProps<SelectProps>()
-
-const value = ref(props.modelValue)
+defineProps<SelectProps>()
 
 const emit = defineEmits(['update:modelValue'])
 
@@ -36,8 +35,6 @@ const emit = defineEmits(['update:modelValue'])
 const onUpdate = (event: any) => {
   emit('update:modelValue', event.target.value)
 }
-
-watch(value, (newVal) => console.log(newVal))
 </script>
 
 <style></style>

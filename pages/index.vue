@@ -13,10 +13,11 @@
 </template>
 
 <script lang="ts" setup>
-const { posts, fetchPosts } = usePostStore()
+const postStore = usePostStore()
+const { posts } = storeToRefs(postStore)
 
 onServerPrefetch(async () => {
-  await fetchPosts()
+  await postStore.fetchPosts()
 })
 
 useSeoMeta({

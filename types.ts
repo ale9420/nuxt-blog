@@ -6,9 +6,10 @@ export type Language = {
   code: string
 }
 
-// export enum StrapiLanguage {
-//   es= ''
-// }
+export enum Locale {
+  es = 'es',
+  en = 'en',
+}
 
 export type Author = {
   name: string
