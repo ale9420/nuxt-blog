@@ -25,10 +25,12 @@ const result = await graphql<PageEntityResponseCollection>(pageBySlug, {
 
 const page = computed(() => result?.data?.pages?.data[0]?.attributes)
 
+console.log(page)
+
 useSeoMeta({
-  title: () => page.value.meta.meta_title,
-  ogTitle: () => page.value.meta.meta_title,
-  description: () => page.value.meta.meta_description,
-  ogDescription: () => page.value.meta.meta_description,
+  title: () => page.value.seo.metaTitle,
+  ogTitle: () => page.value.seo.metaTitle,
+  description: () => page.value.seo.metaDescription,
+  ogDescription: () => page.value.seo.metaDescription,
 })
 </script>

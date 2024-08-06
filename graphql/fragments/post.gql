@@ -2,11 +2,13 @@ fragment PostFragment on Post {
   excerpt
   content
   title
-  meta_title
-  meta_description
   slug
   createdAt
   publishedAt
+  seo {
+    metaTitle
+    metaDescription
+  }
   author {
     data {
       attributes {

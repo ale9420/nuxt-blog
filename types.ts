@@ -63,8 +63,6 @@ export type Category = {
 export type Post = {
   excerpt: BlockNode[]
   title: string
-  meta_title?: string
-  meta_description?: string
   slug: string
   content: BlockNode[]
   publishedAt: string
@@ -74,13 +72,14 @@ export type Post = {
   author: AuthorEntityResponse
   primary_category: CategoryEntityResponse
   categories: CategoryRelationResponseCollection
+  seo: ComponentSharedSeo
 }
 
 export type Page = {
   title: string
   slug: string
   content: BlockNode[]
-  meta: Meta
+  seo: ComponentSharedSeo
 }
 
 type ImageFormat = {
@@ -121,10 +120,12 @@ type Pagination = {
   pageCount: number
 }
 
-type Meta = {
-  meta_title: string
-  meta_description: string
-  slug: string
+type ComponentSharedSeo = {
+  metaTitle: string
+  metaDescription: string
+  keywords?: string
+  metaRobots?: string
+  canonicalURL?: string
 }
 
 export interface PostEntity {

@@ -1,9 +1,9 @@
 fragment PageFragment on Page {
   title
+  slug
   content
-  meta {
-    meta_title
-    meta_description
-    slug
+  seo {
+    metaTitle
+    metaDescription
   }
 }

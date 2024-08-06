@@ -1,15 +1,11 @@
+#import "../fragments/page.gql"
+
 query pages($slug: String) {
-  pages(filters: { meta: { slug: { eq: $slug } } }) {
+  pages(filters: { slug: { eq: $slug } }) {
     data {
       id
       attributes {
-        title
-        content
-        meta {
-          meta_title
-          meta_description
-          slug
-        }
+        ...PageFragment
       }
     }
   }

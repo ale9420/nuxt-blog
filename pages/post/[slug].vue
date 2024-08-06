@@ -33,8 +33,8 @@ const postQuery = await graphql<PostEntityResponseCollection>(postBySlug, {
 })
 
 const post = computed(() => postQuery?.data?.posts?.data[0]?.attributes)
-const seoTitle = post.value?.meta_title || post.value?.title || ''
-const seoDescription = post.value?.meta_description
+const seoTitle = post.value?.seo.metaTitle || post.value?.title || ''
+const seoDescription = post.value?.seo.metaDescription
 
 useSeoMeta({
   title: () => seoTitle,

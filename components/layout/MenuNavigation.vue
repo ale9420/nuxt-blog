@@ -12,7 +12,7 @@
       :to="
         localePath({
           name: 'page-slug',
-          params: { slug: page.attributes.meta.slug },
+          params: { slug: page.attributes.slug },
         })
       "
       class="hover:underline hover:underline-offset-4 hover:cursor-pointer hover:text-red-600 p-2"
