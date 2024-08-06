@@ -1,5 +1,7 @@
 <template>
-  <section class="bg-neutral-100 shadow-md rounded-md hover:shadow-lg">
+  <section
+    class="bg-neutral-100 dark:bg-slate-600 dark:text-slate-50 shadow-md rounded-md hover:shadow-lg"
+  >
     <div class="relative">
       <StrapiBlocksTextImageNode
         :image="post?.featured_image?.data?.attributes"
@@ -12,9 +14,11 @@
       >
     </div>
     <div class="sm:p-2 lg:p-5">
-      <h3 class="sm:text-lg md:text-2xl font-bold">{{ post.title }}</h3>
+      <h3 class="sm:text-lg md:text-2xl font-bold">
+        {{ post.title }}
+      </h3>
       <div
-        class="prose prose-zinc prose-p:leading-normal sm:prose-sm lg:prose-lg xl:prose-xl 2xl:prose-2xl mt-2 min-h-20 overflow-hidden"
+        class="prose prose-zinc prose-p:leading-normal dark:prose-invert sm:prose-sm lg:prose-lg xl:prose-xl 2xl:prose-2xl mt-2 min-h-20 overflow-hidden"
       >
         <StrapiBlocksText :nodes="post?.excerpt" />
       </div>

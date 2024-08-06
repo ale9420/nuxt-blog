@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col absolute top-0 left-0 bg-red-600 h-screen overscroll-none sm:w-3/5 md:w-1/2 z-50 p-5"
+    class="flex flex-col absolute top-0 left-0 backdrop-blur-sm bg-slate-200/50 h-screen drop-shadow-lg overscroll-none dark:bg-slate-800/75 sm:w-3/5 md:w-1/2 z-50 p-5"
     :class="{ hidden: !open }"
   >
     <div class="flex justify-between">
@@ -23,7 +23,6 @@
         v-model="languageModel"
         property="value"
         label="label"
-        class="bg-red-600 rounded-sm border border-slate-50 focus:ring-red-600 focus:border-red-600 hover:border-red-600 hover:cursor-pointer"
         name="language"
         :options="languages"
       />

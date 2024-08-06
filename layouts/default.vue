@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-slate-200 flex flex-col min-h-screen">
+  <div class="bg-slate-200 dark:bg-gray-800 flex flex-col min-h-screen">
     <LayoutMainHeader />
 
     <section

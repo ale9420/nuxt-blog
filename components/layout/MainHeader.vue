@@ -1,6 +1,6 @@
 <template>
   <header
-    class="sticky relative top-0 flex items-center justify-between sm:p-3 lg:p-5 w-full z-10 text-slate-700 backdrop-blur-sm bg-slate-200/50 shadow-lg shadow-slate-300/50"
+    class="sticky relative top-0 flex items-center justify-between text-slate-700 backdrop-blur-sm bg-slate-200/50 shadow-lg shadow-slate-300/50 dark:bg-slate-900/75 dark:text-slate-50 dark:shadow-slate-800/50 sm:p-3 lg:p-5 w-full z-10"
   >
     <div v-click-outside="closeSideBar" class="lg:hidden">
       <Bars3Icon class="lg:hidden size-6" @click="openSidebar = true" />
@@ -9,15 +9,14 @@
 
     <h3 class="text-xl">BOG.DEV</h3>
     <div class="sm:hidden lg:flex">
+      <LayoutMenuNavigation class="flex" :pages="pages" />
       <FormSelect
         v-model="languageModel"
         property="value"
         label="label"
-        class="backdrop-blur-sm bg-slate-200/50 border border-slate-500 rounded-md text-sm p-2"
         name="language"
         :options="languages"
       />
-      <LayoutMenuNavigation class="flex" :pages="pages" />
     </div>
   </header>
 </template>

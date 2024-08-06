@@ -1,6 +1,6 @@
 <template>
   <footer
-    class="flex sm:flex-col items-center bg-gradient-to-r from-slate-600 to-slate-700 p-5 text-neutral-50"
+    class="flex sm:flex-col items-center bg-gradient-to-r from-red-700 to-red-800 p-5 text-neutral-50"
   >
     <div class="flex gap-3">
       <NuxtLink to="https://github.com/ale9420">
