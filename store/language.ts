@@ -2,7 +2,7 @@ import type { Language, Locale } from '@/types'
 
 export const useLanguageStore = defineStore('language', () => {
   const { setLocale } = useI18n({ useScope: 'global' })
-  const strapiLocale = ref('en')
+  const strapiLocale = ref('es-CO')
   const languages = ref<Language[]>([
     { value: 'en', label: 'English', code: 'en' },
     { value: 'es', label: 'Español', code: 'es-CO' },
@@ -10,7 +10,6 @@ export const useLanguageStore = defineStore('language', () => {
 
   async function updateLanguage(lang: Locale) {
     await setLocale(lang)
-    localStorage.setItem('locale', lang)
     const language = {
       ...languages.value.find((i) => i.value === lang),
     } as Language

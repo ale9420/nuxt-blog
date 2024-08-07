@@ -1,0 +1,11 @@
+query pages {
+  pages {
+    data {
+      id
+      attributes {
+        title
+        slug
+      }
+    }
+  }
+}

@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
     'nuxt-strapi-blocks-renderer',
+    'nuxt-viewport',
   ],
   i18n: {
     vueI18n: './i18n.config.ts',

@@ -24,7 +24,7 @@
 <script lang="ts" setup>
 import type { Locale, PageEntityResponseCollection } from '~/types'
 import { Bars3Icon } from '@heroicons/vue/16/solid'
-import pagesQuery from '@/graphql/queries/pages.gql'
+import pagesQuery from '@/graphql/queries/pages-header-list.gql'
 
 const openSidebar = ref(false)
 const graphql = useStrapiGraphQL()

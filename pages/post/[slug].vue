@@ -1,7 +1,8 @@
 <template>
   <article class="w-full">
     <StrapiBlocksTextImageNode
-      :image="post?.featured_image?.data?.attributes"
+      v-if="post?.featured_image"
+      :image="post.featured_image.data.attributes"
       class="sm:h-64 md:h-96 lg:h-[40rem] w-full"
     />
     <div
@@ -20,19 +21,17 @@
 </template>
 
 <script lang="ts" setup>
-import postBySlug from '@/graphql/queries/post-by-slug.gql'
-import type { PostEntityResponseCollection } from '~/types'
-
-const graphql = useStrapiGraphQL()
 const route = useRoute()
-const { locale } = useLanguageStore()
+const postStore = usePostStore()
+const { postBySlug } = storeToRefs(postStore)
 
-const postQuery = await graphql<PostEntityResponseCollection>(postBySlug, {
-  slug: route.params.slug,
-  locale,
-})
+await postStore.fetchPostBySlug(route.params.slug as string)
 
-const post = computed(() => postQuery?.data?.posts?.data[0]?.attributes)
+// onServerPrefetch(async () => {
+//   await postStore.fetchPostBySlug(route.params.slug as string)
+// })
+
+const post = computed(() => postBySlug?.value?.data.posts.data[0].attributes)
 const seoTitle = post.value?.seo.metaTitle || post.value?.title || ''
 const seoDescription = post.value?.seo.metaDescription
 

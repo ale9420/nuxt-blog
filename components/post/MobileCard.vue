@@ -1,28 +1,28 @@
 <template>
   <NuxtLink :to="{ name: 'post-slug', params: { slug: post.slug } }">
     <section
-      class="bg-neutral-100 dark:bg-slate-700 dark:text-slate-50 shadow-md rounded-md hover:shadow-lg"
+      class="bg-neutral-100 dark:bg-slate-700 dark:text-slate-50 shadow-md hover:shadow-lg flex p-2 rounded-lg w-full"
     >
-      <StrapiBlocksTextImageNode
-        :image="post?.featured_image?.data?.attributes"
-        class="sm:h-40 object-cover w-full"
-      />
-      <div class="sm:p-2 lg:p-3">
+      <div class="relative">
         <span
           v-if="post.primary_category"
-          class="bg-red-200 text-sm text-red-700 font-bold uppercase rounded-lg py-0.5 px-1.5"
+          class="absolute top-2 left-0 bg-red-600/50 text-xs text-slate-50 font-semibold uppercase rounded-r-lg p-1"
           >{{ post.primary_category.data.attributes.name }}</span
         >
-        <h3 class="sm:text-lg md:text-2xl font-bold">
+
+        <StrapiBlocksTextImageNode
+          :image="post?.featured_image?.data?.attributes"
+          class="w-36 rounded-md object-cover"
+        />
+      </div>
+
+      <div class="pl-2 flex flex-col justify-between grow">
+        <h3>
           {{ post.title }}
         </h3>
         <div
-          class="prose prose-zinc prose-p:leading-normal dark:prose-invert lg:prose-sm mt-2 min-h-20 overflow-hidden"
+          class="flex items-center justify-between text-xs text-slate-500 dark:text-slate-300 font-semibold"
         >
-          <StrapiBlocksText :nodes="post?.excerpt" />
-        </div>
-        <hr class="w-full h-px mb-2 bg-slate-200 border-0 dark:bg-slate-500" />
-        <div class="flex items-center justify-between text-xs lg:text-base">
           <div class="flex items-center">
             <NuxtImg
               :src="
@@ -33,9 +33,7 @@
               provider="strapi"
               class="rounded-full sm:h-6 sm:w-6 md:h-10 md:w-10"
             />
-            <div class="sm:ml-1 md:ml-2">
-              <p>{{ post?.author?.data?.attributes?.name }}</p>
-            </div>
+            <p class="ml-1">{{ post?.author?.data?.attributes?.name }}</p>
           </div>
           <span>{{ postDate }}</span>
         </div>
@@ -52,10 +50,13 @@ type PostProps = {
   post: Post
 }
 
+const languageStore = useLanguageStore()
+const { locale } = storeToRefs(languageStore)
+
 const props = defineProps<PostProps>()
 const postDate = computed(() =>
-  DateTime.fromISO(props.post.publishedAt as string).toLocaleString(
-    DateTime.DATE_FULL
-  )
+  DateTime.fromISO(props.post.publishedAt as string)
+    .setLocale(locale.value)
+    .toLocaleString(DateTime.DATE_FULL)
 )
 </script>

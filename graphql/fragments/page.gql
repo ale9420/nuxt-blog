@@ -1,9 +1,10 @@
+#import "./seo.gql"
+
 fragment PageFragment on Page {
   title
   slug
   content
   seo {
-    metaTitle
-    metaDescription
+    ...SeoFragment
   }
 }

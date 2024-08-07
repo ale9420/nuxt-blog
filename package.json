@@ -20,6 +20,7 @@
     "luxon": "^3.4.4",
     "nuxt": "^3.12.3",
     "nuxt-strapi-blocks-renderer": "^1.0.8",
+    "nuxt-viewport": "^2.1.5",
     "vue": "latest"
   },
   "devDependencies": {

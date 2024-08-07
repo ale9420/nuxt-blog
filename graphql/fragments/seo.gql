@@ -1,0 +1,5 @@
+fragment SeoFragment on ComponentSharedSeo {
+  metaTitle
+  metaDescription
+  keywords
+}
