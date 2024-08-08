@@ -1,5 +1,5 @@
 <template>
-  <div v-if="viewport.isLessThan('tablet')" class="flex flex-col gap-3 w-full">
+  <div v-if="isMobile" class="flex flex-col gap-3 w-full">
     <PostMobileCard
       v-for="post of posts?.data?.posts?.data"
       :key="+post.id"
@@ -24,6 +24,7 @@ const postStore = usePostStore()
 const languageStore = useLanguageStore()
 const { locale } = storeToRefs(languageStore)
 const { posts } = storeToRefs(postStore)
+const isMobile = computed(() => viewport.isLessThan('tablet'))
 
 useSeoMeta({
   title: 'BOG.DEV Blog',

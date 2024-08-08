@@ -68,6 +68,7 @@ export type Post = {
   publishedAt: string
   createdAt: string
   updatedAt: string
+  readTime: number
   featured_image: UploadFileEntityResponse
   author: AuthorEntityResponse
   primary_category: CategoryEntityResponse

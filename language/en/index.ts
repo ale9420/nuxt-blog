@@ -2,6 +2,8 @@ export default {
   global: {
     home: 'Home',
     details: 'Details',
+    minute: '{minutes} Minute read',
+    minutes: '{minutes} Minutes read',
   },
   footer: {
     blog: 'Blog',

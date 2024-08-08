@@ -5,6 +5,7 @@ fragment PostFragment on Post {
   slug
   createdAt
   publishedAt
+  readTime
   seo {
     metaTitle
     metaDescription

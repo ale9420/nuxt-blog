@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia'
-import { type PostEntityResponseCollection } from '@/types'
+import { type Post, type PostEntityResponseCollection } from '@/types'
 import Posts from '@/graphql/queries/posts.gql'
 import PostBySlug from '@/graphql/queries/post-by-slug.gql'
 
 export const usePostStore = defineStore('usePostStore', () => {
   const graphql = useStrapiGraphQL()
   const posts = ref<PostEntityResponseCollection>()
-  const postBySlug = ref<PostEntityResponseCollection>()
+  const postBySlug = ref<Post>()
   const languageStore = useLanguageStore()
   const { locale } = storeToRefs(languageStore)
 
@@ -22,8 +22,13 @@ export const usePostStore = defineStore('usePostStore', () => {
       slug,
       locale: locale.value,
     })
-    postBySlug.value = result
+    if (result.data.posts.data.length > 0)
+      updatePost(result.data.posts.data[0].attributes)
   }
 
-  return { fetchPosts, fetchPostBySlug, posts, postBySlug }
+  function updatePost(post: Post) {
+    postBySlug.value = post
+  }
+
+  return { fetchPosts, fetchPostBySlug, updatePost, posts, postBySlug }
 })
