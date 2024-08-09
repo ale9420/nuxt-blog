@@ -8,11 +8,12 @@ export const usePostStore = defineStore('usePostStore', () => {
   const posts = ref<PostEntityResponseCollection>()
   const postBySlug = ref<Post>()
   const languageStore = useLanguageStore()
-  const { locale } = storeToRefs(languageStore)
+  const router = useRouter()
+  const { locale, language } = storeToRefs(languageStore)
 
   async function fetchPosts() {
     const result = await graphql<PostEntityResponseCollection>(Posts, {
-      locale: locale.value,
+      locale: language.value?.code,
     })
     posts.value = result
   }
@@ -28,6 +29,7 @@ export const usePostStore = defineStore('usePostStore', () => {
 
   function updatePost(post: Post) {
     postBySlug.value = post
+    router.push({ name: 'post-slug', params: { slug: post.slug } })
   }
 
   return { fetchPosts, fetchPostBySlug, updatePost, posts, postBySlug }

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col absolute top-0 left-0 backdrop-blur-sm bg-slate-200/50 h-screen drop-shadow-lg overscroll-none dark:bg-slate-800/75 sm:w-3/5 md:w-1/2 z-50 p-5"
+    class="flex flex-col absolute top-0 left-0 backdrop-blur-sm bg-slate-600/50 h-screen drop-shadow-lg overscroll-none dark:bg-slate-800/75 sm:w-3/5 md:w-1/2 z-50 p-5"
     :class="{ hidden: !open }"
   >
     <div class="flex justify-between">
@@ -18,12 +18,12 @@
         :pages="pages"
         @click="$emit('close')"
       />
-
       <FormSelect
         v-model="languageModel"
         property="value"
         label="label"
         name="language"
+        return-mode="object"
         :options="languages"
       />
     </div>
@@ -32,7 +32,7 @@
 
 <script lang="ts" setup>
 import { XCircleIcon } from '@heroicons/vue/20/solid'
-import type { Locale } from '~/types'
+import type { Language } from '~/types'
 
 type SideBarProps = {
   open: boolean
@@ -41,16 +41,18 @@ type SideBarProps = {
 const emit = defineEmits(['close'])
 defineProps<SideBarProps>()
 
+const languageStore = useLanguageStore()
 const { pages } = await usePages()
-const { languages, updateLanguage } = useLanguageStore()
-const languageModel = defineModel('language', {
-  type: String,
-  default: 'es',
+const { locale, languages } = storeToRefs(languageStore)
+
+const languageModel = defineModel<Language>('language', {
   async set(value) {
-    await updateLanguage(value as Locale)
+    await languageStore.updateLanguage(value)
     emit('close')
   },
 })
-</script>
 
-<style></style>
+onBeforeMount(() => {
+  languageModel.value = languages.value.find((i) => i.value === locale.value)
+})
+</script>

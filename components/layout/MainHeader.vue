@@ -15,6 +15,7 @@
         property="value"
         label="label"
         name="language"
+        return-mode="object"
         :options="languages"
       />
     </div>
@@ -22,7 +23,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Locale, PageEntityResponseCollection } from '~/types'
+import type { Language, PageEntityResponseCollection } from '~/types'
 import { Bars3Icon } from '@heroicons/vue/16/solid'
 import pagesQuery from '@/graphql/queries/pages-header-list.gql'
 
@@ -30,16 +31,19 @@ const openSidebar = ref(false)
 const graphql = useStrapiGraphQL()
 const result = await graphql<PageEntityResponseCollection>(pagesQuery)
 const pages = result.data.pages.data
-const { languages, updateLanguage } = useLanguageStore()
-const languageModel = defineModel('language', {
-  type: String,
-  default: 'es',
+const languageStore = useLanguageStore()
+const { locale, languages } = storeToRefs(languageStore)
+const languageModel = defineModel<Language>('language', {
   async set(value) {
-    await updateLanguage(value as Locale)
+    await languageStore.updateLanguage(value)
   },
 })
 
 const closeSideBar = () => {
   openSidebar.value = false
 }
+
+onBeforeMount(() => {
+  languageModel.value = languages.value.find((i) => i.value === locale.value)
+})
 </script>

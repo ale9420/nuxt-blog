@@ -53,7 +53,9 @@ const { postBySlug: post } = storeToRefs(postStore)
 const seoTitle = post.value?.seo.metaTitle || post.value?.title || ''
 const seoDescription = post.value?.seo.metaDescription
 
-await postStore.fetchPostBySlug(route.params.slug as string)
+onServerPrefetch(async () => {
+  if (!post.value) await postStore.fetchPostBySlug(route.params.slug as string)
+})
 
 definePageMeta({
   layout: 'content',

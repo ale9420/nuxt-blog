@@ -6,15 +6,14 @@
       :post="post.attributes"
     />
   </div>
-  <div
-    v-else
-    class="sm:flex sm:flex-col gap-3 md:grid md:grid-cols-2 lg:grid-cols-3"
-  >
-    <PostCard
-      v-for="post of posts?.data?.posts?.data"
-      :key="+post.id"
-      :post="post.attributes"
-    />
+  <div v-else>
+    <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-4">
+      <PostCard
+        v-for="post of posts?.data?.posts?.data"
+        :key="+post.id"
+        :post="post.attributes"
+      />
+    </div>
   </div>
 </template>
 
@@ -22,7 +21,7 @@
 const viewport = useViewport()
 const postStore = usePostStore()
 const languageStore = useLanguageStore()
-const { locale } = storeToRefs(languageStore)
+const { language } = storeToRefs(languageStore)
 const { posts } = storeToRefs(postStore)
 const isMobile = computed(() => viewport.isLessThan('tablet'))
 
@@ -41,7 +40,7 @@ onMounted(async () => {
   }
 })
 
-watch(locale, async () => {
+watch(language, async () => {
   await postStore.fetchPosts()
 })
 </script>

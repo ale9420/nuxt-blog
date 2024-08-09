@@ -1,20 +1,19 @@
-import type { Language, Locale } from '@/types'
+import type { Language } from '@/types'
 
 export const useLanguageStore = defineStore('language', () => {
-  const { setLocale } = useI18n({ useScope: 'global' })
-  const strapiLocale = ref('es-CO')
+  const { locale, setLocale } = useI18n({ useScope: 'global' })
   const languages = ref<Language[]>([
     { value: 'en', label: 'English', code: 'en' },
     { value: 'es', label: 'Español', code: 'es-CO' },
   ])
+  const language = ref<Language>(
+    languages.value.find((i) => i.value === locale.value) as Language
+  )
 
-  async function updateLanguage(lang: Locale) {
-    await setLocale(lang)
-    const language = {
-      ...languages.value.find((i) => i.value === lang),
-    } as Language
-    strapiLocale.value = language.code
+  async function updateLanguage(lang: Language) {
+    await setLocale(lang.value)
+    language.value = lang
   }
 
-  return { languages, locale: strapiLocale, updateLanguage }
+  return { languages, language, locale, updateLanguage }
 })
