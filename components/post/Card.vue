@@ -1,50 +1,48 @@
 <template>
   <section
-    class="bg-neutral-100 dark:bg-slate-700 dark:text-slate-50 shadow-md rounded-md hover:shadow-lg"
-    @click="navigateToPost"
+    class="dark:text-slate-50 dark:bg-slate-500 rounded-lg md:overflow-hidden"
   >
-    <StrapiBlocksTextImageNode
-      :image="post?.featured_image?.data?.attributes"
-      class="sm:h-40 object-cover w-full"
-    />
-    <div class="sm:p-2 lg:p-3">
-      <span
-        v-if="post.primary_category"
-        class="bg-red-200 text-sm text-red-700 font-bold uppercase rounded-lg py-0.5 px-1.5"
-        >{{ post.primary_category.data.attributes.name }}</span
-      >
-      <h3 class="sm:text-lg md:text-2xl font-bold">
+    <div class="relative">
+      <PostCategory
+        :category="post.primary_category.data.attributes"
+        class="absolute top-4 left-0 rounded-r-md"
+        main
+      />
+      <StrapiBlocksTextImageNode
+        :image="post?.featured_image?.data?.attributes"
+        class="sm:w-72 sm:w-full md:h-64 lg:h-80 lg:shadow-2xl object-cover shadow-xl rounded-t-lg lg:rounded-none"
+      />
+    </div>
+    <div class="sm:py-2 sm:px-1.5 lg:p-3 w-full">
+      <h5 class="font-semibold md:text-lg lg:text-2xl">
         {{ post.title }}
-      </h3>
-      <div
-        class="prose prose-zinc prose-p:leading-normal dark:prose-invert lg:prose-sm mt-2 min-h-20 overflow-hidden"
-      >
-        <StrapiBlocksText :nodes="post?.excerpt" />
-      </div>
-      <hr class="w-full h-px mb-2 bg-slate-200 border-0 dark:bg-slate-500" />
-      <div class="flex items-center justify-between text-xs lg:text-base">
-        <div class="flex items-center">
-          <NuxtImg
-            :src="
-              post.author.data.attributes.profile_image?.data?.attributes
-                ?.formats.thumbnail.url
-            "
-            :alt="post.author.data.attributes.name"
-            provider="strapi"
-            class="rounded-full sm:h-6 sm:w-6 md:h-10 md:w-10"
-          />
-          <div class="sm:ml-1 md:ml-2">
-            <p>{{ post?.author?.data?.attributes?.name }}</p>
-          </div>
+      </h5>
+      <PostAuthor
+        :author="post.author.data.attributes"
+        :published-at="post.publishedAt"
+      />
+      <div class="min-h-20">
+        <div
+          class="prose prose-zinc prose-p:leading-none dark:prose-invert sm:prose-sm lg:prose-lg mt-5 line-clamp-4"
+        >
+          <StrapiBlocksText :nodes="post?.excerpt" />
         </div>
-        <span>{{ postDate }}</span>
+      </div>
+      <div class="flex items-center justify-between mt-5">
+        <NuxtLink
+          :to="{ name: 'post-slug', params: { slug: post.slug } }"
+          class="bg-gradient-to-r from-orange-500 via-red-500 to-rose-500 text-slate-50 font-semibold uppercase rounded-lg p-2"
+          @click="navigateToPost"
+        >
+          {{ $t('global.details') }}
+        </NuxtLink>
+        <PostReadTime :read-time="post.readTime" />
       </div>
     </div>
   </section>
 </template>
 
 <script lang="ts" setup>
-import { DateTime } from 'luxon'
 import type { Post } from '~/types'
 
 type PostProps = {
@@ -53,11 +51,6 @@ type PostProps = {
 
 const { updatePost } = usePostStore()
 const props = defineProps<PostProps>()
-const postDate = computed(() =>
-  DateTime.fromISO(props.post.publishedAt as string).toLocaleString(
-    DateTime.DATE_FULL
-  )
-)
 
 const navigateToPost = () => {
   updatePost(props.post)

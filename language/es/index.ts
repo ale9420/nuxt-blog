@@ -1,9 +1,12 @@
 export default {
   global: {
     home: 'Inicio',
-    details: 'Detalles',
-    minute: 'Lectura de {minutes} minuto',
-    minutes: 'Lectura de {minutes} minutos',
+    details: 'Ver detalles',
+    minute: '{minutes} minuto',
+    minutes: '{minutes} minutos',
+  },
+  post: {
+    author: 'Por {author}',
   },
   footer: {
     blog: 'Blog',

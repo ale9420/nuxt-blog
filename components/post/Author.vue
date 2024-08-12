@@ -1,15 +1,31 @@
 <template>
-  <div class="text-zinc-200 flex flex-col items-center">
-    <NuxtImg
-      :src="author.profile_image?.data?.attributes?.formats.thumbnail.url"
-      :alt="author.name"
-      provider="strapi"
-      class="rounded-full sm:h-8 sm:w-8 md:h-10 md:w-10"
-    />
-    <div class="flex flex-col items-center leading-none">
-      <p class="font-bold">{{ author?.name }}</p>
-      <span class="text-xs">{{ postDate }} - {{ readTimeText }}</span>
+  <div
+    class="text-neutral-600 dark:text-slate-200 flex items-center sm:text-xs md:text-md lg:text-lg"
+  >
+    <div class="flex items-center">
+      <NuxtImg
+        :src="author.profile_image?.data?.attributes?.formats.thumbnail.url"
+        :alt="author.name"
+        provider="strapi"
+        class="rounded-full sm:h-5 sm:w-5 md:h-6 md:w-6 lg:w-7 lg:h-7"
+      />
+      <i18n-t
+        keypath="post.author"
+        tag="span"
+        class="font-semibold ml-1 lg:ml-2"
+        for="author"
+      >
+        <template #author>
+          <NuxtLink to="/author" class="text-red-800 dark:text-red-400">
+            {{ author?.name }}
+          </NuxtLink>
+        </template>
+      </i18n-t>
     </div>
+    <span
+      class="mx-1 h-1.5 w-1.5 rounded-lg bg-red-800 dark:bg-red-400 lg:mx-2"
+    ></span>
+    <span> {{ postDate }}</span>
   </div>
 </template>
 
@@ -20,23 +36,13 @@ import type { Author } from '@/types'
 type AuthorProps = {
   author: Author
   publishedAt: string
-  readTime: number
 }
 
 const props = defineProps<AuthorProps>()
-const { t } = useI18n()
-const languageStore = useLanguageStore()
-const { locale } = storeToRefs(languageStore)
 
 const postDate = computed(() =>
-  DateTime.fromISO(props.publishedAt as string)
-    .setLocale(locale.value)
-    .toLocaleString(DateTime.DATE_FULL)
+  DateTime.fromISO(props.publishedAt as string).toLocaleString(
+    DateTime.DATE_FULL
+  )
 )
-const readTimeText = computed(() => {
-  const timeProps = { minutes: props.readTime }
-  return props.readTime > 1
-    ? t('global.minutes', timeProps)
-    : t('global.minute', timeProps)
-})
 </script>

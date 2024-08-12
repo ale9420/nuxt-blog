@@ -8,7 +8,7 @@ export const usePostStore = defineStore('usePostStore', () => {
   const posts = ref<PostEntityResponseCollection>()
   const postBySlug = ref<Post>()
   const languageStore = useLanguageStore()
-  const router = useRouter()
+  // const router = useRouter()
   const { locale, language } = storeToRefs(languageStore)
 
   async function fetchPosts() {
@@ -28,8 +28,9 @@ export const usePostStore = defineStore('usePostStore', () => {
   }
 
   function updatePost(post: Post) {
+    console.log('se llamo update')
     postBySlug.value = post
-    router.push({ name: 'post-slug', params: { slug: post.slug } })
+    // router.push({ name: 'post-slug', params: { slug: post.slug } })
   }
 
   return { fetchPosts, fetchPostBySlug, updatePost, posts, postBySlug }

@@ -16,15 +16,7 @@ const props = defineProps<CategoryProps>()
 
 const isMainCategory = computed(() =>
   props.main
-    ? [
-        'absolute',
-        'top-2',
-        'left-0',
-        'bg-red-600/75',
-        'text-slate-50',
-        'rounded-r-md',
-        'uppercase',
-      ]
+    ? ['bg-red-600/75', 'text-slate-50', 'uppercase']
     : ['border-2', 'border-amber-500', 'rounded-md', 'text-amber-500']
 )
 </script>
