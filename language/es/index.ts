@@ -5,6 +5,11 @@ export default {
     minute: '{minutes} minuto',
     minutes: '{minutes} minutos',
   },
+  meta: {
+    title: 'Bog.dev',
+    description:
+      'Este es un espacio para aprender y compartir diferentes temas relacionados al desarrollo web y tecnologias de la información.',
+  },
   post: {
     author: 'Por {author}',
   },

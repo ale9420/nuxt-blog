@@ -17,23 +17,20 @@ const postStore = usePostStore()
 const languageStore = useLanguageStore()
 const { language } = storeToRefs(languageStore)
 const { posts } = storeToRefs(postStore)
-
-useSeoMeta({
-  title: 'BOG.DEV Blog',
-  description: 'Este es un blog donde nos enfocaremos en tecnologias web TI',
-})
+const { t } = useI18n({ useScope: 'global' })
 
 onServerPrefetch(async () => {
   await postStore.fetchPosts()
 })
 
-onMounted(async () => {
-  if (!posts.value) {
-    await postStore.fetchPosts()
-  }
-})
-
 watch(language, async () => {
   await postStore.fetchPosts()
+})
+
+useSeoMeta({
+  title: t('meta.title'),
+  ogTitle: t('meta.title'),
+  description: t('meta.description'),
+  ogDescription: t('meta.description'),
 })
 </script>

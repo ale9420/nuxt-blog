@@ -68,12 +68,14 @@ export type Post = {
   publishedAt: string
   createdAt: string
   updatedAt: string
+  locale: string
   readTime: number
   featured_image: UploadFileEntityResponse
   author: AuthorEntityResponse
   primary_category: CategoryEntityResponse
   categories: CategoryRelationResponseCollection
   seo: ComponentSharedSeo
+  localizations?: PostRelationResponseCollection
 }
 
 export type Page = {
@@ -144,6 +146,10 @@ export interface PostEntityResponse {
 
 export interface ResponseCollectionMeta {
   pagination: Pagination
+}
+
+type PostRelationResponseCollection = {
+  data: [PostEntity]
 }
 
 export type PostEntityResponseCollection = {

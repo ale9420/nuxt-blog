@@ -6,9 +6,18 @@ fragment PostFragment on Post {
   createdAt
   publishedAt
   readTime
+  locale
   seo {
     metaTitle
     metaDescription
+  }
+  localizations {
+    data {
+      attributes {
+        slug
+        locale
+      }
+    }
   }
   author {
     data {

@@ -1,6 +1,6 @@
 <template>
   <section
-    class="dark:text-slate-50 dark:bg-slate-500 rounded-lg md:overflow-hidden"
+    class="dark:text-slate-50 bg-slate-100 rounded-lg shadow-xl dark:bg-slate-500 md:overflow-hidden lg:shadow-2xl"
   >
     <div class="relative">
       <PostCategory
@@ -10,7 +10,7 @@
       />
       <StrapiBlocksTextImageNode
         :image="post?.featured_image?.data?.attributes"
-        class="sm:w-72 sm:w-full md:h-64 lg:h-80 lg:shadow-2xl object-cover shadow-xl rounded-t-lg lg:rounded-none"
+        class="sm:w-72 sm:w-full md:h-64 lg:h-80 object-cover rounded-t-lg"
       />
     </div>
     <div class="sm:py-2 sm:px-1.5 lg:p-3 w-full">
@@ -30,7 +30,11 @@
       </div>
       <div class="flex items-center justify-between mt-5">
         <NuxtLink
-          :to="{ name: 'post-slug', params: { slug: post.slug } }"
+          :to="{
+            name: 'post-slug',
+            params: { slug: post.slug },
+            query: { locale: encodeURI(post.locale) },
+          }"
           class="bg-gradient-to-r from-orange-500 via-red-500 to-rose-500 text-slate-50 font-semibold uppercase rounded-lg p-2"
           @click="navigateToPost"
         >
