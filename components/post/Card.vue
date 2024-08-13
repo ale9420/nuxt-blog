@@ -51,12 +51,13 @@ import type { Post } from '~/types'
 
 type PostProps = {
   post: Post
+  id: string | number
 }
 
 const { updatePost } = usePostStore()
 const props = defineProps<PostProps>()
 
 const navigateToPost = () => {
-  updatePost(props.post)
+  updatePost({ ...props.post, id: props.id })
 }
 </script>

@@ -17,6 +17,8 @@
     "@nuxtjs/strapi": "^1.12.0",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@pinia/nuxt": "^0.5.1",
+    "@vee-validate/nuxt": "^4.13.2",
+    "@vee-validate/yup": "^4.13.2",
     "luxon": "^3.4.4",
     "nuxt": "^3.12.3",
     "nuxt-strapi-blocks-renderer": "^1.0.8",

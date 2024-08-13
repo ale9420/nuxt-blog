@@ -1,0 +1,7 @@
+mutation createComment($comment: CreateComment!) {
+  createComment(input: $comment) {
+    id
+    content
+    blocked
+  }
+}

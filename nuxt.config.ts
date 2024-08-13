@@ -10,6 +10,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxtjs/tailwindcss',
     '@nuxtjs/i18n',
+    '@vee-validate/nuxt',
     'nuxt-strapi-blocks-renderer',
     'nuxt-viewport',
   ],
@@ -68,6 +69,9 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [gql()],
+  },
+  runtimeConfig: {
+    strapiToken: process.env.STRAPI_API_TOKEN,
   },
   compatibilityDate: '2024-07-26',
 })

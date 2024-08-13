@@ -61,6 +61,7 @@ export type Category = {
 }
 
 export type Post = {
+  id: string | number
   excerpt: BlockNode[]
   title: string
   slug: string
@@ -84,6 +85,39 @@ export type Page = {
   content: BlockNode[]
   seo: ComponentSharedSeo
 }
+
+export type CommentsCommentInput = {
+  blockedThread: boolean
+  blockReason: string
+  authorUser: string
+  authorId: string
+  authorName: string
+  authorEmail: string
+  authorAvatar: string
+  isAdminComment: boolean
+  removed: boolean
+  approvalStatus: string
+  related: string
+  reports: string[]
+  threadOf: string
+}
+
+type CommonComment = {
+  content: string
+  blocked: boolean
+}
+
+type CommentAuthor = {
+  id: string
+  name: string
+  email: string
+  avatar: string
+}
+
+export type CommentNested = {
+  id: string
+  author: CommentAuthor
+} & CommonComment
 
 type ImageFormat = {
   name: string
@@ -168,4 +202,10 @@ export type PageEntityResponseCollection = {
     }
   }
   meta: ResponseCollectionMeta
+}
+
+export type CommentEntityResponseCollection = {
+  data: {
+    findAllInHierarchy: CommentNested[]
+  }
 }

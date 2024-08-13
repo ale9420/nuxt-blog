@@ -5,6 +5,7 @@
     >
       <PostCard
         v-for="post of posts?.data?.posts?.data"
+        :id="post.id"
         :key="+post.id"
         :post="post.attributes"
       />
@@ -21,6 +22,10 @@ const { t } = useI18n({ useScope: 'global' })
 
 onServerPrefetch(async () => {
   await postStore.fetchPosts()
+})
+
+onMounted(async () => {
+  if (!posts.value) await postStore.fetchPosts()
 })
 
 watch(language, async () => {

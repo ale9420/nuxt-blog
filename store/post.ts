@@ -23,7 +23,11 @@ export const usePostStore = defineStore('usePostStore', () => {
       locale,
     })
     if (result.data.posts.data.length > 0)
-      updatePost(result.data.posts.data[0].attributes)
+      console.log(result.data.posts.data[0].id)
+    updatePost({
+      ...result.data.posts.data[0].attributes,
+      id: result.data.posts.data[0].id,
+    })
   }
 
   function updatePost(post: Post) {

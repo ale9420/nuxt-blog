@@ -40,6 +40,8 @@
           class="m-0.5"
         />
       </div>
+      <hr class="w-20 h-1 my-6 bg-slate-50 rounded-lg" />
+      <PostComments />
     </div>
   </article>
 </template>
@@ -57,6 +59,8 @@ onServerPrefetch(async () => {
       route.params.slug as string,
       route.query.locale as string
     )
+
+  console.log(post.value?.id)
 })
 
 useSeoMeta({
