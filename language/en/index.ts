@@ -4,6 +4,15 @@ export default {
     details: 'See details',
     minute: '{minutes} Minute',
     minutes: '{minutes} Minutes',
+    postComment: 'Post comment',
+    signUpToComment: 'To post a comment you need to {signUp} or {login}',
+    signUp: 'Sign up',
+    login: 'Login',
+    logout: 'Logout',
+    success: 'success',
+  },
+  auth: {
+    createdAccount: 'Your account has been created successfully',
   },
   meta: {
     title: 'Bog.dev',

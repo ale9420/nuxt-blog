@@ -116,6 +116,7 @@ type CommentAuthor = {
 
 export type CommentNested = {
   id: string
+  createdAt: string
   author: CommentAuthor
 } & CommonComment
 
@@ -208,4 +209,13 @@ export type CommentEntityResponseCollection = {
   data: {
     findAllInHierarchy: CommentNested[]
   }
+}
+
+export type ToastStatus = 'success' | 'warning' | 'error'
+
+export type Toast = {
+  title: string
+  description: string
+  timeout: number
+  status: ToastStatus
 }

@@ -50,6 +50,8 @@ import { toTypedSchema } from '@vee-validate/yup'
 import * as yup from 'yup'
 import { useForm } from 'vee-validate'
 
+const { t } = useI18n()
+const { addToast } = useToastStore()
 const { register } = useStrapiAuth()
 const { meta, defineField, handleSubmit } = useForm({
   validationSchema: toTypedSchema(
@@ -69,6 +71,16 @@ const [phoneNumber, phoneNumberAttrs] = defineField('phoneNumber')
 
 const onSubmit = handleSubmit(async (values) => {
   await register(values)
+  addToast({
+    title: t('global.success'),
+    description: t('global.auth.createdAccount'),
+    timeout: 2000,
+    status: 'success',
+  })
   console.log(values)
+})
+
+definePageMeta({
+  middleware: 'user-register',
 })
 </script>

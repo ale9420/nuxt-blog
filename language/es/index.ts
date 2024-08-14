@@ -4,6 +4,12 @@ export default {
     details: 'Ver detalles',
     minute: '{minutes} minuto',
     minutes: '{minutes} minutos',
+    postComment: 'Publicar comentario',
+    signUpToComment: 'Para publicar un comentario necesitas {signUp} o {login}',
+    signUp: 'Crear una cuenta',
+    login: 'Iniciar sesión',
+    success: 'Éxito',
+    logout: 'Cerrar sesión',
   },
   meta: {
     title: 'Bog.dev',

@@ -31,7 +31,7 @@
         <StrapiBlocksText :nodes="post?.content" />
       </div>
       <hr class="w-20 h-1 my-6 bg-slate-50 rounded-lg" />
-      <div class="flex justify-center flex-wrap mb-6">
+      <div class="flex justify-center flex-wrap">
         <PostCategory
           v-for="category in post?.categories.data || []"
           :key="category.id"

@@ -2,6 +2,7 @@ query getCommentsByPost($post: String!) {
   findAllInHierarchy(relation: $post, filters: { blocked: { eq: false } }) {
     blocked
     content
+    createdAt
     author {
       name
       email
