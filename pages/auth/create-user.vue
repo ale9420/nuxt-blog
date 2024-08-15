@@ -48,7 +48,6 @@
 <script setup lang="ts">
 import { toTypedSchema } from '@vee-validate/yup'
 import * as yup from 'yup'
-import { useForm } from 'vee-validate'
 
 const { t } = useI18n()
 const { addToast } = useToastStore()

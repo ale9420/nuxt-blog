@@ -13,24 +13,7 @@
     </div>
 
     <div class="sm:hidden lg:flex lg:items-center">
-      <div>
-        <button
-          v-if="!user"
-          id="loginLink"
-          type="button"
-          class="hover:underline hover:underline-offset-4 hover:cursor-pointer hover:text-red-600 p-2"
-          @click="openPopOver = true"
-        >
-          {{ $t('global.login') }}
-        </button>
-        <UiPopOver id="loginLink" :is-visible="openPopOver" class="w-64">
-          <form class="bg-neutral-50 p-2" @submit.prevent>
-            <input placeholder="Username" type="text" />
-            <input placeholder="Password" type="text" />
-          </form>
-        </UiPopOver>
-      </div>
-
+      <AuthLogin />
       <NuxtLink
         v-if="!user"
         to="/auth/create-user"
@@ -62,7 +45,7 @@ import pagesQuery from '@/graphql/queries/pages-header-list.gql'
 
 const user = useStrapiUser()
 const openSidebar = ref(false)
-const openPopOver = ref(false)
+
 const graphql = useStrapiGraphQL()
 const result = await graphql<PageEntityResponseCollection>(pagesQuery)
 const pages = result.data.pages.data

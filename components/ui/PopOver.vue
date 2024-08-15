@@ -1,12 +1,16 @@
 <template>
-  <div
-    v-if="isVisible"
-    :data-popover-id="id"
-    role="tooltip"
-    class="absolute z-10 inline-block transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:border-gray-600 dark:bg-gray-800"
-  >
-    <slot />
-    <div data-popper-arrow></div>
+  <div class="relative">
+    <slot name="trigger" />
+    <div
+      :id="id"
+      ref="popover"
+      role="tooltip"
+      class="absolute bottom-10 w-64"
+      popover
+    >
+      <slot />
+      <div data-popper-arrow></div>
+    </div>
   </div>
 </template>
 
@@ -17,4 +21,14 @@ type PopOverProps = {
 }
 
 defineProps<PopOverProps>()
+
+const popover = ref<HTMLElement>()
+
+const hide = () => popover.value?.hidePopover()
+const show = () => popover.value?.showPopover()
+
+defineExpose({
+  hide,
+  show,
+})
 </script>

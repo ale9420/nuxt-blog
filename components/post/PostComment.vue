@@ -1,9 +1,9 @@
 <template>
   <div class="flex flex-col">
     <textarea class="bg-stone-200" placeholder="Escribe ..." name="comment" />
-    <FormButton class="mt-3" @click="postComment">
+    <UiButton class="mt-3" @click="postComment">
       {{ $t('global.postComment') }}
-    </FormButton>
+    </UiButton>
   </div>
 </template>
 
