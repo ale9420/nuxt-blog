@@ -218,4 +218,5 @@ export type Toast = {
   description: string
   timeout: number
   status: ToastStatus
+  id?: number
 }

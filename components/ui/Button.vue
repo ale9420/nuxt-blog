@@ -1,9 +1,22 @@
 <template>
   <button
-    class="bg-gradient-to-r from-red-500 to-red-700 text-slate-50 mx-2 p-2 rounded-md"
+    class="text-slate-50 p-2 rounded-md"
+    :class="backgroundClasses"
+    :disabled="disabled"
   >
     <slot />
   </button>
 </template>
+<script lang="ts" setup>
+type ButtonProps = {
+  disabled?: boolean
+}
 
-<script lang="ts" setup></script>
+const props = defineProps<ButtonProps>()
+
+const backgroundClasses = computed(() =>
+  props.disabled
+    ? ['disabled:bg-gray-300']
+    : ['bg-gradient-to-r', 'from-red-500', 'to-red-700']
+)
+</script>

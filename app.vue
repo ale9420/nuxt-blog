@@ -2,6 +2,7 @@
   <div>
     <NuxtLayout>
       <NuxtPage />
+      <UiToasts />
     </NuxtLayout>
   </div>
 </template>
