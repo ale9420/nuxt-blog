@@ -1,0 +1,12 @@
+#import "../fragments/post.gql"
+
+query featuredPosts {
+  posts(filters: { featured: { eq: true } }) {
+    data {
+      id
+      attributes {
+        ...PostFragment
+      }
+    }
+  }
+}

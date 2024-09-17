@@ -226,6 +226,10 @@ export type LoginForm = {
   password: string
 }
 
+export type CommentForm = {
+  comment: string
+}
+
 export type LoginError = {
   error: {
     message: string

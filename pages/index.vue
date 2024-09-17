@@ -1,7 +1,8 @@
 <template>
   <div>
+    <PostFeatured />
     <div
-      class="gap-3 w-full sm:flex sm:justify-items-center sm:flex-col md:grid md:grid-cols-2 lg:grid-cols-3"
+      class="gap-3 w-full sm:flex sm:justify-items-center sm:flex-col md:grid md:grid-cols-2 lg:grid-cols-3 mt-6"
     >
       <PostCard
         v-for="post of posts?.data?.posts?.data"

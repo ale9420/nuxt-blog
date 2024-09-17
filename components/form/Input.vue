@@ -19,7 +19,8 @@
         {{ placeholder }}
       </label>
       <div class="relative">
-        <input
+        <component
+          :is="fieldComponent"
           v-bind="{ ...field, ...$attrs }"
           class="pb-1 bg-transparent border-b-2 w-full transition focus:outline-none placeholder:text-stone-600"
           :class="{
@@ -29,7 +30,6 @@
           :type="type"
           :placeholder="placeholder"
         />
-
         <div
           v-if="$attrs['type'] === 'password'"
           class="absolute top-0 right-1"
@@ -59,9 +59,10 @@ import type { InputTypeHTMLAttribute } from 'vue'
 type InputProps = {
   placeholder: string
   name: string
+  component?: 'input' | 'textarea'
 }
 
-defineProps<InputProps>()
+const props = defineProps<InputProps>()
 const attrs = useAttrs()
 const hidePassword = ref(true)
 const type = computed(() =>
@@ -70,6 +71,10 @@ const type = computed(() =>
     : hidePassword.value
       ? 'password'
       : 'text'
+)
+
+const fieldComponent = computed(() =>
+  props.component ? props.component : 'input'
 )
 
 defineOptions({

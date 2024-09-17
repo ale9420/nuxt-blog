@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <PostComment v-if="user" />
+    <PostComment v-if="user" @refresh-comments="fetchComments" />
     <div v-else class="bg-stone-200 p-2 flex items-center justify-center h-24">
       <i18n-t
         keypath="global.signUpToComment"
@@ -66,7 +66,7 @@ const comments = ref<CommentNested[]>()
 const formatDate = (date: string) =>
   DateTime.fromISO(date).toLocaleString(DateTime.DATETIME_MED)
 
-onMounted(async () => {
+const fetchComments = async () => {
   const result = await graphql<CommentEntityResponseCollection>(
     GetCommentsByPost,
     {
@@ -75,7 +75,9 @@ onMounted(async () => {
   )
 
   comments.value = result?.data?.findAllInHierarchy
+}
 
-  console.log(result)
+onMounted(async () => {
+  await fetchComments()
 })
 </script>
