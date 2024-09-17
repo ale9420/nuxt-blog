@@ -11,6 +11,14 @@ export default {
     success: 'Éxito',
     logout: 'Cerrar sesión',
   },
+  auth: {
+    createdAccount: 'Su cuenta ha sido creada exitosamente',
+    email: 'Correo electrónico',
+    password: 'Contraseña',
+    unauthorizedTitle: 'Error de autenticacion',
+    unauthorizedDescription: 'Usuario o contraseña no validos',
+    welcomeTitle: 'Bienvenido de nuevo {username}!',
+  },
   meta: {
     title: 'Bog.dev',
     description:
@@ -23,5 +31,10 @@ export default {
     blog: 'Blog',
     blogText:
       'El objetivo de este blog es de hablar de mis experiencias en el mundo del desarrollo web, noticias, tutoriales y poder compartir el conocimiento con quien lo desee.',
+  },
+  validations: {
+    required: 'Este es un campo requerido',
+    email: 'Correo electrónico invalido',
+    min: 'Debe tener al menos {min} caracteres',
   },
 }

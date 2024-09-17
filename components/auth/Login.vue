@@ -11,64 +11,83 @@
         {{ $t('global.login') }}
       </button>
     </template>
-    <form class="flex flex-col gap-2 bg-neutral-50 p-3" @submit.prevent>
+    <Form
+      v-slot="{ meta, handleSubmit }"
+      :validation-schema="validationSchema"
+      class="flex flex-col gap-2 bg-neutral-50 p-3"
+      autocomplete="off"
+    >
       <FormInput
-        v-model="identifier"
-        v-bind="identifierAttrs"
-        placeholder="Username"
+        :placeholder="$t('auth.email')"
+        name="identifier"
         type="text"
       />
       <FormInput
-        v-model="password"
-        v-bind="passwordAttrs"
-        placeholder="Password"
+        :placeholder="$t('auth.password')"
+        name="password"
         type="password"
       />
-      <UiButton class="w-full" :disabled="!meta.valid" @click="onSubmit">{{
-        $t('global.login')
-      }}</UiButton>
-    </form>
+      <UiButton
+        class="w-full mt-2"
+        type="button"
+        :disabled="!meta.valid"
+        @click="handleSubmit((values) => onSubmit(values as LoginForm))"
+        >{{ $t('global.login') }}</UiButton
+      >
+    </Form>
   </UiPopOver>
 </template>
 
 <script lang="ts" setup>
 import * as yup from 'yup'
 import type PopOver from '../ui/PopOver.vue'
+import type { LoginForm, LoginError } from '@/types'
 
 const popover = ref<InstanceType<typeof PopOver>>()
+const { t } = useI18n()
 const { login } = useStrapiAuth()
 const { addToast } = useToastStore()
 const user = useStrapiUser()
 const openPopOver = ref(false)
 
-const { meta, defineField, handleSubmit } = useForm({
-  validationSchema: toTypedSchema(
-    yup.object({
-      identifier: yup.string().required(),
-      password: yup.string().required(),
-    })
-  ),
-})
+const validationSchema = toTypedSchema(
+  yup.object({
+    identifier: yup
+      .string()
+      .email(t('validations.email'))
+      .required(t('validations.required')),
+    password: yup
+      .string()
+      .min(6, t('validations.min', { min: 6 }))
+      .required(t('validations.required')),
+  })
+)
 
-const [identifier, identifierAttrs] = defineField('identifier')
-const [password, passwordAttrs] = defineField('password')
-
-const onSubmit = handleSubmit(async () => {
+const onSubmit = async ({ identifier, password }: LoginForm) => {
   try {
     await login({
-      identifier: identifier.value as string,
-      password: password.value as string,
+      identifier,
+      password,
     })
 
     popover?.value?.hide()
-  } catch (error) {
     addToast({
-      title: 'Error de autenticacion',
-      description: 'Usuario o contraseña no validos',
-      status: 'error',
+      title: t('auth.welcomeTitle', {
+        username: user.value?.username,
+      }),
+      status: 'success',
       timeout: 9000,
     })
-    console.log(error)
+  } catch (e) {
+    const loginError = e as unknown as LoginError
+    if (loginError.error.status === 400) {
+      addToast({
+        title: t('auth.unauthorizedTitle'),
+        description: t('auth.unauthorizedDescription'),
+        status: 'error',
+        timeout: 9000,
+      })
+    }
   }
-})
+}
 </script>

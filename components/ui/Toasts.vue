@@ -11,7 +11,7 @@
       class="border rounded-md text-neutral-50 p-2 my-1"
     >
       <h5 class="text-lg font-semibold">{{ toast.title }}</h5>
-      <p class="font-normal">{{ toast.description }}</p>
+      <p class="font-normal">{{ toast?.description }}</p>
     </div>
   </div>
 </template>

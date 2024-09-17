@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts" setup>
-import type { Language, PageEntityResponseCollection } from '~/types'
+import type { Language, PageEntityResponseCollection } from '@/types'
 import { Bars3Icon } from '@heroicons/vue/16/solid'
 import pagesQuery from '@/graphql/queries/pages-header-list.gql'
 
@@ -57,6 +57,10 @@ const languageModel = defineModel<Language>('language', {
     await languageStore.updateLanguage(value)
   },
 })
+
+// watch([user], (newValue) => {
+//   console.log(newValue)
+// })
 
 const closeSideBar = () => {
   openSidebar.value = false

@@ -1,21 +1,78 @@
 <template>
-  <input v-model="internalValue" class="p-2 rounded-md bg-slate-300" />
+  <div class="w-full border-stone-600 text-stone-600">
+    <Field
+      v-slot="{ field, meta, value }"
+      :name="name"
+      :type="type"
+      validate-on-input
+    >
+      <label
+        :for="name"
+        :class="{
+          'opacity-0': !value || value?.toString()?.length === 0,
+          'opacity-1': value && value?.toString()?.length > 0,
+          'text-red-600': !meta.valid && meta.dirty && !meta.pending,
+          'text-stone-600': meta.valid && !meta.pending,
+        }"
+        class="transition duration-300 ease-in-out"
+      >
+        {{ placeholder }}
+      </label>
+      <div class="relative">
+        <input
+          v-bind="{ ...field, ...$attrs }"
+          class="pb-1 bg-transparent border-b-2 w-full transition focus:outline-none placeholder:text-stone-600"
+          :class="{
+            'border-red-600': !meta.valid && !meta.pending,
+            'border-stone-600': !meta.dirty || meta.valid,
+          }"
+          :type="type"
+          :placeholder="placeholder"
+        />
+
+        <div
+          v-if="$attrs['type'] === 'password'"
+          class="absolute top-0 right-1"
+        >
+          <button
+            v-if="hidePassword"
+            type="button"
+            @click.stop="hidePassword = false"
+          >
+            <EyeIcon class="size-6" />
+          </button>
+          <button v-else type="button" @click.stop="hidePassword = true">
+            <EyeSlashIcon class="size-6" />
+          </button>
+        </div>
+      </div>
+
+      <ErrorMessage :name="name" class="text-red-500 text-sm" />
+    </Field>
+  </div>
 </template>
 
 <script lang="ts" setup>
+import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/20/solid'
+import type { InputTypeHTMLAttribute } from 'vue'
+
 type InputProps = {
-  modelValue: string | number | undefined
+  placeholder: string
+  name: string
 }
 
-const props = defineProps<InputProps>()
-const emit = defineEmits(['update:modelValue'])
+defineProps<InputProps>()
+const attrs = useAttrs()
+const hidePassword = ref(true)
+const type = computed(() =>
+  attrs['type'] !== 'password'
+    ? (attrs['type'] as InputTypeHTMLAttribute)
+    : hidePassword.value
+      ? 'password'
+      : 'text'
+)
 
-const internalValue = computed({
-  get() {
-    return props.modelValue
-  },
-  set(value) {
-    emit('update:modelValue', value)
-  },
+defineOptions({
+  inheritAttrs: false,
 })
 </script>

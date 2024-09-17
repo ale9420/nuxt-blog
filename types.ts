@@ -215,8 +215,21 @@ export type ToastStatus = 'success' | 'warning' | 'error'
 
 export type Toast = {
   title: string
-  description: string
+  description?: string
   timeout: number
   status: ToastStatus
   id?: number
+}
+
+export type LoginForm = {
+  identifier: string
+  password: string
+}
+
+export type LoginError = {
+  error: {
+    message: string
+    name: string
+    status: number
+  }
 }

@@ -13,6 +13,11 @@ export default {
   },
   auth: {
     createdAccount: 'Your account has been created successfully',
+    email: 'Email',
+    password: 'Password',
+    unauthorizedTitle: 'Authentication error',
+    unauthorizedDescription: 'Invalid username or password',
+    welcomeTitle: 'Welcome back {username}!',
   },
   meta: {
     title: 'Bog.dev',
@@ -26,5 +31,10 @@ export default {
     blog: 'Blog',
     blogText:
       'The purpose of this blog is to talk about my experiences in the world of web development, news, tutorials and to share knowledge with whoever wants it.',
+  },
+  validations: {
+    required: 'This is a required field',
+    email: 'Invalid email address',
+    min: 'must be at least {min} characters',
   },
 }

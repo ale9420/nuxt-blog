@@ -6,11 +6,12 @@
       :id="id"
       ref="popover"
       role="tooltip"
-      class="absolute inline-block top-10 inset-x-0 z-10 w-64 shadow-lg"
+      class="absolute inline-block top-14 -left-14 z-10 w-64 shadow-lg"
       data-popover
     >
-      <slot />
-      <div popover-arrow></div>
+      <div class="rounded-lg overflow-hidden">
+        <slot />
+      </div>
     </div>
   </div>
 </template>
