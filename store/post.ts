@@ -12,9 +12,11 @@ export const usePostStore = defineStore('usePostStore', () => {
   const languageStore = useLanguageStore()
   const { language } = storeToRefs(languageStore)
 
-  async function fetchPosts() {
+  async function fetchPosts(page: number, pageSize: number) {
     const result = await graphql<PostEntityResponseCollection>(Posts, {
       locale: language.value?.code,
+      page,
+      pageSize,
     })
     posts.value = result
   }

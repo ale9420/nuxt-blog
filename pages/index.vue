@@ -1,15 +1,26 @@
 <template>
   <div>
     <PostFeatured />
-    <div
-      class="container mx-auto sm:py-3 lg:pt-8 lg:p-5 gap-3 w-full sm:flex sm:justify-items-center sm:flex-col md:grid md:grid-cols-2 lg:grid-cols-3"
-    >
-      <PostCard
-        v-for="post of posts?.data?.posts?.data"
-        :id="post.id"
-        :key="+post.id"
-        :post="post.attributes"
-      />
+    <div class="container sm:py-3 lg:pt-8">
+      <div
+        class="mx-auto gap-1 w-full sm:flex sm:justify-items-center sm:flex-col md:grid md:grid-cols-2 lg:grid-cols-3"
+      >
+        <PostCard
+          v-for="post of posts?.data?.posts?.data"
+          :id="post.id"
+          :key="+post.id"
+          :post="post.attributes"
+        />
+      </div>
+      <ClientOnly>
+        <UiPagination
+          class="mt-6"
+          :limit="LIMIT"
+          :page="currentPage"
+          :page-count="posts?.data?.posts?.meta.pagination.pageCount || 0"
+          @page-change="pageChange"
+        />
+      </ClientOnly>
     </div>
   </div>
 </template>
@@ -20,17 +31,24 @@ const languageStore = useLanguageStore()
 const { language } = storeToRefs(languageStore)
 const { posts } = storeToRefs(postStore)
 const { t } = useI18n({ useScope: 'global' })
+const currentPage = ref(1)
+const LIMIT = 10
+
+const pageChange = async (page: number) => {
+  currentPage.value = page
+  await postStore.fetchPosts(currentPage.value, LIMIT)
+}
 
 onServerPrefetch(async () => {
-  await postStore.fetchPosts()
+  await postStore.fetchPosts(currentPage.value, LIMIT)
 })
 
 onMounted(async () => {
-  if (!posts.value) await postStore.fetchPosts()
+  if (!posts.value) await postStore.fetchPosts(currentPage.value, LIMIT)
 })
 
 watch(language, async () => {
-  await postStore.fetchPosts()
+  await postStore.fetchPosts(currentPage.value, LIMIT)
 })
 
 useSeoMeta({

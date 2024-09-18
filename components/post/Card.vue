@@ -1,6 +1,6 @@
 <template>
   <section
-    class="dark:text-slate-50 bg-slate-100 rounded-lg shadow-xl dark:bg-slate-500 md:overflow-hidden lg:shadow-2xl"
+    class="dark:text-slate-50 bg-neutral-50 shadow-md dark:bg-slate-500 md:overflow-hidden"
   >
     <div class="relative">
       <PostCategory
@@ -10,7 +10,7 @@
       />
       <StrapiBlocksTextImageNode
         :image="post?.featured_image?.data?.attributes"
-        class="sm:w-72 sm:w-full md:h-64 lg:h-80 object-cover rounded-t-lg"
+        class="sm:w-72 sm:w-full md:h-52 object-cover"
       />
     </div>
     <div class="sm:py-2 sm:px-1.5 lg:p-3 w-full">

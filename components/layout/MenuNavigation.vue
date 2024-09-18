@@ -1,12 +1,9 @@
 <template>
   <nav>
-    <NuxtLink
-      :to="localePath('/')"
-      class="hover:underline hover:underline-offset-4 hover:cursor-pointer hover:text-red-600 p-2"
-      @click="$emit('click')"
-      >{{ $t('global.home') }}</NuxtLink
-    >
-    <NuxtLink
+    <UiLink :to="localePath('/')" @click="$emit('click')">
+      {{ $t('global.home') }}
+    </UiLink>
+    <UiLink
       v-for="page in pages"
       :key="page.id"
       :to="
@@ -15,10 +12,9 @@
           params: { slug: page.attributes.slug },
         })
       "
-      class="hover:underline hover:underline-offset-4 hover:cursor-pointer hover:text-red-600 p-2"
       @click="$emit('click')"
     >
-      {{ page.attributes.title }}</NuxtLink
+      {{ page.attributes.title }}</UiLink
     >
   </nav>
 </template>

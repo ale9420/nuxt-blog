@@ -152,10 +152,10 @@ export type UploadFile = {
 }
 
 type Pagination = {
-  total: number
-  page: number
-  pageSize: number
-  pageCount: number
+  total?: number
+  page?: number
+  pageSize?: number
+  pageCount?: number
 }
 
 type ComponentSharedSeo = {
@@ -191,9 +191,9 @@ export type PostEntityResponseCollection = {
   data: {
     posts: {
       data: PostEntity[]
+      meta: ResponseCollectionMeta
     }
   }
-  meta: ResponseCollectionMeta
 }
 
 export type PageEntityResponseCollection = {
@@ -237,3 +237,33 @@ export type LoginError = {
     status: number
   }
 }
+
+export type PaginationProps = {
+  limit: number
+  page: number
+  pageCount: number
+}
+
+export type Color =
+  | 'slate'
+  | 'gray'
+  | 'zinc'
+  | 'neutral'
+  | 'stone'
+  | 'red'
+  | 'orange'
+  | 'amber'
+  | 'yellow'
+  | 'lime'
+  | 'green'
+  | 'emerald'
+  | 'teal'
+  | 'cyan'
+  | 'sky'
+  | 'blue'
+  | 'indigo'
+  | 'violet'
+  | 'purple'
+  | 'fucshia'
+  | 'pink'
+  | 'rose'

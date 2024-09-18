@@ -1,5 +1,5 @@
 <template>
-  <span class="text-xs font-semibold p-0.5" :class="isMainCategory">{{
+  <span class="text-xs font-semibold py-0.5 px-2" :class="isMainCategory">{{
     category.name
   }}</span>
 </template>

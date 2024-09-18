@@ -1,7 +1,13 @@
 #import "../fragments/post.gql"
 
-query posts($locale: I18NLocaleCode) {
-  posts(locale: $locale) {
+query posts($locale: I18NLocaleCode, $page: Int!, $pageSize: Int!) {
+  posts(locale: $locale, pagination: { page: $page, pageSize: $pageSize }) {
+    meta {
+      pagination {
+        total
+        pageCount
+      }
+    }
     data {
       id
       attributes {
