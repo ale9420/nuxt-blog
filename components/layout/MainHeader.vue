@@ -1,39 +1,35 @@
 <template>
   <header
-    class="sticky relative top-0 flex items-center justify-between text-slate-700 bg-slate-200 shadow-lg shadow-slate-300/50 dark:bg-slate-900/75 dark:text-slate-50 dark:shadow-slate-800/50 sm:p-3 lg:p-5 w-full z-10"
+    class="sticky relative top-0 flex flex-col items-center justify-center text-zinc-800 bg-neutral-50 shadow-lg shadow-slate-300/50 dark:bg-slate-900/75 dark:text-slate-50 dark:shadow-slate-800/50 sm:p-3 lg:p-5 w-full z-10"
   >
+    <NuxtLink class="text-3xl font-bold" to="/">BOG.DEV</NuxtLink>
+    <span class="text-xs">{{ $t('meta.blogCategory') }}</span>
     <div v-click-outside="closeSideBar" class="lg:hidden">
       <Bars3Icon class="lg:hidden size-6" @click="openSidebar = true" />
       <LayoutSideBar :open="openSidebar" @close="openSidebar = false" />
     </div>
 
-    <div class="sm:hidden lg:flex lg:items-center gap-3">
-      <h3 class="text-xl font-semibold">BOG.DEV</h3>
+    <div
+      class="sm:hidden lg:flex lg:items-center mt-3 pt-2 border-t border-zinc-500"
+    >
       <LayoutMenuNavigation class="flex" :pages="pages" />
-    </div>
-
-    <div class="sm:hidden lg:flex lg:items-center">
-      <AuthLogin />
-      <NuxtLink
-        v-if="!user"
-        to="/auth/create-user"
-        class="bg-gradient-to-r from-red-500 to-red-700 text-slate-50 mx-2 p-2 rounded-md"
-        >{{ $t('global.signUp') }}</NuxtLink
-      >
-      <span
-        v-if="user"
-        class="hover:underline hover:underline-offset-4 hover:cursor-pointer hover:text-red-600 p-2"
-        @click="logout"
-        >{{ $t('global.logout') }}</span
-      >
       <FormSelect
         v-model="languageModel"
+        class="pl-2"
         property="value"
         label="label"
         name="language"
         return-mode="object"
         :options="languages"
       />
+    </div>
+    <div class="sm:hidden lg:flex lg:items-center">
+      <span
+        v-if="user"
+        class="hover:underline hover:underline-offset-4 hover:cursor-pointer hover:text-red-600 p-2"
+        @click="logout"
+        >{{ $t('global.logout') }}</span
+      >
     </div>
   </header>
 </template>

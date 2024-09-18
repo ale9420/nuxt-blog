@@ -21,6 +21,7 @@ export default {
   },
   meta: {
     title: 'Bog.dev',
+    blogCategory: 'Technology & web development',
     description:
       'This is a space to learn and share different topics related to web development and information technologies.',
   },
