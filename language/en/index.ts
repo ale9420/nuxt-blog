@@ -10,6 +10,8 @@ export default {
     login: 'Login',
     logout: 'Logout',
     success: 'success',
+    comments: 'Comments ({comments})',
+    joinCommunity: '¡Join the community!',
   },
   auth: {
     createdAccount: 'Your account has been created successfully',

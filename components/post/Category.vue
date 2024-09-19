@@ -1,7 +1,5 @@
 <template>
-  <span class="text-xs font-semibold py-0.5 px-2" :class="isMainCategory">{{
-    category.name
-  }}</span>
+  <span class="py-0.5 px-2" :class="isMainCategory">{{ category.name }}</span>
 </template>
 
 <script lang="ts" setup>
@@ -16,8 +14,15 @@ const props = defineProps<CategoryProps>()
 
 const isMainCategory = computed(() =>
   props.main
-    ? ['bg-red-600/75', 'text-slate-50', 'uppercase']
-    : ['border-2', 'border-amber-500', 'rounded-md', 'text-amber-500']
+    ? ['bg-red-600/75', 'text-slate-50', 'uppercase', 'font-bold', 'text-sm']
+    : [
+        'border-2',
+        'border-red-600',
+        'rounded-md',
+        'text-red-600',
+        'font-semibold',
+        'text-xs',
+      ]
 )
 </script>
 

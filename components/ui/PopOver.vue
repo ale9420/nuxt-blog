@@ -1,19 +1,15 @@
 <template>
-  <div v-click-outside="closePopover" class="relative">
-    <slot name="trigger" :toggle="toggle" />
-    <div
-      v-if="isOpen"
-      :id="id"
-      ref="popover"
-      role="tooltip"
-      class="absolute inline-block top-14 -left-14 z-10 w-64 shadow-lg"
-      data-popover
-    >
-      <div class="rounded-lg overflow-hidden">
-        <slot />
-      </div>
+  <dialog
+    :id="id"
+    ref="popover"
+    role="tooltip"
+    class="ui-popover z-10 w-64 shadow-lg"
+    popover
+  >
+    <div class="rounded-lg overflow-hidden">
+      <slot />
     </div>
-  </div>
+  </dialog>
 </template>
 
 <script lang="ts" setup>
@@ -23,18 +19,21 @@ type PopOverProps = {
 
 defineProps<PopOverProps>()
 
-const popover = ref<HTMLElement>()
+const popover = ref<HTMLDialogElement>()
 const isOpen = ref<boolean>(false)
 
-const hide = () => (isOpen.value = false)
-const show = () => (isOpen.value = true)
-
-const toggle = () => {
-  isOpen.value = !isOpen.value
-}
-
-const closePopover = () => {
+const hide = () => {
   isOpen.value = false
+
+  if (popover.value) {
+    popover.value.close()
+  }
+}
+const show = () => {
+  isOpen.value = true
+  if (popover.value) {
+    popover.value.showModal()
+  }
 }
 
 defineExpose({

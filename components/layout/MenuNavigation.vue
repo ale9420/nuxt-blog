@@ -16,6 +16,9 @@
     >
       {{ page.attributes.title }}</UiLink
     >
+    <UiLink v-if="user" @click="logout">
+      {{ $t('global.logout') }}
+    </UiLink>
   </nav>
 </template>
 
@@ -26,6 +29,8 @@ type PagesProps = {
   pages: PageEntity[]
 }
 
+const user = useStrapiUser()
+const { logout } = useStrapiAuth()
 const localePath = useLocalePath()
 
 defineEmits(['click'])

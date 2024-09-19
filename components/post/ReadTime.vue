@@ -1,7 +1,7 @@
 <template>
-  <div class="flex items-center text-neutral-600 dark:text-neutral-300">
+  <div class="flex items-center">
     <BookOpenIcon class="size-5" />
-    <span class="text-xs lg:text-lg ml-1">{{ readTimeText }}</span>
+    <span class="ml-1">{{ readTimeText }}</span>
   </div>
 </template>
 

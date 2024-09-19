@@ -9,7 +9,9 @@ export default {
     signUp: 'Crear una cuenta',
     login: 'Iniciar sesión',
     success: 'Éxito',
+    comments: 'Comentarios ({comments})',
     logout: 'Cerrar sesión',
+    joinCommunity: '¡Únete a la comunidad!',
   },
   auth: {
     createdAccount: 'Su cuenta ha sido creada exitosamente',

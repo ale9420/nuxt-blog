@@ -5,7 +5,6 @@
     :alt="props.image.alternativeText"
     :width="props.image.width"
     :height="props.image.height"
-    densities="x1 x2"
   />
 </template>
 

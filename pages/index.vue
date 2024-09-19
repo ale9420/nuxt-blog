@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="w-full">
     <PostFeatured />
-    <div class="container sm:py-3 lg:pt-8">
+    <div class="container mx-auto sm:py-3 lg:pt-8">
       <div
-        class="mx-auto gap-1 w-full sm:flex sm:justify-items-center sm:flex-col md:grid md:grid-cols-2 lg:grid-cols-3"
+        class="gap-3 w-full sm:flex sm:justify-items-center sm:flex-col md:grid md:grid-cols-2"
       >
         <PostCard
           v-for="post of posts?.data?.posts?.data"

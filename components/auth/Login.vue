@@ -3,8 +3,8 @@
     <template #trigger="{ toggle }">
       <button
         v-if="!user"
-        class="hover:underline hover:underline-offset-4 hover:cursor-pointer hover:text-red-600 p-2"
-        data-popover-target="loginLink"
+        class="text-blue-400"
+        popovertarget="loginLink"
         type="button"
         @click="toggle"
       >
@@ -90,4 +90,10 @@ const onSubmit = async ({ identifier, password }: LoginForm) => {
     }
   }
 }
+
+const showModal = () => {
+  popover.value?.show()
+}
+
+defineExpose({ showModal })
 </script>

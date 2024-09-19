@@ -1,56 +1,68 @@
 <template>
-  <div class="flex flex-col gap-4 w-full">
-    <h2 class="self-center">Comentarios</h2>
+  <div class="bg-slate-700 py-10">
     <div
-      v-for="comment in comments"
-      :key="comment.id"
-      class="sm:w-full md:w-96 bg-slate-200 rounded-md p-3"
+      class="flex flex-col items-center max-w-[65ch] mx-auto gap-2 text-neutral-800"
     >
-      <div class="flex">
-        <span
-          class="flex justify-center items-center bg-amber-400 rounded-full font-bold sm:h-8 sm:w-8 md:h-10 md:w-10 sm:p-1 md:p-2"
-          >{{ comment.author.name[0].toUpperCase() }}</span
-        >
-        <div class="ml-3">
-          <div class="flex items-center sm:text-xs text-sm">
-            <h4 class="font-semibold">{{ comment.author.name }}</h4>
-            <span class="text-gray-500 ml-1">{{
+      <div class="flex items-center mb-4 text-neutral-50">
+        <ChatBubbleBottomCenterTextIcon class="size-6 mr-2" />
+        <h2 class="text-4xl">
+          {{ $t('global.comments', { comments: comments?.length || 0 }) }}
+        </h2>
+      </div>
+
+      <div
+        v-for="comment in comments"
+        :key="comment.id"
+        class="sm:w-full bg-gradient-to-r from-neutral-200 via-zinc-200 to-gray-200 rounded-sm shadow-md px-2 py-3"
+      >
+        <div class="flex">
+          <span
+            class="flex justify-center items-center bg-zinc-900 rounded-full text-neutral-50 font-semibold xs:text-xs sm:h-7 sm:w-7 sm:p-1"
+            >{{ comment.author.name[0].toUpperCase() }}</span
+          >
+          <div class="ml-1.5">
+            <h4 class="font-semibold sm:text-sm/[6px]">
+              {{ comment.author.name }}
+            </h4>
+            <span class="text-gray-500 text-xs">{{
               formatDate(comment.createdAt)
             }}</span>
+            <p class="sm:text-sm md:text-base mt-2">
+              {{ comment.content }}
+            </p>
           </div>
-          <p class="sm:text-sm md:text-base">
-            {{ comment.content }}
-          </p>
         </div>
       </div>
-    </div>
-
-    <PostComment v-if="user" @refresh-comments="fetchComments" />
-    <div v-else class="bg-stone-200 p-2 flex items-center justify-center h-24">
-      <i18n-t
-        keypath="global.signUpToComment"
-        tag="span"
-        class="font-semibold ml-1 lg:ml-2"
-        for="author"
-      >
-        <template #signUp>
-          <NuxtLink to="/auth/create-user" class="text-blue-800">
-            {{ $t('global.signUp').toLocaleLowerCase() }}
-          </NuxtLink>
-        </template>
-        <template #login>
-          <NuxtLink to="/auth/create-user" class="text-blue-800">
-            {{ $t('global.login').toLocaleLowerCase() }}
-          </NuxtLink>
-        </template>
-      </i18n-t>
+      <hr class="w-2/4 h-1 mt-8 mb-4 border-t-neutral-50" />
+      <PostComment v-if="user" @refresh-comments="fetchComments" />
+      <div v-else class="flex flex-col items-center text-neutral-50">
+        <h5 class="text-2xl">{{ $t('global.joinCommunity') }}</h5>
+        <i18n-t
+          keypath="global.signUpToComment"
+          tag="p"
+          class="font-semibold mt-2"
+          for="author"
+        >
+          <template #signUp>
+            <NuxtLink to="/auth/create-user" class="text-blue-400">
+              {{ $t('global.signUp').toLocaleLowerCase() }}
+            </NuxtLink>
+          </template>
+          <template #login>
+            <NuxtLink class="text-blue-400" @click="authLogin.showModal()">
+              {{ $t('global.login').toLocaleLowerCase() }}
+            </NuxtLink>
+            <AuthLogin ref="authLogin" />
+          </template>
+        </i18n-t>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { DateTime } from 'luxon'
-
+import { ChatBubbleBottomCenterTextIcon } from '@heroicons/vue/16/solid'
 import GetCommentsByPost from '@/graphql/queries/getCommentsByPost.gql'
 import {
   type CommentNested,
@@ -60,11 +72,16 @@ import {
 const user = useStrapiUser()
 const graphql = useStrapiGraphQL()
 const postStore = usePostStore()
+const languageStore = useLanguageStore()
 const { postBySlug: post } = storeToRefs(postStore)
+const { locale } = storeToRefs(languageStore)
 const comments = ref<CommentNested[]>()
+const authLogin = ref()
 
 const formatDate = (date: string) =>
-  DateTime.fromISO(date).toLocaleString(DateTime.DATETIME_MED)
+  DateTime.fromISO(date, { locale: locale.value }).toLocaleString(
+    DateTime.DATETIME_MED
+  )
 
 const fetchComments = async () => {
   const result = await graphql<CommentEntityResponseCollection>(

@@ -23,14 +23,6 @@
         :options="languages"
       />
     </div>
-    <div class="sm:hidden lg:flex lg:items-center">
-      <span
-        v-if="user"
-        class="hover:underline hover:underline-offset-4 hover:cursor-pointer hover:text-red-600 p-2"
-        @click="logout"
-        >{{ $t('global.logout') }}</span
-      >
-    </div>
   </header>
 </template>
 
@@ -39,24 +31,17 @@ import type { Language, PageEntityResponseCollection } from '@/types'
 import { Bars3Icon } from '@heroicons/vue/16/solid'
 import pagesQuery from '@/graphql/queries/pages-header-list.gql'
 
-const user = useStrapiUser()
 const openSidebar = ref(false)
-
 const graphql = useStrapiGraphQL()
 const result = await graphql<PageEntityResponseCollection>(pagesQuery)
 const pages = result.data.pages.data
 const languageStore = useLanguageStore()
 const { locale, languages } = storeToRefs(languageStore)
-const { logout } = useStrapiAuth()
 const languageModel = defineModel<Language>('language', {
   async set(value) {
     await languageStore.updateLanguage(value)
   },
 })
-
-// watch([user], (newValue) => {
-//   console.log(newValue)
-// })
 
 const closeSideBar = () => {
   openSidebar.value = false
