@@ -1,22 +1,17 @@
 <template>
-  <UiPopOver id="loginLink" ref="popover" :is-visible="openPopOver">
-    <template #trigger="{ toggle }">
-      <button
-        v-if="!user"
-        class="text-blue-400"
-        popovertarget="loginLink"
-        type="button"
-        @click="toggle"
-      >
-        {{ $t('global.login') }}
-      </button>
+  <UiDialog ref="dialog" size="medium" show-icon>
+    <template #icon>
+      <LockClosedIcon class="size-14" />
     </template>
     <Form
       v-slot="{ meta, handleSubmit }"
       :validation-schema="validationSchema"
-      class="flex flex-col gap-2 bg-neutral-50 p-3"
+      class="flex flex-col gap-2"
       autocomplete="off"
     >
+      <h1 class="self-center text-5xl font-light mt-3 mb-6">
+        {{ $t('auth.loginNow') }}
+      </h1>
       <FormInput
         :placeholder="$t('auth.email')"
         name="identifier"
@@ -28,27 +23,31 @@
         type="password"
       />
       <UiButton
-        class="w-full mt-2"
+        class="w-full mt-6"
         type="button"
         :disabled="!meta.valid"
-        @click="handleSubmit((values) => onSubmit(values as LoginForm))"
+        @click="handleSubmit((values: LoginForm) => onSubmit(values))"
         >{{ $t('global.login') }}</UiButton
       >
+      <div class="flex justify-between">
+        <UiLink to="/auth/create-user">{{ $t('auth.noAccount') }}</UiLink>
+        <UiLink>{{ $t('auth.forgotPassword') }}</UiLink>
+      </div>
     </Form>
-  </UiPopOver>
+  </UiDialog>
 </template>
 
 <script lang="ts" setup>
 import * as yup from 'yup'
-import type PopOver from '../ui/PopOver.vue'
+import type Dialog from '../ui/Dialog.vue'
 import type { LoginForm, LoginError } from '@/types'
+import { LockClosedIcon } from '@heroicons/vue/20/solid'
 
-const popover = ref<InstanceType<typeof PopOver>>()
+const dialog = ref<InstanceType<typeof Dialog>>()
 const { t } = useI18n()
 const { login } = useStrapiAuth()
 const { addToast } = useToastStore()
 const user = useStrapiUser()
-const openPopOver = ref(false)
 
 const validationSchema = toTypedSchema(
   yup.object({
@@ -70,7 +69,7 @@ const onSubmit = async ({ identifier, password }: LoginForm) => {
       password,
     })
 
-    popover?.value?.hide()
+    dialog?.value?.hide()
     addToast({
       title: t('auth.welcomeTitle', {
         username: user.value?.username,
@@ -92,8 +91,12 @@ const onSubmit = async ({ identifier, password }: LoginForm) => {
 }
 
 const showModal = () => {
-  popover.value?.show()
+  dialog.value?.show()
 }
+
+onBeforeUnmount(() => {
+  dialog.value?.hide()
+})
 
 defineExpose({ showModal })
 </script>

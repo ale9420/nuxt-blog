@@ -1,18 +1,20 @@
 <template>
-  <div class="flex flex-col">
+  <div
+    class="flex flex-col bg-gradient-to-r from-neutral-200 via-zinc-200 to-gray-200 w-full p-3 roundend-md"
+  >
     <Form v-slot="{ meta, handleSubmit }" :validation-schema="validationSchema">
       <FormInput
         name="comment"
-        placeholder="Escribe ..."
+        :placeholder="$t('global.comment')"
         component="textarea"
       />
       <UiButton
-        class="mt-3"
+        class="mt-3 w-full"
         :disabled="!meta.valid"
         type="button"
         @click="
-          handleSubmit((e, { resetForm }) =>
-            postComment(e as CommentForm, resetForm)
+          handleSubmit((e: CommentForm, { resetForm }: any) =>
+            postComment(e, resetForm)
           )
         "
       >

@@ -5,6 +5,7 @@ export default {
     minute: '{minutes} minuto',
     minutes: '{minutes} minutos',
     postComment: 'Publicar comentario',
+    comment: 'Comentario',
     signUpToComment: 'Para publicar un comentario necesitas {signUp} o {login}',
     signUp: 'Crear una cuenta',
     login: 'Iniciar sesión',
@@ -20,6 +21,9 @@ export default {
     unauthorizedTitle: 'Error de autenticacion',
     unauthorizedDescription: 'Usuario o contraseña no validos',
     welcomeTitle: 'Bienvenido de nuevo {username}!',
+    loginNow: '¡Inicia sesión ahora!',
+    noAccount: '¿No tienes una cuenta?',
+    forgotPassword: '¿Has olvidado tu contraseña?',
   },
   meta: {
     title: 'Bog.dev',

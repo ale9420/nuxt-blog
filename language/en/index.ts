@@ -5,6 +5,7 @@ export default {
     minute: '{minutes} Minute',
     minutes: '{minutes} Minutes',
     postComment: 'Post comment',
+    comment: 'Comment',
     signUpToComment: 'To post a comment you need to {signUp} or {login}',
     signUp: 'Sign up',
     login: 'Login',
@@ -20,6 +21,9 @@ export default {
     unauthorizedTitle: 'Authentication error',
     unauthorizedDescription: 'Invalid username or password',
     welcomeTitle: 'Welcome back {username}!',
+    loginNow: 'Login now!',
+    noAccount: "Don't have an account?",
+    forgotPassword: 'Forgot password?',
   },
   meta: {
     title: 'Bog.dev',

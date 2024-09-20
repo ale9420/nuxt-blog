@@ -1,0 +1,87 @@
+<template>
+  <dialog
+    ref="dialog"
+    :class="dialogSize"
+    class="ui-dialog fixed z-10 shadow-lg rounded-lg overflow-visible"
+  >
+    <div class="relative p-10">
+      <button
+        class="absolute top-2 right-2 text-slate-900 hover:text-slate-500"
+        @click="hide"
+      >
+        <XMarkIcon class="size-8" />
+      </button>
+      <div
+        v-if="showIcon"
+        class="bg-slate-200 h-28 w-28 rounded-full flex items-center justify-center shadow-lg absolute inset-x-0 m-auto -top-14"
+      >
+        <div
+          class="bg-gradient-to-r from-slate-600 to-cyan-600 h-22 w-22 rounded-full flex items-center justify-center p-5"
+        >
+          <slot name="icon" />
+        </div>
+      </div>
+      <div :class="{ 'mt-6': showIcon }">
+        <slot />
+      </div>
+    </div>
+  </dialog>
+</template>
+
+<script lang="ts" setup>
+import { XMarkIcon } from '@heroicons/vue/20/solid'
+
+type PopOverProps = {
+  showIcon?: boolean
+  size?: 'small' | 'medium' | 'large'
+}
+
+const props = defineProps<PopOverProps>()
+
+const dialog = ref<HTMLDialogElement>()
+const isOpen = ref<boolean>(false)
+
+const dialogSize = computed(() => {
+  let _size = 'w-96'
+  switch (props.size) {
+    case 'medium':
+      _size = 'w-1/3'
+      break
+    case 'large':
+      _size = 'w-3/4'
+      break
+    default:
+      _size = 'w-96'
+      break
+  }
+
+  return _size
+})
+
+const hide = () => {
+  isOpen.value = false
+
+  if (dialog.value) {
+    dialog.value.close()
+    document.body.classList.remove('overflow-hidden')
+  }
+}
+const show = () => {
+  isOpen.value = true
+  if (dialog.value) {
+    dialog.value.showModal()
+    document.body.classList.add('overflow-hidden')
+  }
+}
+
+defineExpose({
+  hide,
+  show,
+})
+</script>
+
+<style>
+.ui-dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.363);
+}
+</style>

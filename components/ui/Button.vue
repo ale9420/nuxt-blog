@@ -16,7 +16,7 @@ const props = defineProps<ButtonProps>()
 
 const backgroundClasses = computed(() =>
   props.disabled
-    ? ['disabled:bg-gray-200']
-    : ['bg-gradient-to-r', 'from-red-500', 'to-red-700']
+    ? ['disabled:bg-gray-400', 'disabled:text-slate-100']
+    : ['bg-gradient-to-r', 'from-teal-500', 'to-cyan-600']
 )
 </script>
