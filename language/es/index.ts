@@ -18,7 +18,9 @@ export default {
   auth: {
     createdAccount: 'Su cuenta ha sido creada exitosamente',
     email: 'Correo electrónico',
+    username: 'Nombre de usuario',
     password: 'Contraseña',
+    confirmPassword: 'Confirmar contraseña',
     unauthorizedTitle: 'Error de autenticacion',
     unauthorizedDescription: 'Usuario o contraseña no validos',
     welcomeTitle: 'Bienvenido de nuevo {username}!',
@@ -61,5 +63,6 @@ export default {
     required: 'Este es un campo requerido',
     email: 'Correo electrónico invalido',
     min: 'Debe tener al menos {min} caracteres',
+    matchPassword: 'Las contraseñas no coinciden',
   },
 }

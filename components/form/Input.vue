@@ -1,7 +1,7 @@
 <template>
   <div class="w-full border-stone-600 text-stone-600">
     <Field
-      v-slot="{ field, meta, value }"
+      v-slot="{ field, meta, value, errorMessage }"
       :name="name"
       :type="type"
       validate-on-input
@@ -22,10 +22,13 @@
         <component
           :is="fieldComponent"
           v-bind="{ ...field, ...$attrs }"
-          class="pb-1 bg-transparent border-b-2 w-full transition focus:outline-none placeholder:text-stone-600"
+          class="pb-1 bg-transparent border-b-2 w-full transition focus:outline-none"
           :class="{
-            'border-red-600': !meta.valid && !meta.pending,
-            'border-stone-600': !meta.dirty || meta.valid,
+            'border-red-600': !meta.valid && !meta.pending && meta.touched,
+            'placeholder:text-red-600':
+              !meta.valid && meta.touched && !meta.pending,
+            'border-stone-600': !meta.touched || meta.valid,
+            'placeholder:text-stone-600': !meta.touched || meta.valid,
           }"
           :type="type"
           :placeholder="placeholder"
@@ -46,8 +49,14 @@
           </button>
         </div>
       </div>
-
-      <ErrorMessage :name="name" class="text-red-500 text-sm" />
+      <span
+        :class="{
+          'opacity-0': errorMessage === '',
+          'opacity-1': errorMessage !== '',
+        }"
+        class="block text-red-500 text-sm h-[19px]"
+        >{{ errorMessage }}</span
+      >
     </Field>
   </div>
 </template>

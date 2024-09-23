@@ -17,8 +17,10 @@ export default {
   },
   auth: {
     createdAccount: 'Your account has been created successfully',
+    username: 'Username',
     email: 'Email',
     password: 'Password',
+    confirmPassword: 'Confirm password',
     unauthorizedTitle: 'Authentication error',
     unauthorizedDescription: 'Invalid username or password',
     welcomeTitle: 'Welcome back {username}!',
@@ -61,5 +63,6 @@ export default {
     required: 'This is a required field',
     email: 'Invalid email address',
     min: 'must be at least {min} characters',
+    matchPassword: 'Passwords do not match',
   },
 }

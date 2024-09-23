@@ -244,6 +244,17 @@ export type PaginationProps = {
   pageCount: number
 }
 
+export type StrapiErrorResponse = {
+  error: HttpError
+}
+
+export type HttpError = {
+  details: HttpError[]
+  message: string
+  name: string
+  status: number
+}
+
 export type Color =
   | 'slate'
   | 'gray'
