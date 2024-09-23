@@ -3,12 +3,7 @@
     <template #icon>
       <LockClosedIcon class="size-14" />
     </template>
-    <Form
-      v-slot="{ meta, handleSubmit }"
-      :validation-schema="validationSchema"
-      class="flex flex-col gap-2"
-      autocomplete="off"
-    >
+    <form class="flex flex-col gap-2" autocomplete="off" @submit.prevent>
       <h1 class="self-center text-5xl font-light mt-3 mb-6">
         {{ $t('auth.loginNow') }}
       </h1>
@@ -26,21 +21,22 @@
         class="w-full mt-6"
         type="button"
         :disabled="!meta.valid"
-        @click="handleSubmit((values: LoginForm) => onSubmit(values))"
+        :is-loading="isSubmitting"
+        @click="onSubmit"
         >{{ $t('global.login') }}</UiButton
       >
       <div class="flex justify-between">
         <UiLink to="/auth/create-user">{{ $t('auth.noAccount') }}</UiLink>
         <UiLink>{{ $t('auth.forgotPassword') }}</UiLink>
       </div>
-    </Form>
+    </form>
   </UiDialog>
 </template>
 
 <script lang="ts" setup>
 import * as yup from 'yup'
 import type Dialog from '../ui/Dialog.vue'
-import type { LoginForm, LoginError } from '@/types'
+import type { LoginError } from '@/types'
 import { LockClosedIcon } from '@heroicons/vue/20/solid'
 
 const dialog = ref<InstanceType<typeof Dialog>>()
@@ -49,20 +45,22 @@ const { login } = useStrapiAuth()
 const { addToast } = useToastStore()
 const user = useStrapiUser()
 
-const validationSchema = toTypedSchema(
-  yup.object({
-    identifier: yup
-      .string()
-      .email(t('validations.email'))
-      .required(t('validations.required')),
-    password: yup
-      .string()
-      .min(6, t('validations.min', { min: 6 }))
-      .required(t('validations.required')),
-  })
-)
+const { meta, handleSubmit, isSubmitting } = useForm({
+  validationSchema: toTypedSchema(
+    yup.object({
+      identifier: yup
+        .string()
+        .email(t('validations.email'))
+        .required(t('validations.required')),
+      password: yup
+        .string()
+        .min(6, t('validations.min', { min: 6 }))
+        .required(t('validations.required')),
+    })
+  ),
+})
 
-const onSubmit = async ({ identifier, password }: LoginForm) => {
+const onSubmit = handleSubmit(async ({ identifier, password }) => {
   try {
     await login({
       identifier,
@@ -78,7 +76,7 @@ const onSubmit = async ({ identifier, password }: LoginForm) => {
       timeout: 9000,
     })
   } catch (e) {
-    const loginError = e as unknown as LoginError
+    const loginError = e as LoginError
     if (loginError.error.status === 400) {
       addToast({
         title: t('auth.unauthorizedTitle'),
@@ -88,7 +86,7 @@ const onSubmit = async ({ identifier, password }: LoginForm) => {
       })
     }
   }
-}
+})
 
 const showModal = () => {
   dialog.value?.show()

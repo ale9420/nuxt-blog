@@ -52,7 +52,7 @@
         />
         <UiButton
           class="mt-6"
-          :disabled="!meta.valid || isSubmitting"
+          :disabled="!meta.valid"
           :is-loading="isSubmitting"
           @click="onSubmit"
         >

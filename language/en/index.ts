@@ -14,6 +14,7 @@ export default {
     comments: 'Comments ({comments})',
     joinCommunity: 'Join Our Community!',
     info: 'Information',
+    requestError: 'Something has gone wrong, please try again.',
   },
   auth: {
     createdAccount: 'Your account has been created successfully',

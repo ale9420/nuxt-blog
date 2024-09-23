@@ -1,5 +1,4 @@
 import type { Language } from '@/types'
-import { setLocale as setLocaleVeeValidate } from '@vee-validate/i18n'
 
 export const useLanguageStore = defineStore('language', () => {
   const { locale, setLocale } = useI18n({ useScope: 'global' })
@@ -13,7 +12,6 @@ export const useLanguageStore = defineStore('language', () => {
 
   async function updateLanguage(lang: Language) {
     await setLocale(lang.value)
-    setLocaleVeeValidate(lang.value)
     language.value = lang
   }
 

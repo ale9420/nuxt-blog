@@ -221,15 +221,6 @@ export type Toast = {
   id?: number
 }
 
-export type LoginForm = {
-  identifier: string
-  password: string
-}
-
-export type CommentForm = {
-  comment: string
-}
-
 export type LoginError = {
   error: {
     message: string

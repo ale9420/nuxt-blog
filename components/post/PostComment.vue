@@ -1,8 +1,8 @@
 <template>
   <div
-    class="flex flex-col bg-gradient-to-r from-neutral-200 via-zinc-200 to-gray-200 w-full p-3 roundend-md"
+    class="flex flex-col bg-gradient-to-r from-neutral-200 via-zinc-200 to-gray-200 w-full p-3 rounded-md"
   >
-    <Form v-slot="{ meta, handleSubmit }" :validation-schema="validationSchema">
+    <form autocomplete="off" @submit.prevent>
       <FormInput
         name="comment"
         :placeholder="$t('global.comment')"
@@ -10,44 +10,52 @@
       />
       <UiButton
         class="mt-3 w-full"
-        :disabled="!meta.valid"
+        :disabled="!meta.valid || isSubmitting"
+        :is-loading="isSubmitting"
         type="button"
-        @click="
-          handleSubmit((e: CommentForm, { resetForm }: any) =>
-            postComment(e, resetForm)
-          )
-        "
+        @click="postComment"
       >
         {{ $t('global.postComment') }}
       </UiButton>
-    </Form>
+    </form>
   </div>
 </template>
 
 <script lang="ts" setup>
 import * as yup from 'yup'
 import CreateComment from '@/graphql/mutations/createComment.gql'
-import type { CommentForm } from '~/types'
 
 const emit = defineEmits(['refreshComments'])
 const graphql = useStrapiGraphQL()
 const postStore = usePostStore()
+const { addToast } = useToastStore()
 const { postBySlug: post } = storeToRefs(postStore)
 const { t } = useI18n()
-const validationSchema = toTypedSchema(
-  yup.object({
-    comment: yup.string().required(t('validations.required')),
-  })
-)
+const { meta, handleSubmit, isSubmitting, resetForm } = useForm({
+  validationSchema: toTypedSchema(
+    yup.object({
+      comment: yup.string().required(t('validations.required')),
+    })
+  ),
+})
 
-const postComment = async ({ comment }: CommentForm, resetForm: () => void) => {
-  await graphql(CreateComment, {
-    comment: {
-      content: comment,
-      relation: `api::post.post:${post.value?.id}`,
-    },
-  })
-  resetForm()
-  emit('refreshComments')
-}
+const postComment = handleSubmit(async ({ comment }) => {
+  try {
+    await graphql(CreateComment, {
+      comment: {
+        content: comment,
+        relation: `api::post.post:${post.value?.id}`,
+      },
+    })
+    resetForm()
+    emit('refreshComments')
+  } catch {
+    addToast({
+      title: 'Error',
+      description: t('global.requestError'),
+      timeout: 2000,
+      status: 'error',
+    })
+  }
+})
 </script>

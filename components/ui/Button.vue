@@ -35,7 +35,7 @@ type ButtonProps = {
 const props = defineProps<ButtonProps>()
 
 const backgroundClasses = computed(() =>
-  props.disabled
+  props.disabled || props.isLoading
     ? ['disabled:bg-gray-400', 'disabled:text-slate-100']
     : ['bg-gradient-to-r', 'from-teal-500', 'to-cyan-600']
 )

@@ -13,7 +13,7 @@
       <div
         v-for="comment in comments"
         :key="comment.id"
-        class="sm:w-full bg-gradient-to-r from-neutral-200 via-zinc-200 to-gray-200 rounded-sm shadow-md px-2 py-3"
+        class="sm:w-full bg-gradient-to-r from-neutral-200 via-zinc-200 to-gray-200 rounded-md shadow-md px-2 py-3"
       >
         <div class="flex">
           <span
@@ -49,7 +49,10 @@
             </NuxtLink>
           </template>
           <template #login>
-            <NuxtLink class="text-blue-400" @click="authLogin.showModal()">
+            <NuxtLink
+              class="text-blue-400 cursor-pointer"
+              @click="authLogin.showModal()"
+            >
               {{ $t('global.login').toLocaleLowerCase() }}
             </NuxtLink>
             <AuthLogin ref="authLogin" />

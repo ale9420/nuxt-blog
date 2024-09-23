@@ -14,6 +14,7 @@ export default {
     logout: 'Cerrar sesión',
     joinCommunity: '¡Únete a Nuestra Comunidad!',
     info: 'Información',
+    requestError: 'Algo ha salido mal, por favor inténtalo de nuevo.',
   },
   auth: {
     createdAccount: 'Su cuenta ha sido creada exitosamente',
