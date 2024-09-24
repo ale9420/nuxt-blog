@@ -55,11 +55,6 @@ export default {
   post: {
     author: 'By {author}',
   },
-  footer: {
-    blog: 'Blog',
-    blogText:
-      'The purpose of this blog is to talk about my experiences in the world of web development, news, tutorials and to share knowledge with whoever wants it.',
-  },
   validations: {
     required: 'This is a required field',
     email: 'Invalid email address',
