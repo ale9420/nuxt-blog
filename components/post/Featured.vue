@@ -1,5 +1,5 @@
 <template>
-  <Carousel :autoplay="9000" :items-to-show="1" wrap-around>
+  <Carousel :breakpoints="breakpoints" :autoplay="9000">
     <Slide
       v-for="post in featuredPosts?.data.posts.data"
       :key="post.id"
@@ -7,7 +7,7 @@
     >
       <StrapiBlocksTextImageNode
         :image="post.attributes.featured_image.data.attributes"
-        class="sm:h-80 md:h-[32rem] lg:h-[35rem] lg:w-full xl:h-[42rem] 2xl:h[56rem] object-cover"
+        class="sm:h-80 md:h-[32rem] 2xl:h-[46rem] w-full object-cover"
       />
 
       <div class="absolute inset-x-0 sm:bottom-4 lg:bottom-6 text-stone-50">
@@ -38,6 +38,15 @@ import 'vue3-carousel/dist/carousel.css'
 import { Carousel, Slide } from 'vue3-carousel'
 import type { Post } from '@/types'
 
+const breakpoints = {
+  600: {
+    itemsToShow: 1,
+  },
+  1500: {
+    itemsToShow: 2,
+  },
+}
+
 const postStore = usePostStore()
 const { featuredPosts } = storeToRefs(postStore)
 
@@ -47,5 +56,11 @@ const navigateToPost = (post: Post, id: string) => {
 
 onServerPrefetch(async () => {
   await postStore.fetchFeaturedPosts()
+})
+
+onMounted(async () => {
+  if (!featuredPosts.value) {
+    await postStore.fetchFeaturedPosts()
+  }
 })
 </script>

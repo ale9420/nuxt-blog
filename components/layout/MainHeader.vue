@@ -1,27 +1,32 @@
 <template>
-  <header
-    class="sticky relative top-0 flex flex-col items-center justify-center text-zinc-800 bg-neutral-50 shadow-lg shadow-slate-300/50 dark:bg-slate-900/75 dark:text-slate-50 dark:shadow-slate-800/50 sm:p-3 lg:p-5 w-full z-10"
-  >
-    <NuxtLink class="text-3xl font-bold" to="/">BOG.DEV</NuxtLink>
-    <span class="text-xs">{{ $t('meta.blogCategory') }}</span>
-    <div v-click-outside="closeSideBar" class="lg:hidden">
-      <Bars3Icon class="lg:hidden size-6" @click="openSidebar = true" />
-      <LayoutSideBar :open="openSidebar" @close="openSidebar = false" />
-    </div>
-
+  <header class="sticky relative top-0 z-10">
     <div
-      class="sm:hidden lg:flex lg:items-center mt-3 pt-2 border-t border-zinc-500"
+      class="bg-gradient-to-r from-red-500 via-orange-500 to-rose-500 h-1 w-full"
+    ></div>
+    <div
+      class="flex flex-col items-center justify-center text-zinc-800 bg-neutral-50 shadow-lg shadow-slate-300/50 dark:bg-slate-900/75 dark:text-slate-50 dark:shadow-slate-800/50 sm:p-3 lg:p-5 w-full"
     >
-      <LayoutMenuNavigation class="flex" :pages="pages" />
-      <FormSelect
-        v-model="languageModel"
-        class="pl-2"
-        property="value"
-        label="label"
-        name="language"
-        return-mode="object"
-        :options="languages"
-      />
+      <NuxtLink class="text-3xl font-bold" to="/">BOG.DEV</NuxtLink>
+      <span class="text-xs">{{ $t('meta.blogCategory') }}</span>
+      <div v-click-outside="closeSideBar" class="lg:hidden">
+        <Bars3Icon class="lg:hidden size-6" @click="openSidebar = true" />
+        <LayoutSideBar :open="openSidebar" @close="openSidebar = false" />
+      </div>
+
+      <div
+        class="sm:hidden lg:flex lg:items-center mt-3 pt-2 border-t border-zinc-500"
+      >
+        <LayoutMenuNavigation class="flex" :pages="pages" />
+        <FormSelect
+          v-model="languageModel"
+          class="pl-2"
+          property="value"
+          label="label"
+          name="language"
+          return-mode="object"
+          :options="languages"
+        />
+      </div>
     </div>
   </header>
 </template>
