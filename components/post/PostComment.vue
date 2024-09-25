@@ -13,7 +13,7 @@
         :disabled="!meta.valid || isSubmitting"
         :is-loading="isSubmitting"
         type="button"
-        @click="postComment"
+        @click="onSubmit"
       >
         {{ $t('global.postComment') }}
       </UiButton>
@@ -23,11 +23,10 @@
 
 <script lang="ts" setup>
 import * as yup from 'yup'
-import CreateComment from '@/graphql/mutations/createComment.gql'
 
 const emit = defineEmits(['refreshComments'])
-const graphql = useStrapiGraphQL()
 const postStore = usePostStore()
+const { postComment } = useCommentStore()
 const { addToast } = useToastStore()
 const { postBySlug: post } = storeToRefs(postStore)
 const { t } = useI18n()
@@ -39,14 +38,9 @@ const { meta, handleSubmit, isSubmitting, resetForm } = useForm({
   ),
 })
 
-const postComment = handleSubmit(async ({ comment }) => {
+const onSubmit = handleSubmit(async ({ comment }) => {
   try {
-    await graphql(CreateComment, {
-      comment: {
-        content: comment,
-        relation: `api::post.post:${post.value?.id}`,
-      },
-    })
+    await postComment(comment, post.value?.id as string)
     resetForm()
     emit('refreshComments')
   } catch {

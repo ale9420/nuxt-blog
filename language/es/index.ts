@@ -15,6 +15,9 @@ export default {
     joinCommunity: '¡Únete a Nuestra Comunidad!',
     info: 'Información',
     requestError: 'Algo ha salido mal, por favor inténtalo de nuevo.',
+    edit: 'Editar',
+    delete: 'Eliminar',
+    cancel: 'Cancelar',
   },
   auth: {
     createdAccount: 'Su cuenta ha sido creada exitosamente',

@@ -3,6 +3,7 @@ import type { Toast } from '@/types'
 
 export const useToastStore = defineStore('useToastStore', () => {
   const toasts = ref<Toast[]>([])
+  const { t } = useI18n({ useScope: 'global' })
 
   function addToast(toast: Toast) {
     const id = Date.now()
@@ -12,5 +13,14 @@ export const useToastStore = defineStore('useToastStore', () => {
     }, toast.timeout)
   }
 
-  return { addToast, toasts }
+  function addRequestErrorToast() {
+    addToast({
+      title: 'Error',
+      description: t('global.requestError'),
+      timeout: 2000,
+      status: 'error',
+    })
+  }
+
+  return { addToast, addRequestErrorToast, toasts }
 })

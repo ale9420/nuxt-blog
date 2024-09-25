@@ -1,0 +1,15 @@
+mutation updateComment($input: UpdateComment!) {
+  updateComment(input: $input) {
+    id
+    content
+    threadOf {
+      id
+    }
+    author {
+      id
+      name
+    }
+    createdAt
+    updatedAt
+  }
+}

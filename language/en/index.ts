@@ -15,6 +15,9 @@ export default {
     joinCommunity: 'Join Our Community!',
     info: 'Information',
     requestError: 'Something has gone wrong, please try again.',
+    edit: 'Edit',
+    delete: 'Delete',
+    cancel: 'Cancel',
   },
   auth: {
     createdAccount: 'Your account has been created successfully',

@@ -1,5 +1,6 @@
 query getCommentsByPost($post: String!) {
   findAllInHierarchy(relation: $post, filters: { blocked: { eq: false } }) {
+    id
     blocked
     content
     createdAt

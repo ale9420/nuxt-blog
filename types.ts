@@ -115,9 +115,10 @@ type CommentAuthor = {
 }
 
 export type CommentNested = {
-  id: string
+  id: number
   createdAt: string
   author: CommentAuthor
+  edit: boolean
 } & CommonComment
 
 type ImageFormat = {
@@ -269,3 +270,14 @@ export type Color =
   | 'fucshia'
   | 'pink'
   | 'rose'
+
+export type Comment = {
+  id: number
+  relation: string
+}
+
+export type RemoveComment = Comment
+
+export type UpdateComment = {
+  content: string
+} & Comment
