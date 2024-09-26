@@ -84,6 +84,7 @@ export type Page = {
   slug: string
   content: BlockNode[]
   seo: ComponentSharedSeo
+  featured_image: UploadFileEntityResponse
 }
 
 export type CommentsCommentInput = {

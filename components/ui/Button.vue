@@ -20,14 +20,24 @@ type ButtonProps = {
 
 const props = defineProps<ButtonProps>()
 
+const buttonClasses = {
+  primary: [
+    'bg-gradient-to-b',
+    'from-sky-500',
+    'to-sky-700',
+    'hover:to-cyan-800',
+  ],
+  warning: [
+    'bg-gradient-to-b',
+    'from-red-500',
+    'to-red-700',
+    'hover:to-orange-800',
+  ],
+}
+
 const backgroundClasses = computed(() =>
   props.disabled || props.isLoading
     ? ['disabled:bg-gray-400', 'disabled:text-slate-100']
-    : [
-        'bg-gradient-to-b',
-        'from-teal-500',
-        'to-emerald-500',
-        'hover:to-teal-600',
-      ]
+    : buttonClasses[props.state || 'primary']
 )
 </script>

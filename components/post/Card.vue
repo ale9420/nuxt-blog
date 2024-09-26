@@ -35,7 +35,7 @@
             params: { slug: post.slug },
             query: { locale: encodeURI(post.locale) },
           }"
-          class="text-stone-800 font-semibold uppercase rounded-sm p-2 transition duration-1000 ease-in-out bg-gradient-to-r from-stone-50 to-neutral-50 hover:from-stone-800 hover:to-neutral-800 hover:text-stone-50"
+          class="text-stone-800 font-semibold uppercase rounded-sm p-2 transition duration-500 ease-in-out bg-gradient-to-r from-stone-50 to-neutral-50 hover:from-stone-800 hover:to-neutral-800 hover:text-stone-50"
           @click="navigateToPost"
         >
           {{ $t('global.details') }}

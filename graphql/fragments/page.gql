@@ -4,6 +4,14 @@ fragment PageFragment on Page {
   title
   slug
   content
+  featured_image {
+    data {
+      attributes {
+        url
+        formats
+      }
+    }
+  }
   seo {
     ...SeoFragment
   }

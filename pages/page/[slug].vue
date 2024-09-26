@@ -1,14 +1,24 @@
 <template>
-  <article
-    class="flex flex-col items-center w-full bg-slate-50 dark:bg-slate-600 sm:p-3"
-  >
-    <h1 class="sm:text-3xl lg:text-7xl dark:text-slate-50">
-      {{ page?.title }}
-    </h1>
+  <article class="mx-auto w-full">
+    <div class="container mx-auto">
+      <div class="flex flex-col items-center sm:my-6 lg:my-12">
+        <h1 class="sm:text-3xl lg:text-7xl text-zinc-800 dark:text-slate-50">
+          {{ page?.title }}
+        </h1>
+      </div>
+      <StrapiBlocksTextImageNode
+        :image="page.featured_image.data.attributes"
+        class="sm:h-64 md:h-96 lg:h-[56rem] object-cover w-full rounded-lg"
+      />
+    </div>
     <div
-      class="prose dark:prose-invert sm:prose-sm lg:prose-lg xl:prose-xl 2xl:prose-2xl prose-p:leading-normal prose-zinc prose-img:w-full w-full"
+      class="container mx-auto flex flex-col items-center my-12 dark:bg-slate-600 w-full sm:p-3"
     >
-      <StrapiBlocksText :nodes="page?.content" />
+      <div
+        class="prose dark:prose-invert sm:prose-sm lg:prose-lg xl:prose-xl 2xl:prose-2xl prose-p:leading-normal prose-zinc prose-img:w-full w-full"
+      >
+        <StrapiBlocksText :nodes="page?.content" />
+      </div>
     </div>
   </article>
 </template>
@@ -30,5 +40,9 @@ useSeoMeta({
   ogTitle: () => page.value.seo.metaTitle,
   description: () => page.value.seo.metaDescription,
   ogDescription: () => page.value.seo.metaDescription,
+})
+
+definePageMeta({
+  layout: 'content',
 })
 </script>

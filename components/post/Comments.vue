@@ -47,7 +47,7 @@
                   <PencilSquareIcon class="size-4 fill-neutral-50" />
                   {{ $t('global.edit') }}
                 </UiButton>
-                <UiButton @click="onDelete(comment.id)">
+                <UiButton state="warning" @click="onDelete(comment.id)">
                   <TrashIcon class="size-4 fill-neutral-50" />
                   {{ $t('global.delete') }}
                 </UiButton>
