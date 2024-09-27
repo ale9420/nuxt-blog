@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
+import type { CreateComment } from '@/types.ts'
 import RemoveCommentMutation from '@/graphql/mutations/removeComment.gql'
 import GetCommentsByPost from '@/graphql/queries/getCommentsByPost.gql'
-import CreateComment from '@/graphql/mutations/createComment.gql'
+import CreateCommentMutation from '@/graphql/mutations/createComment.gql'
 import UpdateCommentMutation from '@/graphql/mutations/updateComment.gql'
 
 import type {
@@ -30,11 +31,11 @@ export const useCommentStore = defineStore('comment', () => {
     }))
   }
 
-  async function postComment(content: string, relation: string) {
+  async function postComment({ relation, ...comment }: CreateComment) {
     try {
-      await graphql(CreateComment, {
+      await graphql(CreateCommentMutation, {
         comment: {
-          content,
+          ...comment,
           relation: `api::post.post:${relation}`,
         },
       })

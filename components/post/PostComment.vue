@@ -40,7 +40,7 @@ const { meta, handleSubmit, isSubmitting, resetForm } = useForm({
 
 const onSubmit = handleSubmit(async ({ comment }) => {
   try {
-    await postComment(comment, post.value?.id as string)
+    await postComment({ content: comment, relation: post.value?.id as string })
     resetForm()
     emit('refreshComments')
   } catch {

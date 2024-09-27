@@ -9,5 +9,16 @@ query getCommentsByPost($post: String!) {
       email
       avatar
     }
+    children {
+      id
+      blocked
+      content
+      createdAt
+      author {
+        name
+        email
+        avatar
+      }
+    }
   }
 }

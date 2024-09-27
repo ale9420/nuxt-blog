@@ -120,6 +120,7 @@ export type CommentNested = {
   createdAt: string
   author: CommentAuthor
   edit: boolean
+  children: CommentNested[]
 } & CommonComment
 
 type ImageFormat = {
@@ -282,3 +283,9 @@ export type RemoveComment = Comment
 export type UpdateComment = {
   content: string
 } & Comment
+
+export type CreateComment = {
+  content: string
+  relation: string
+  threadOf?: string
+}
