@@ -14,6 +14,7 @@
       />
       <FormInput
         :placeholder="$t('auth.password')"
+        class="mt-2"
         name="password"
         type="password"
       />

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sm:w-full bg-gradient-to-r from-neutral-200 via-zinc-200 to-gray-200 rounded-md shadow-md flex px-2 py-3"
+    class="sm:w-full bg-gradient-to-r from-neutral-200 via-zinc-200 to-gray-200 flex"
   >
     <div class="grow flex">
       <span
@@ -8,77 +8,103 @@
         >{{ comment.author.name[0].toUpperCase() }}</span
       >
       <div class="ml-1.5 w-full">
-        <h4 class="font-semibold sm:text-sm/[6px]">
-          {{ comment.author.name }}
-        </h4>
-        <span class="text-gray-500 text-xs">{{
-          formatDate(comment.createdAt)
-        }}</span>
-        <div v-if="!edit && !reply">
-          <p class="sm:text-sm md:text-base mt-2">{{ comment.content }}</p>
-          <div class="ml-10">
-            <Comment
-              v-for="children in comment.children"
-              :key="children.id"
-              :comment="children"
-              class="mb-2"
-            />
-            <!-- <div v-for="children in comment.children" :key="children.id" >
-              <p>{{ children.content }}</p>
-              <hr class="border-t-1 border-stone-400 w-full my-3" />
-            </div> -->
+        <div class="bg-neutral-100 rounded-md p-2">
+          <div class="flex justify-between">
+            <h4 class="font-semibold sm:text-sm">
+              {{ comment.author.name }}
+            </h4>
+            <div class="flex gap-2">
+              <button
+                v-if="user?.email === comment.author.email && !edit"
+                class="text-slate-500 flex items-center"
+                @click="edit = true"
+              >
+                <PencilSquareIcon class="size-4 fill-slate-500 mr-1" />
+                {{ $t('global.edit') }}
+              </button>
+              <button
+                v-if="edit"
+                :disabled="isSubmitting"
+                :is-loading="isSubmitting"
+                class="text-slate-500 flex items-center"
+                type="button"
+                @click="onCancel"
+              >
+                <XCircleIcon class="size-4 fill-slate-500 mr-1" />
+                {{ $t('global.cancel') }}
+              </button>
+              <button
+                v-if="user?.email === comment.author.email"
+                class="text-red-500 flex items-center"
+                @click="onDelete(comment.id)"
+              >
+                <TrashIcon class="size-4 fill-red-500 mr-1" />
+                {{ $t('global.delete') }}
+              </button>
+            </div>
           </div>
+          <div v-if="!edit">
+            <p class="sm:text-sm md:text-base">{{ comment.content }}</p>
+          </div>
+          <Transition>
+            <form v-if="edit" class="mt-3" @submit.prevent>
+              <FormInput
+                :placeholder="$t('global.comment')"
+                type="text"
+                name="content"
+                component="textarea"
+              />
+              <UiButton
+                v-if="edit"
+                :disabled="!meta.valid || isSubmitting"
+                class="mt-2"
+                @click="onUpdate"
+              >
+                {{ $t('global.postComment') }}
+              </UiButton>
+            </form>
+          </Transition>
         </div>
-        <form v-else-if="edit || reply" @submit.prevent>
-          <FormInput
-            :placeholder="$t('global.comment')"
-            type="text"
-            name="content"
-            component="textarea"
-          />
-        </form>
-        <div>
-          <hr class="border-t-1 border-stone-400 w-full my-3" />
-          <div class="flex gap-2">
+        <div class="flex gap-2 items-end">
+          <button
+            v-if="!reply && user?.email !== comment.author.email"
+            class="text-inherit ml-2 hover:underline hover:underline-offset-4 hover:cursor-pointer hover:text-red-600"
+            @click="reply = true"
+          >
+            Reply
+          </button>
+
+          <span class="text-gray-500">{{ formatDate(comment.createdAt) }}</span>
+        </div>
+        <Transition>
+          <form
+            v-if="reply"
+            class="bg-neutral-100 rounded-md px-2 py-3 mt-3"
+            @submit.prevent
+          >
+            <FormInput
+              :placeholder="$t('global.comment')"
+              type="text"
+              name="content"
+              component="textarea"
+            />
             <UiButton
-              v-if="edit || reply"
               :disabled="!meta.valid || isSubmitting"
               :is-loading="isSubmitting"
               type="button"
-              @click="edit && !reply ? onUpdate() : onReply()"
+              class="mt-2"
+              @click="onReply"
             >
               {{ $t('global.postComment') }}
             </UiButton>
-            <UiButton
-              v-if="edit || reply"
-              :disabled="isSubmitting"
-              :is-loading="isSubmitting"
-              type="button"
-              @click="onCancel"
-            >
-              {{ $t('global.cancel') }}
-            </UiButton>
-            <UiButton
-              v-if="user?.email === comment.author.email && !edit"
-              @click="edit = true"
-            >
-              <PencilSquareIcon class="size-4 fill-neutral-50" />
-              {{ $t('global.edit') }}
-            </UiButton>
-            <UiButton
-              v-if="user?.email === comment.author.email && !edit"
-              state="warning"
-              @click="onDelete(comment.id)"
-            >
-              <TrashIcon class="size-4 fill-neutral-50" />
-              {{ $t('global.delete') }}
-            </UiButton>
-            <UiButton
-              v-if="!reply && user?.email !== comment.author.email"
-              @click="reply = true"
-              >Replicar</UiButton
-            >
-          </div>
+          </form>
+        </Transition>
+        <div class="mt-2">
+          <ul>
+            <li v-for="children in comment.children" :key="children.id">
+              <Comment :comment="children" class="mb-2" />
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -86,7 +112,11 @@
 </template>
 
 <script setup lang="ts">
-import { PencilSquareIcon, TrashIcon } from '@heroicons/vue/16/solid'
+import {
+  PencilSquareIcon,
+  TrashIcon,
+  XCircleIcon,
+} from '@heroicons/vue/16/solid'
 import * as yup from 'yup'
 import { DateTime } from 'luxon'
 import type { CommentNested } from '~/types'
@@ -143,7 +173,7 @@ const onDelete = async (id: number) => {
 
 const formatDate = (date: string) =>
   DateTime.fromISO(date, { locale: locale.value }).toLocaleString(
-    DateTime.DATETIME_MED
+    DateTime.DATETIME_SHORT
   )
 
 watch(edit, () => {

@@ -9,13 +9,13 @@ export const useScroll = () => {
     lastScroll.value = currentScrollTop <= 0 ? 0 : currentScrollTop
   }
 
-  onMounted(() => {
-    document.addEventListener('scroll', onScroll)
-  })
+  // onMounted(() => {
+  //   document.addEventListener('scroll', onScroll)
+  // })
 
-  onBeforeUnmount(() => {
-    document.removeEventListener('scroll', onScroll)
-  })
+  // onBeforeUnmount(() => {
+  //   document.removeEventListener('scroll', onScroll)
+  // })
 
   return { showHeader }
 }

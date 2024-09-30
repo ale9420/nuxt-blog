@@ -1,6 +1,6 @@
 <template>
   <button
-    class="text-slate-50 p-2 rounded-md flex items-center justify-center"
+    class="text-slate-50 p-2 rounded-sm flex items-center justify-center"
     :class="backgroundClasses"
     :disabled="disabled"
   >
@@ -21,18 +21,8 @@ type ButtonProps = {
 const props = defineProps<ButtonProps>()
 
 const buttonClasses = {
-  primary: [
-    'bg-gradient-to-b',
-    'from-sky-500',
-    'to-sky-700',
-    'hover:to-cyan-800',
-  ],
-  warning: [
-    'bg-gradient-to-b',
-    'from-red-500',
-    'to-red-700',
-    'hover:to-orange-800',
-  ],
+  primary: ['bg-slate-600', 'hover:bg-slate-500'],
+  warning: ['bg-red-600', 'hover:bg-red-500'],
 }
 
 const backgroundClasses = computed(() =>

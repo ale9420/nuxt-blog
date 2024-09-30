@@ -6,18 +6,20 @@
       :type="type"
       validate-on-input
     >
-      <label
-        :for="name"
-        :class="{
-          'opacity-0': !value || value?.toString()?.length === 0,
-          'opacity-1': value && value?.toString()?.length > 0,
-          'text-red-600': !meta.valid && meta.dirty && !meta.pending,
-          'text-stone-600': meta.valid && !meta.pending,
-        }"
-        class="transition duration-300 ease-in-out"
-      >
-        {{ placeholder }}
-      </label>
+      <Transition>
+        <label
+          v-if="value && value?.toString()?.length > 0"
+          :for="name"
+          :class="{
+            'text-red-600': !meta.valid && meta.dirty && !meta.pending,
+            'text-stone-600': meta.valid && !meta.pending,
+          }"
+          class="transition duration-300 ease-in-out"
+        >
+          {{ placeholder }}
+        </label>
+      </Transition>
+
       <div class="relative">
         <component
           :is="fieldComponent"
@@ -35,28 +37,25 @@
         />
         <div
           v-if="$attrs['type'] === 'password'"
-          class="absolute top-0 right-1"
+          class="absolute bottom-0 right-1"
         >
           <button
             v-if="hidePassword"
             type="button"
             @click.stop="hidePassword = false"
           >
-            <EyeIcon class="size-6" />
+            <EyeIcon class="size-5" />
           </button>
           <button v-else type="button" @click.stop="hidePassword = true">
-            <EyeSlashIcon class="size-6" />
+            <EyeSlashIcon class="size-5" />
           </button>
         </div>
       </div>
-      <span
-        :class="{
-          'opacity-0': errorMessage === '',
-          'opacity-1': errorMessage !== '',
-        }"
-        class="block text-red-500 text-sm h-[19px]"
-        >{{ errorMessage }}</span
-      >
+      <Transition>
+        <span v-if="errorMessage !== ''" class="block text-red-500 text-sm">{{
+          errorMessage
+        }}</span>
+      </Transition>
     </Field>
   </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
-  <section class="bg-slate-700 py-10">
+  <section class="bg-slate-700 sm:p-5 lg:px-0 py-10">
     <div
-      class="flex flex-col items-center max-w-[65ch] mx-auto gap-2 text-neutral-800"
+      class="flex flex-col items-center max-w-[75ch] mx-auto gap-2 text-neutral-800"
     >
       <div class="flex items-center mb-4 text-neutral-50">
         <ChatBubbleBottomCenterTextIcon class="size-6 mr-2" />
@@ -9,12 +9,11 @@
           {{ $t('global.comments', { comments: comments?.length || 0 }) }}
         </h2>
       </div>
-
-      <Comment
-        v-for="comment in comments"
-        :key="comment.id"
-        :comment="comment"
-      />
+      <ul class="w-full">
+        <li v-for="comment in comments" :key="comment.id" class="mb-2">
+          <Comment class="px-2 py-3" :comment="comment" />
+        </li>
+      </ul>
 
       <hr class="w-2/4 h-1 mt-8 mb-4 border-t-neutral-50" />
       <PostComment
