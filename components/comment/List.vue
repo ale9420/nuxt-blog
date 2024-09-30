@@ -16,7 +16,7 @@
       </ul>
 
       <hr class="w-2/4 h-1 mt-8 mb-4 border-t-neutral-50" />
-      <PostComment
+      <CommentCreate
         v-if="user"
         @refresh-comments="commentStore.fetchCommentsByPost(post?.id as string)"
       />

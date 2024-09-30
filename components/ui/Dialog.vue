@@ -21,8 +21,12 @@
           <slot name="icon" />
         </div>
       </div>
+      <p v-if="title" class="text-2xl mb-4">{{ title }}</p>
       <div :class="{ 'mt-6': showIcon }">
         <slot />
+      </div>
+      <div class="flex justify-end gap-2 mt-4">
+        <slot name="actions" />
       </div>
     </div>
   </dialog>
@@ -34,6 +38,7 @@ import { XMarkIcon } from '@heroicons/vue/20/solid'
 type PopOverProps = {
   showIcon?: boolean
   size?: 'small' | 'medium' | 'large'
+  title?: string
 }
 
 const props = defineProps<PopOverProps>()
@@ -60,12 +65,12 @@ const dialogSize = computed(() => {
 
 const hide = () => {
   isOpen.value = false
-
   if (dialog.value) {
     dialog.value.close()
     document.body.classList.remove('overflow-hidden')
   }
 }
+
 const show = () => {
   isOpen.value = true
   if (dialog.value) {
@@ -73,6 +78,10 @@ const show = () => {
     document.body.classList.add('overflow-hidden')
   }
 }
+
+onBeforeUnmount(() => {
+  hide()
+})
 
 defineExpose({
   hide,

@@ -67,7 +67,7 @@
         </div>
         <div class="flex gap-2 items-end">
           <button
-            v-if="!reply && user?.email !== comment.author.email"
+            v-if="!reply && user && user?.email !== comment.author.email"
             class="text-inherit ml-2 hover:underline hover:underline-offset-4 hover:cursor-pointer hover:text-red-600"
             @click="reply = true"
           >
@@ -108,6 +108,7 @@
         </div>
       </div>
     </div>
+    <CommentDelete ref="deleteDialog" :comment-id="selectedCommentId" />
   </div>
 </template>
 
@@ -120,11 +121,14 @@ import {
 import * as yup from 'yup'
 import { DateTime } from 'luxon'
 import type { CommentNested } from '~/types'
+import type Dialog from '../ui/Dialog.vue'
 
 type CommentProps = {
   comment: CommentNested
 }
 
+const selectedCommentId = ref<number>(0)
+const deleteDialog = ref<InstanceType<typeof Dialog>>()
 const props = defineProps<CommentProps>()
 const { t } = useI18n()
 const edit = ref(false)
@@ -149,6 +153,11 @@ const onCancel = () => {
   reply.value = false
 }
 
+const onDelete = (id: number) => {
+  selectedCommentId.value = id
+  deleteDialog.value?.show()
+}
+
 const onUpdate = handleSubmit(async ({ content }) => {
   await commentStore.updateComment({
     content,
@@ -166,10 +175,6 @@ const onReply = handleSubmit(async ({ content }) => {
   })
   reply.value = false
 })
-
-const onDelete = async (id: number) => {
-  await commentStore.removeComment({ relation: post.value?.id as string, id })
-}
 
 const formatDate = (date: string) =>
   DateTime.fromISO(date, { locale: locale.value }).toLocaleString(

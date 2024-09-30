@@ -93,9 +93,5 @@ const showModal = () => {
   dialog.value?.show()
 }
 
-onBeforeUnmount(() => {
-  dialog.value?.hide()
-})
-
 defineExpose({ showModal })
 </script>

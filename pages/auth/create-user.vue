@@ -25,7 +25,7 @@
     </div>
     <div class="py-5 px-8 bg-stone-200 flex items-center basis-full">
       <form
-        class="flex flex-col gap-3 w-full"
+        class="flex flex-col gap-5 w-full"
         autocomplete="off"
         @submit.prevent
       >

@@ -49,6 +49,10 @@ export default {
     step3:
       '<span class="font-bold">¡Empieza a disfrutar!:</span> Una vez verificado, podrás acceder a todas las funciones exclusivas.',
   },
+  comment: {
+    title: 'Borrar comentario',
+    confirmDelete: '¿Estás seguro que deseas eliminar este comentario?',
+  },
   meta: {
     title: 'Bog.dev',
     blogCategory: 'Tecnología & desarrollo web',
