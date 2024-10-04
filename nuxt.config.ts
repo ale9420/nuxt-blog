@@ -72,6 +72,31 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     strapiToken: process.env.STRAPI_API_TOKEN,
+    strapi: {
+      url: process.env.STRAPI_URL,
+    },
+    public: {
+      strapi: {
+        url: process.env.STRAPI_URL,
+      },
+    },
+  },
+  nitro: {
+    firebase: {
+      gen: 2,
+      nodeVersion: '18',
+    },
   },
   compatibilityDate: '2024-07-26',
+  $production: {
+    dev: true,
+    debug: true,
+    build: {
+      analyze: true,
+    },
+    sourcemap: {
+      server: true,
+      client: true,
+    },
+  },
 })

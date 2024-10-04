@@ -13,31 +13,43 @@ export const usePostStore = defineStore('usePostStore', () => {
   const { language } = storeToRefs(languageStore)
 
   async function fetchPosts(page: number, pageSize: number) {
-    const result = await graphql<PostEntityResponseCollection>(Posts, {
-      locale: language.value?.code,
-      page,
-      pageSize,
-    })
-    posts.value = result
+    try {
+      const result = await graphql<PostEntityResponseCollection>(Posts, {
+        locale: language.value?.code,
+        page,
+        pageSize,
+      })
+      posts.value = result
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async function fetchPostBySlug(slug: string, locale: string) {
-    const result = await graphql<PostEntityResponseCollection>(PostBySlug, {
-      slug,
-      locale,
-    })
-    if (result.data.posts.data.length > 0)
-      console.log(result.data.posts.data[0].id)
-    updatePost({
-      ...result.data.posts.data[0].attributes,
-      id: result.data.posts.data[0].id,
-    })
+    try {
+      const result = await graphql<PostEntityResponseCollection>(PostBySlug, {
+        slug,
+        locale,
+      })
+      if (result.data.posts.data.length > 0)
+        console.log(result.data.posts.data[0])
+      updatePost({
+        ...result.data.posts.data[0].attributes,
+        id: result.data.posts.data[0].id,
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   async function fetchFeaturedPosts() {
-    const result =
-      await graphql<PostEntityResponseCollection>(FeaturedPostsQuery)
-    featuredPosts.value = result
+    try {
+      const result =
+        await graphql<PostEntityResponseCollection>(FeaturedPostsQuery)
+      featuredPosts.value = result
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   function updatePost(post: Post) {
