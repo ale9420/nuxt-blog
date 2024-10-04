@@ -32,7 +32,7 @@ const { language } = storeToRefs(languageStore)
 const { posts } = storeToRefs(postStore)
 const { t } = useI18n({ useScope: 'global' })
 const currentPage = ref(1)
-const LIMIT = 10
+const LIMIT = 3
 
 const pageChange = async (page: number) => {
   currentPage.value = page

@@ -6,12 +6,12 @@
     <span class="text-xs">{{ $t('meta.blogCategory') }}</span>
     <div class="flex gap-3 mt-4">
       <NuxtLink to="https://github.com/ale9420">
-        <NuxtImg class="h-8 w-8" src="/github.png" />
+        <img class="h-8 w-8" src="/images/github.png" alt="Github" />
       </NuxtLink>
       <NuxtLink
         to="https://www.linkedin.com/in/alejandro-ramirez-garcia-046713139/"
       >
-        <NuxtImg class="h-8 w-8" src="/linkedin.png" />
+        <img class="h-8 w-8" src="/images/linkedin.png" alt="Linkedin" />
       </NuxtLink>
     </div>
   </footer>

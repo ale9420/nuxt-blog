@@ -63,6 +63,7 @@ export default defineNuxtConfig({
     url: process.env.STRAPI_URL,
   },
   image: {
+    domains: ['https://bogdev-437223.firebaseapp.com'],
     strapi: {
       baseURL: process.env.STRAPI_URL,
     },
@@ -88,15 +89,4 @@ export default defineNuxtConfig({
     },
   },
   compatibilityDate: '2024-07-26',
-  $production: {
-    dev: true,
-    debug: true,
-    build: {
-      analyze: true,
-    },
-    sourcemap: {
-      server: true,
-      client: true,
-    },
-  },
 })
