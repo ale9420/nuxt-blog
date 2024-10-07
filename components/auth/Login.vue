@@ -3,7 +3,11 @@
     <template #icon>
       <LockClosedIcon class="size-14" />
     </template>
-    <form class="flex flex-col gap-2" autocomplete="off" @submit.prevent>
+    <form
+      class="flex flex-col grow gap-2 h-full"
+      autocomplete="off"
+      @submit.prevent
+    >
       <h1 class="self-center text-5xl font-light mt-3 mb-6">
         {{ $t('auth.loginNow') }}
       </h1>
@@ -12,12 +16,14 @@
         name="identifier"
         type="text"
       />
-      <FormInput
-        :placeholder="$t('auth.password')"
-        class="mt-2"
-        name="password"
-        type="password"
-      />
+      <div class="mt-2">
+        <FormInput
+          :placeholder="$t('auth.password')"
+          name="password"
+          type="password"
+        />
+      </div>
+
       <UiButton
         class="w-full mt-6"
         type="button"
@@ -26,7 +32,7 @@
         @click="onSubmit"
         >{{ $t('global.login') }}</UiButton
       >
-      <div class="flex justify-between">
+      <div class="flex justify-between items-end shrink">
         <UiLink to="/auth/create-user">{{ $t('auth.noAccount') }}</UiLink>
         <UiLink>{{ $t('auth.forgotPassword') }}</UiLink>
       </div>

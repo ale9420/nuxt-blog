@@ -3,29 +3,29 @@
     <div
       class="flex flex-col items-center max-w-[75ch] mx-auto gap-2 text-neutral-800"
     >
-      <div class="flex items-center mb-4 text-neutral-50">
+      <div class="flex items-center text-neutral-50">
         <ChatBubbleBottomCenterTextIcon class="size-6 mr-2" />
         <h2 class="text-4xl">
           {{ $t('global.comments', { comments: comments?.length || 0 }) }}
         </h2>
       </div>
-      <ul class="w-full">
+      <ul v-if="comments && comments?.length > 0" class="mt-4 w-full">
         <li v-for="comment in comments" :key="comment.id" class="mb-2">
           <Comment class="px-2 py-3" :comment="comment" />
         </li>
       </ul>
 
-      <hr class="w-2/4 h-1 mt-8 mb-4 border-t-neutral-50" />
+      <hr class="w-2/4 h-1 sm:my-2 mt-8 mb-4 border-t-neutral-50" />
       <CommentCreate
         v-if="user"
         @refresh-comments="commentStore.fetchCommentsByPost(post?.id as string)"
       />
       <div v-else class="flex flex-col items-center text-neutral-50">
-        <h5 class="text-2xl">{{ $t('global.joinCommunity') }}</h5>
+        <h5 class="sm:text-xl md:text-2xl">{{ $t('global.joinCommunity') }}</h5>
         <i18n-t
           keypath="global.signUpToComment"
           tag="p"
-          class="font-semibold mt-2"
+          class="font-semibold text-center mt-2 sm:text-xs"
           for="author"
         >
           <template #signUp>

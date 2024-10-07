@@ -17,7 +17,9 @@
         >
           {{ post?.title }}
         </h1>
-        <div class="flex items-center sm:text-xs text-base text-zinc-600 mt-4">
+        <div
+          class="flex items-center text-base text-zinc-600 mt-4 sm:text-[0.65rem] md:text-base"
+        >
           <PostAuthor
             :author="post.author.data.attributes"
             :published-at="post.publishedAt"
@@ -31,17 +33,19 @@
       <!-- Featured image and primary category -->
       <div
         v-if="post?.featured_image && post?.primary_category?.data?.attributes"
-        class="relative"
+        class="flex justify-center"
       >
-        <PostCategory
-          :category="post?.primary_category?.data?.attributes"
-          class="absolute top-10 left-0 rounded-r-md"
-          main
-        />
-        <StrapiBlocksTextImageNode
-          :image="post.featured_image.data.attributes"
-          class="sm:h-64 md:h-96 lg:h-[56rem] object-cover w-full rounded-lg"
-        />
+        <div class="relative w-11/12 xl:w-full">
+          <PostCategory
+            :category="post?.primary_category?.data?.attributes"
+            class="absolute top-10 left-0 rounded-r-md"
+            main
+          />
+          <StrapiBlocksTextImageNode
+            :image="post.featured_image.data.attributes"
+            class="sm:h-64 md:h-96 lg:h-[45rem] object-cover w-full rounded-lg"
+          />
+        </div>
       </div>
     </div>
     <!-- Post Content -->
@@ -71,7 +75,7 @@ const seoDescription = post.value?.seo.metaDescription
 
 const postDate = computed(() =>
   DateTime.fromISO(post.value?.publishedAt as string, {
-    locale: locale.value,
+    locale: route.query.locale?.toString() || locale.value,
   }).toLocaleString(DateTime.DATE_FULL)
 )
 

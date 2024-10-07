@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="flex flex-col bg-gradient-to-r from-neutral-200 via-zinc-200 to-gray-200 w-full p-3 rounded-md"
-  >
+  <div class="flex flex-col bg-neutral-200 w-full p-3 rounded-md">
     <form autocomplete="off" @submit.prevent>
       <FormInput
         name="comment"

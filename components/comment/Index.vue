@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sm:w-full bg-gradient-to-r from-neutral-200 via-zinc-200 to-gray-200 flex"
+    class="sm:w-full bg-gradient-to-r from-neutral-200 via-zinc-200 to-gray-200 flex roundend-lg"
   >
     <div class="grow flex">
       <span

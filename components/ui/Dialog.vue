@@ -4,7 +4,7 @@
     :class="dialogSize"
     class="ui-dialog fixed z-10 shadow-lg rounded-lg overflow-visible"
   >
-    <div class="relative p-10">
+    <div class="relative sm:p-5 md:p-10">
       <button
         class="absolute top-2 right-2 text-slate-900 hover:text-slate-500"
         @click="hide"
@@ -47,16 +47,16 @@ const dialog = ref<HTMLDialogElement>()
 const isOpen = ref<boolean>(false)
 
 const dialogSize = computed(() => {
-  let _size = 'w-96'
+  let _size = 'sm:w-full md:w-96'
   switch (props.size) {
     case 'medium':
-      _size = 'w-1/3'
+      _size = 'md:w-3/5 lg:w-2/5'
       break
     case 'large':
-      _size = 'w-3/4'
+      _size = 'md:w-3/4 '
       break
     default:
-      _size = 'w-96'
+      _size = 'md:w-96'
       break
   }
 

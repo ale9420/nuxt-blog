@@ -1,63 +1,63 @@
 <template>
-  <div class="w-full border-stone-600 text-stone-600">
-    <Field
-      v-slot="{ field, meta, value, errorMessage }"
-      :name="name"
-      :type="type"
-      validate-on-input
-    >
-      <Transition>
-        <label
-          v-if="value && value?.toString()?.length > 0"
-          :for="name"
-          :class="{
-            'text-red-600': !meta.valid && meta.dirty && !meta.pending,
-            'text-stone-600': meta.valid && !meta.pending,
-          }"
-          class="transition duration-300 ease-in-out"
-        >
-          {{ placeholder }}
-        </label>
-      </Transition>
+  <Field
+    v-slot="{ field, meta, value, errorMessage }"
+    :name="name"
+    :type="type"
+    as="div"
+    class="w-full border-stone-600 text-stone-600 flex flex-col"
+    validate-on-input
+  >
+    <Transition>
+      <label
+        v-if="value && value?.toString()?.length > 0"
+        :for="name"
+        :class="{
+          'text-red-600': !meta.valid && meta.dirty && !meta.pending,
+          'text-stone-600': meta.valid && !meta.pending,
+        }"
+        class="transition duration-300 ease-in-out text-left"
+      >
+        {{ placeholder }}
+      </label>
+    </Transition>
 
-      <div class="relative">
-        <component
-          :is="fieldComponent"
-          v-bind="{ ...field, ...$attrs }"
-          class="pb-1 bg-transparent border-b-2 w-full transition focus:outline-none"
-          :class="{
-            'border-red-600': !meta.valid && !meta.pending && meta.touched,
-            'placeholder:text-red-600':
-              !meta.valid && meta.touched && !meta.pending,
-            'border-stone-600': !meta.touched || meta.valid,
-            'placeholder:text-stone-600': !meta.touched || meta.valid,
-          }"
-          :type="type"
-          :placeholder="placeholder"
-        />
-        <div
-          v-if="$attrs['type'] === 'password'"
-          class="absolute bottom-0 right-1"
+    <div class="relative">
+      <component
+        :is="fieldComponent"
+        v-bind="{ ...field, ...filteredAtts }"
+        class="pb-1 bg-transparent border-b-2 w-full transition focus:outline-none"
+        :class="{
+          'border-red-600': !meta.valid && !meta.pending && meta.touched,
+          'placeholder:text-red-600':
+            !meta.valid && meta.touched && !meta.pending,
+          'border-stone-600': !meta.touched || meta.valid,
+          'placeholder:text-stone-600': !meta.touched || meta.valid,
+        }"
+        :type="type"
+        :placeholder="placeholder"
+      />
+      <div
+        v-if="$attrs['type'] === 'password'"
+        class="absolute bottom-0 right-1"
+      >
+        <button
+          v-if="hidePassword"
+          type="button"
+          @click.stop="hidePassword = false"
         >
-          <button
-            v-if="hidePassword"
-            type="button"
-            @click.stop="hidePassword = false"
-          >
-            <EyeIcon class="size-5" />
-          </button>
-          <button v-else type="button" @click.stop="hidePassword = true">
-            <EyeSlashIcon class="size-5" />
-          </button>
-        </div>
+          <EyeIcon class="size-5" />
+        </button>
+        <button v-else type="button" @click.stop="hidePassword = true">
+          <EyeSlashIcon class="size-5" />
+        </button>
       </div>
-      <Transition>
-        <span v-if="errorMessage !== ''" class="block text-red-500 text-sm">{{
-          errorMessage
-        }}</span>
-      </Transition>
-    </Field>
-  </div>
+    </div>
+    <Transition>
+      <span v-if="errorMessage !== ''" class="text-red-500 text-sm text-left">{{
+        errorMessage
+      }}</span>
+    </Transition>
+  </Field>
 </template>
 
 <script lang="ts" setup>
@@ -84,6 +84,14 @@ const type = computed(() =>
 const fieldComponent = computed(() =>
   props.component ? props.component : 'input'
 )
+
+const filteredAtts = computed(() => {
+  console.log(attrs)
+  type FilteredAttrs = Omit<typeof attrs, 'class'>
+  const filteredAttrs = attrs as FilteredAttrs
+  console.log(filteredAttrs)
+  return filteredAttrs
+})
 
 defineOptions({
   inheritAttrs: false,
