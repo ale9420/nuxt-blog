@@ -27,11 +27,12 @@
         v-bind="{ ...field, ...filteredAtts }"
         class="pb-1 bg-transparent border-b-2 w-full transition focus:outline-none"
         :class="{
-          'border-red-600': !meta.valid && !meta.pending && meta.touched,
+          'border-red-600': !meta.valid && meta.dirty && !meta.pending,
           'placeholder:text-red-600':
-            !meta.valid && meta.touched && !meta.pending,
-          'border-stone-600': !meta.touched || meta.valid,
-          'placeholder:text-stone-600': !meta.touched || meta.valid,
+            !meta.valid && meta.dirty && !meta.pending,
+          'border-stone-600':
+            (meta.valid && !meta.pending) || (!meta.valid && !meta.dirty),
+          'placeholder:text-stone-600': !meta.dirty || meta.valid,
         }"
         :type="type"
         :placeholder="placeholder"
