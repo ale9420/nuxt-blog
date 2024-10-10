@@ -25,6 +25,10 @@
           {
             "key": "Content-Type",
             "value": "application/javascript"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
           }
         ]
       }
