@@ -17,8 +17,8 @@ const isMainCategory = computed(() =>
     ? ['bg-red-600/75', 'text-slate-50', 'uppercase', 'font-bold', 'text-sm']
     : [
         'border-2',
-        'light:border-red-600',
-        'light:text-red-600',
+        'border-red-600',
+        'text-red-600',
         'dark:text-red-300',
         'dark:border-red-300',
         'rounded-md',

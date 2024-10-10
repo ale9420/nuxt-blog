@@ -2,11 +2,11 @@
   <dialog
     ref="dialog"
     :class="dialogSize"
-    class="ui-dialog fixed z-10 shadow-lg rounded-lg overflow-visible light:bg-slate-50 dark:bg-slate-600"
+    class="ui-dialog fixed z-10 shadow-lg rounded-lg overflow-visible bg-slate-50 dark:bg-slate-600"
   >
     <div class="relative sm:p-5 md:p-10">
       <button
-        class="absolute top-2 right-2 light:text-slate-900 dark:text-neutral-200 hover:text-slate-500"
+        class="absolute top-2 right-2 text-slate-900 dark:text-neutral-200 hover:text-slate-500"
         @click="hide"
       >
         <XMarkIcon class="size-8" />

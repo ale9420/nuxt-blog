@@ -22,9 +22,9 @@ const props = defineProps<ButtonProps>()
 
 const buttonClasses = {
   primary: [
-    'light:bg-slate-600',
+    'bg-slate-600',
     'dark:bg-slate-700',
-    'light:hover:bg-slate-500',
+    'hover:bg-slate-500',
     'dark:hover:bg-slate-600',
   ],
   warning: ['bg-red-600', 'hover:bg-red-500'],

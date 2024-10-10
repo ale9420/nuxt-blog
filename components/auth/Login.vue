@@ -9,7 +9,7 @@
       @submit.prevent
     >
       <h1
-        class="self-center text-5xl font-light mt-3 mb-6 light:text-stone-800 dark:text-stone-50"
+        class="self-center text-5xl font-light mt-3 mb-6 text-stone-800 dark:text-stone-50"
       >
         {{ $t('auth.loginNow') }}
       </h1>

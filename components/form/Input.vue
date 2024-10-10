@@ -4,7 +4,7 @@
     :name="name"
     :type="type"
     as="div"
-    class="w-full flex flex-col light:border-stone-600 light:text-stone-600 dark:border-stone-200 dark:text-stone-200"
+    class="w-full flex flex-col border-stone-600 text-stone-600 dark:border-stone-200 dark:text-stone-200"
     validate-on-input
   >
     <Transition>
@@ -12,10 +12,9 @@
         v-if="value && value?.toString()?.length > 0"
         :for="name"
         :class="{
-          'light:text-red-600 dark:text-red-400':
+          'text-red-600 dark:text-red-400':
             !meta.valid && meta.dirty && !meta.pending,
-          'light:text-stone-600 dark:text-stone-100':
-            meta.valid && !meta.pending,
+          'text-stone-600 dark:text-stone-100': meta.valid && !meta.pending,
         }"
         class="transition duration-300 ease-in-out text-left"
       >
@@ -29,13 +28,13 @@
         v-bind="{ ...field, ...filteredAtts }"
         class="pb-1 bg-transparent border-b-2 w-full transition focus:outline-none"
         :class="{
-          'light:border-red-600 dark:border-red-400':
+          'border-red-600 dark:border-red-400':
             !meta.valid && meta.dirty && !meta.pending,
-          'light:placeholder:text-red-600 dark:placeholder:text-red-400':
+          'placeholder:text-red-600 dark:placeholder:text-red-400':
             !meta.valid && meta.dirty && !meta.pending,
-          'light:border-stone-600 dark:border-stone-200':
+          'border-stone-600 dark:border-stone-200':
             (meta.valid && !meta.pending) || (!meta.valid && !meta.dirty),
-          'light:placeholder:text-stone-600 dark:placeholder:text-stone-200':
+          'placeholder:text-stone-600 dark:placeholder:text-stone-200':
             !meta.dirty || meta.valid,
         }"
         :type="type"
@@ -60,7 +59,7 @@
     <Transition>
       <span
         v-if="errorMessage !== ''"
-        class="light:text-red-500 dark:text-red-400 text-sm text-left"
+        class="text-red-500 dark:text-red-400 text-xs text-left"
         >{{ errorMessage }}</span
       >
     </Transition>

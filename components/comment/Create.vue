@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col w-full p-3 rounded-md light:bg-neutral-200 dark:bg-gray-500"
+    class="flex flex-col w-full p-3 rounded-md bg-neutral-200 dark:bg-gray-500"
   >
     <form autocomplete="off" @submit.prevent>
       <FormInput
