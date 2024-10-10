@@ -58,7 +58,9 @@
         <StrapiBlocksText :nodes="post?.content" />
       </div>
     </div>
-    <CommentList />
+    <ClientOnly>
+      <CommentList />
+    </ClientOnly>
   </article>
 </template>
 
