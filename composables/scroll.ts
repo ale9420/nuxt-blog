@@ -10,10 +10,12 @@ export const useScroll = () => {
 
   onMounted(() => {
     document.addEventListener('scroll', onScroll)
+    document.addEventListener('touchmove', onScroll)
   })
 
   onBeforeUnmount(() => {
     document.removeEventListener('scroll', onScroll)
+    document.removeEventListener('touchmove', onScroll)
   })
 
   return { showHeader }
