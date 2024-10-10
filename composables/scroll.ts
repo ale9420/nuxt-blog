@@ -3,19 +3,18 @@ export const useScroll = () => {
   const showHeader = ref(true)
 
   const onScroll = () => {
-    const currentScrollTop =
-      window.scrollY || document.documentElement.scrollTop
-    showHeader.value = currentScrollTop < lastScroll.value
-    lastScroll.value = currentScrollTop <= 0 ? 0 : currentScrollTop
+    const scrollY = window.scrollY || document.documentElement.scrollTop
+    showHeader.value = scrollY < lastScroll.value
+    lastScroll.value = scrollY
   }
 
-  // onMounted(() => {
-  //   document.addEventListener('scroll', onScroll)
-  // })
+  onMounted(() => {
+    document.addEventListener('scroll', onScroll)
+  })
 
-  // onBeforeUnmount(() => {
-  //   document.removeEventListener('scroll', onScroll)
-  // })
+  onBeforeUnmount(() => {
+    document.removeEventListener('scroll', onScroll)
+  })
 
   return { showHeader }
 }
