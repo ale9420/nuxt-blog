@@ -18,7 +18,7 @@
           {{ post?.title }}
         </h1>
         <div
-          class="flex items-center text-base text-zinc-600 mt-4 sm:text-[0.65rem] md:text-base"
+          class="flex items-center text-base mt-4 light:text-zinc-600 dark:text-zinc-50 sm:text-[0.65rem] md:text-base"
         >
           <PostAuthor
             :author="post.author.data.attributes"

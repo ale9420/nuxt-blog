@@ -6,7 +6,7 @@
       'text-red-600': active && hoverColor,
       'hover:text-red-600': hoverColor,
     }"
-    class="text-inherit p-2 hover:underline hover:underline-offset-4 hover:cursor-pointer"
+    class="text-inherit p-2 hover:underline hover:underline-offset-4 hover:cursor-pointer dark:text-neutral-50"
   >
     <slot
   /></NuxtLink>

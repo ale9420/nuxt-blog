@@ -21,7 +21,12 @@ type ButtonProps = {
 const props = defineProps<ButtonProps>()
 
 const buttonClasses = {
-  primary: ['bg-slate-600', 'hover:bg-slate-500'],
+  primary: [
+    'light:bg-slate-600',
+    'dark:bg-slate-700',
+    'light:hover:bg-slate-500',
+    'dark:hover:bg-slate-600',
+  ],
   warning: ['bg-red-600', 'hover:bg-red-500'],
 }
 

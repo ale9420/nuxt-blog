@@ -35,7 +35,7 @@
             params: { slug: post.slug },
             query: { locale: encodeURI(post.locale) },
           }"
-          class="text-stone-800 font-semibold uppercase rounded-sm p-2 transition duration-500 ease-in-out bg-gradient-to-r from-stone-50 to-neutral-50 hover:from-stone-800 hover:to-neutral-800 hover:text-stone-50"
+          class="font-semibold uppercase rounded-sm p-2 transition duration-500 ease-in-out bg-gradient-to-r light:from-stone-50 dark:from-stone-800 light:to-neutral-50 dark:to-neutral-800 light:text-stone-800 dark:text-stone-50 light:hover:from-stone-800 light:hover:to-neutral-800 light:hover:text-stone-50 dark:hover:from-stone-200 dark:hover:to-neutral-200 dark:hover:text-stone-800"
           @click="navigateToPost"
         >
           {{ $t('global.details') }}

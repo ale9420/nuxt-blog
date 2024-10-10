@@ -1,5 +1,7 @@
 <template>
-  <div class="flex flex-col bg-neutral-200 w-full p-3 rounded-md">
+  <div
+    class="flex flex-col w-full p-3 rounded-md light:bg-neutral-200 dark:bg-gray-500"
+  >
     <form autocomplete="off" @submit.prevent>
       <FormInput
         name="comment"

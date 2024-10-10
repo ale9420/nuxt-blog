@@ -4,7 +4,7 @@
     :name="name"
     :type="type"
     as="div"
-    class="w-full border-stone-600 text-stone-600 flex flex-col"
+    class="w-full flex flex-col light:border-stone-600 light:text-stone-600 dark:border-stone-200 dark:text-stone-200"
     validate-on-input
   >
     <Transition>
@@ -12,8 +12,10 @@
         v-if="value && value?.toString()?.length > 0"
         :for="name"
         :class="{
-          'text-red-600': !meta.valid && meta.dirty && !meta.pending,
-          'text-stone-600': meta.valid && !meta.pending,
+          'light:text-red-600 dark:text-red-400':
+            !meta.valid && meta.dirty && !meta.pending,
+          'light:text-stone-600 dark:text-stone-100':
+            meta.valid && !meta.pending,
         }"
         class="transition duration-300 ease-in-out text-left"
       >
@@ -27,12 +29,14 @@
         v-bind="{ ...field, ...filteredAtts }"
         class="pb-1 bg-transparent border-b-2 w-full transition focus:outline-none"
         :class="{
-          'border-red-600': !meta.valid && meta.dirty && !meta.pending,
-          'placeholder:text-red-600':
+          'light:border-red-600 dark:border-red-400':
             !meta.valid && meta.dirty && !meta.pending,
-          'border-stone-600':
+          'light:placeholder:text-red-600 dark:placeholder:text-red-400':
+            !meta.valid && meta.dirty && !meta.pending,
+          'light:border-stone-600 dark:border-stone-200':
             (meta.valid && !meta.pending) || (!meta.valid && !meta.dirty),
-          'placeholder:text-stone-600': !meta.dirty || meta.valid,
+          'light:placeholder:text-stone-600 dark:placeholder:text-stone-200':
+            !meta.dirty || meta.valid,
         }"
         :type="type"
         :placeholder="placeholder"
@@ -54,9 +58,11 @@
       </div>
     </div>
     <Transition>
-      <span v-if="errorMessage !== ''" class="text-red-500 text-sm text-left">{{
-        errorMessage
-      }}</span>
+      <span
+        v-if="errorMessage !== ''"
+        class="light:text-red-500 dark:text-red-400 text-sm text-left"
+        >{{ errorMessage }}</span
+      >
     </Transition>
   </Field>
 </template>

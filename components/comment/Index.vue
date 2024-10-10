@@ -1,6 +1,6 @@
 <template>
   <div
-    class="sm:w-full bg-gradient-to-r from-neutral-200 via-zinc-200 to-gray-200 flex roundend-lg"
+    class="sm:w-full bg-gradient-to-r light:from-neutral-200 light:via-zinc-200 light:to-gray-200 dark:from-neutral-500 dark:via-zinc-500 dark:to-gray-500 flex roundend-lg"
   >
     <div class="grow flex">
       <span
@@ -8,7 +8,9 @@
         >{{ comment.author.name[0].toUpperCase() }}</span
       >
       <div class="ml-1.5 w-full">
-        <div class="bg-neutral-100 rounded-md p-2">
+        <div
+          class="light:bg-neutral-100 light:text-slate-800 dark:text-slate-50 dark:bg-neutral-600 rounded-md p-2"
+        >
           <div class="flex justify-between">
             <h4 class="font-semibold sm:text-sm">
               {{ comment.author.name }}
@@ -26,19 +28,23 @@
                 v-if="edit"
                 :disabled="isSubmitting"
                 :is-loading="isSubmitting"
-                class="text-slate-500 flex items-center"
+                class="light:text-slate-500 dark:text-slate-300 flex items-center"
                 type="button"
                 @click="onCancel"
               >
-                <XCircleIcon class="size-4 fill-slate-500 mr-1" />
+                <XCircleIcon
+                  class="size-4 mr-1 light:fill-slate-500 dark:fill-slate-300"
+                />
                 {{ $t('global.cancel') }}
               </button>
               <button
                 v-if="user?.email === comment.author.email"
-                class="text-red-500 flex items-center"
+                class="light:text-red-500 dark:text-red-300 flex items-center"
                 @click="onDelete(comment.id)"
               >
-                <TrashIcon class="size-4 fill-red-500 mr-1" />
+                <TrashIcon
+                  class="size-4 mr-1 light:fill-red-500 dark:fill-red-300"
+                />
                 {{ $t('global.delete') }}
               </button>
             </div>
@@ -74,7 +80,9 @@
             Reply
           </button>
 
-          <span class="text-gray-500">{{ formatDate(comment.createdAt) }}</span>
+          <span class="light:text-gray-500 dark:text-gray-100">{{
+            formatDate(comment.createdAt)
+          }}</span>
         </div>
         <Transition>
           <form
