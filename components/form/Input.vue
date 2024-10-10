@@ -71,8 +71,10 @@ type InputProps = {
   component?: 'input' | 'textarea'
 }
 
+type Attributes = Record<string, unknown> & { class?: string }
+
 const props = defineProps<InputProps>()
-const attrs = useAttrs()
+const attrs: Attributes = useAttrs()
 const hidePassword = ref(true)
 const type = computed(() =>
   attrs['type'] !== 'password'
@@ -87,11 +89,9 @@ const fieldComponent = computed(() =>
 )
 
 const filteredAtts = computed(() => {
-  console.log(attrs)
-  type FilteredAttrs = Omit<typeof attrs, 'class'>
-  const filteredAttrs = attrs as FilteredAttrs
-  console.log(filteredAttrs)
-  return filteredAttrs
+  const attributes = { ...attrs }
+  if (attributes.class) delete attributes.class
+  return attributes
 })
 
 defineOptions({

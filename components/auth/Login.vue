@@ -16,11 +16,12 @@
         name="identifier"
         type="text"
       />
-      <div class="mt-2">
+      <div>
         <FormInput
           :placeholder="$t('auth.password')"
           name="password"
           type="password"
+          class="mt-2"
         />
       </div>
 
