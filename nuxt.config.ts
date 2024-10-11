@@ -70,6 +70,9 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [gql()],
+    build: {
+      sourcemap: 'hidden',
+    },
   },
   runtimeConfig: {
     strapiToken: process.env.STRAPI_API_TOKEN,

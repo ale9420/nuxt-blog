@@ -20,12 +20,8 @@
         ]
       },
       {
-        "source": "**/*.js",
+        "source": "**/*.json",
         "headers": [
-          {
-            "key": "Content-Type",
-            "value": "application/javascript"
-          },
           {
             "key": "Content-Type",
             "value": "application/json"
