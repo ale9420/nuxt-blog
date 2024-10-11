@@ -34,6 +34,7 @@ export default defineNuxtConfig({
   imports: { dirs: ['store'] },
   css: ['~/public/main.css'],
   app: {
+    baseURL: '/',
     pageTransition: {
       name: 'page',
       mode: 'out-in',
